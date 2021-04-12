@@ -3,6 +3,13 @@
 Changelog
 =========
 
+abaqus\_tools (unrelease)
+-------------------------
+
+- Remove everything except the abaqus\_tools (:jira:`538`, :pull:`2`). By `Kyle Brindley`_.
+- Update project name (:jira:`537`, :pull:`1`). By `Kyle Brindley`_.
+- Creation from cpp_stub (:jira:`534`). By `Kyle Brindley`_.
+
 0.0.3 (unreleased)
 ------------------
 
