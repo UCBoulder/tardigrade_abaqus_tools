@@ -55,7 +55,7 @@
       <projectCode>MM</projectCode>
       <repositoryName>abaqus_tools</repositoryName>
       <ignoreSsl>true</ignoreSsl>
-      <targetBranchesToBuild>^((?!master).)*$</targetBranchesToBuild>
+      <targetBranchesToBuild>master,dev</targetBranchesToBuild>
       <checkDestinationCommit>true</checkDestinationCommit>
       <checkNotConflicted>true</checkNotConflicted>
       <checkMergeable>false</checkMergeable>
