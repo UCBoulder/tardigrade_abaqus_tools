@@ -1,14 +1,14 @@
 /**
-  * \file test_cpp_stub.cpp
+  * \file test_abaqus_tools.cpp
   *
-  * Tests for cpp_stub
+  * Tests for abaqus_tools
   */
 
-#include<cpp_stub.h>
+#include<abaqus_tools.h>
 #include<sstream>
 #include<fstream>
 
-#define BOOST_TEST_MODULE test_cpp_stub
+#define BOOST_TEST_MODULE test_abaqus_tools
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/output_test_stream.hpp>
 

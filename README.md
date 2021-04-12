@@ -33,13 +33,13 @@ Bitbucket](https://xcp-confluence.lanl.gov/display/GIT/Gitting+Started+W-13%27s+
 
 ### Clone cpp\_stub into a local repository
 
-1. Navigate to the [upstream cpp\_stub repo](https://xcp-stash.lanl.gov/projects/MM/repos/cpp_stub/browse)
+1. Navigate to the [upstream cpp\_stub repo](https://xcp-stash.lanl.gov/projects/MM/repos/abaqus_tools/browse)
 
 2. Copy the ssh url from the Bitbucket "Clone" button on the Bitbucket
    repository web page. It should look like the following:
 
 ```
-ssh://git@xcp-stash.lanl.gov:7999/mm/cpp_stub.git
+ssh://git@xcp-stash.lanl.gov:7999/mm/abaqus_tools.git
 ```
 
 3. Navigate to your preferred repository directory in a terminal or use the
@@ -60,7 +60,7 @@ $ pwd
 ```
 $ pwd
 /projects/<moniker>/w13repos
-$ git clone ssh://git@xcp-stash.lanl.gov:7999/mm/cpp_stub.git
+$ git clone ssh://git@xcp-stash.lanl.gov:7999/mm/abaqus_tools.git
 ```
 
 5. Rename the local repository directory for your project.
@@ -68,12 +68,12 @@ $ git clone ssh://git@xcp-stash.lanl.gov:7999/mm/cpp_stub.git
 ```
 $ pwd
 /projects/<moniker>/w13repos
-$ ls cpp_stub -d
-cpp_stub
-$ mv cpp_stub my_project
-$ ls cpp_stub -d
-ls: cannot access 'cpp_stub': No such file or directory
-$ mv cpp_stub my_project
+$ ls abaqus_tools -d
+abaqus_tools
+$ mv abaqus_tools my_project
+$ ls abaqus_tools -d
+ls: cannot access 'abaqus_tools': No such file or directory
+$ mv abaqus_tools my_project
 my_project
 ```
 
@@ -220,7 +220,7 @@ $ git branch
   master
 ```
 
-2. Search for all instances of ``cpp_stub``. The list of occurrences will look
+2. Search for all instances of ``abaqus_tools``. The list of occurrences will look
    quite long, but we can search and replace with ``sed`` to avoid manual file
    edits.
 
@@ -229,23 +229,23 @@ $ pwd
 /projects/<moniker>/w13repos/my_project
 
 # Recursive, case-insensitive search and count occurrences
-$ grep -ri cpp_stub . --exclude-dir={build,.git} | wc -l
+$ grep -ri abaqus_tools . --exclude-dir={build,.git} | wc -l
 57
 
 # Recursive, case-insensitive search and display
-$ grep -ri cpp_stub . --exclude-dir={build,.git}
+$ grep -ri abaqus_tools . --exclude-dir={build,.git}
 ...
 
 # Clean list of files with project name
-$ grep -ri cpp_stub . --exclude-dir={build,.git} -l
+$ grep -ri abaqus_tools . --exclude-dir={build,.git} -l
 ./CMakeLists.txt
 ./docs/api.rst
 ./docs/devops.rst
 ./README.md
 ./set_vars.sh
-./src/cpp/cpp_stub.cpp
-./src/cpp/cpp_stub.h
-./src/cpp/tests/test_cpp_stub.cpp
+./src/cpp/abaqus_tools.cpp
+./src/cpp/abaqus_tools.h
+./src/cpp/tests/test_abaqus_tools.cpp
 ```
 
 3. Search and replace from command line
@@ -255,24 +255,24 @@ $ pwd
 /projects/<moniker>/w13repos/my_project
 
 # Replace lower case occurrences in place
-$ sed -i 's/cpp_stub/my_project/g' $(grep -ri cpp_stub . --exclude-dir={build,.git} -l)
-$ grep -ri cpp_stub . --exclude-dir={build,.git} -l
-./src/cpp/cpp_stub.h
+$ sed -i 's/abaqus_tools/my_project/g' $(grep -ri abaqus_tools . --exclude-dir={build,.git} -l)
+$ grep -ri abaqus_tools . --exclude-dir={build,.git} -l
+./src/cpp/abaqus_tools.h
 
 # Replace upper case occurrences in place
-$ sed -i 's/CPP_STUB/MY_PROJECT/g' $(grep -ri cpp_stub . --exclude-dir={build,.git} -l)
+$ sed -i 's/ABAQUS_TOOLS/MY_PROJECT/g' $(grep -ri abaqus_tools . --exclude-dir={build,.git} -l)
 ```
 
-4. Verify no more occurrences of project name ``cpp_stub``
+4. Verify no more occurrences of project name ``abaqus_tools``
 
 ```
 $ pwd
 /projects/<moniker>/w13repos/my_project
-$ grep -ri cpp_stub . --exclude-dir={build,.git} | wc -l
+$ grep -ri abaqus_tools . --exclude-dir={build,.git} | wc -l
 0
-$ grep -ri cpp_stub . --exclude-dir={build,.git}
+$ grep -ri abaqus_tools . --exclude-dir={build,.git}
 # no stdout to terminal because no files found
-$ grep -ri cpp_stub . --exclude-dir={build,.git} -l
+$ grep -ri abaqus_tools . --exclude-dir={build,.git} -l
 # no stdout to terminal because no files found
 ```
 
@@ -282,7 +282,7 @@ $ grep -ri cpp_stub . --exclude-dir={build,.git} -l
 $ pwd
 /projects/<moniker>/w13repos/my_project
 # Add tracked files and message
-$ git commit -a -m "FEAT: replace cpp_stub with my_project through repository"
+$ git commit -a -m "FEAT: replace abaqus_tools with my_project through repository"
 $ git push origin feature/project-name-updates
 ```
 
@@ -436,7 +436,7 @@ $ sv3r
 
 ```
 $ pwd
-/path/to/cpp_stub/
+/path/to/abaqus_tools/
 
 $ mkdir build
 $ cd build
@@ -450,7 +450,7 @@ $ cd build
 
 ```
 $ pwd
-/path/to/cpp_stub/build
+/path/to/abaqus_tools/build
 $ cmake3 ..
 ```
 
@@ -461,7 +461,7 @@ $ cmake3 ..
 
 ```
 $ pwd
-/path/to/cpp_stub/build
+/path/to/abaqus_tools/build
 
 # Build everything
 $ cmake3 --build .
@@ -477,7 +477,7 @@ $ cmake3 --build src/cpp
 
 ```
 $ pwd
-/path/to/cpp_stub/build
+/path/to/abaqus_tools/build
 
 # find c++ libraries and ignore intermediate files with similar extensions
 $ find . \( -name "*.o" -o -name "*.so" -o -name "*.a" \) | grep -vE "\.cpp\."
@@ -493,7 +493,7 @@ $ find . \( -name "*.o" -o -name "*.so" -o -name "*.a" \) | grep -vE "\.cpp\."
 
 ```
 $ pwd
-/path/to/cpp_stub/build
+/path/to/abaqus_tools/build
 
 $ make clean
 ```
@@ -504,7 +504,7 @@ $ make clean
 
 ```
 $ pwd
-/path/to/cpp_stub/build
+/path/to/abaqus_tools/build
 
 # Build c++ tests
 $ cmake3 --build src/cpp/tests
@@ -514,7 +514,7 @@ $ cmake3 --build src/cpp/tests
 
 ```
 $ pwd
-/path/to/cpp_stub/build
+/path/to/abaqus_tools/build
 
 # Run ctest
 $ ctest
@@ -538,7 +538,7 @@ configuration from scratch.
 
 ```
 $ pwd
-/path/to/cpp_stub/
+/path/to/abaqus_tools/
 
 # Just perform the build (pick one)
 $ ./new_build.sh <cxx compiler>
@@ -547,7 +547,7 @@ $ ./new_build.sh g++
 $ ./new_build.sh icpc
 
 # Perform tests from PWD
-$ ./build/src/cpp/tests/test_cpp_stub
+$ ./build/src/cpp/tests/test_abaqus_tools
 
 # Build and perform tests
 $ ./jenkins_build.sh
@@ -589,7 +589,7 @@ To build just the documentation pick up the steps here:
 
 ```
 $ pwd
-/path/to/cpp_stub/
+/path/to/abaqus_tools/
 $ mkdir build/
 $ cd build/
 ```
@@ -598,7 +598,7 @@ $ cd build/
 
 ```
 $ pwd
-/path/to/cpp_stub/build/
+/path/to/abaqus_tools/build/
 $ cmake3 ..
 ```
 
@@ -611,14 +611,14 @@ $ cmake3 --build docs
 5) Documentation builds to:
 
 ```
-cpp_stub/build/docs/sphinx/index.html
+abaqus_tools/build/docs/sphinx/index.html
 ```
 
 6) Display docs
 
 ```
 $ pwd
-/path/to/cpp_stub/build/
+/path/to/abaqus_tools/build/
 $ firefox docs/sphinx/index.html &
 ```
 
@@ -626,7 +626,7 @@ $ firefox docs/sphinx/index.html &
 
 ```
 $ pwd
-/path/to/cpp_stub/build/
+/path/to/abaqus_tools/build/
 $ firefox docs/doxygen/html/index.html &
 ```
 

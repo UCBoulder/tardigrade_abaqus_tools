@@ -20,7 +20,7 @@ Clone cpp\_stub into a local repository
 
 .. code:: bash
 
-   ssh://git@xcp-stash.lanl.gov:7999/mm/cpp_stub.git
+   ssh://git@xcp-stash.lanl.gov:7999/mm/abaqus_tools.git
 
 3. Navigate to your preferred repository directory in a terminal or use the
    example commands below
@@ -48,7 +48,7 @@ Clone cpp\_stub into a local repository
    $ pwd
    /projects/<moniker>/w13repos
    # Clone the stub repository
-   $ git clone ssh://git@xcp-stash.lanl.gov:7999/mm/cpp_stub.git
+   $ git clone ssh://git@xcp-stash.lanl.gov:7999/mm/abaqus_tools.git
 
 5. Rename the local repository directory for your project.
 
@@ -58,13 +58,13 @@ Clone cpp\_stub into a local repository
    $ pwd
    /projects/<moniker>/w13repos
    # Observe the stub repo directory name
-   $ ls cpp_stub -d
-   cpp_stub
+   $ ls abaqus_tools -d
+   abaqus_tools
    # Rename the stub repo directory after your project
-   $ mv cpp_stub my_project
+   $ mv abaqus_tools my_project
    # Observe that the stub repo directory no longer exists
-   $ ls cpp_stub -d
-   ls: cannot access 'cpp_stub': No such file or directory
+   $ ls abaqus_tools -d
+   ls: cannot access 'abaqus_tools': No such file or directory
    # Observe that your project directory exists
    $ ls my_project -d
    my_project
@@ -209,7 +209,7 @@ Update project name throughout repository
    * feature/project-name-updates
      master
 
-2. Search for all instances of ``cpp_stub``. The list of occurrences will look
+2. Search for all instances of ``abaqus_tools``. The list of occurrences will look
    quite long, but we can search and replace with ``sed`` to avoid manual file
    edits.
 
@@ -219,23 +219,23 @@ Update project name throughout repository
    /projects/<moniker>/w13repos/my_project
 
    # Recursive, case-insensitive search and count occurrences
-   $ grep -ri cpp_stub . --exclude-dir={build,.git} | wc -l
+   $ grep -ri abaqus_tools . --exclude-dir={build,.git} | wc -l
    57
 
    # Recursive, case-insensitive search and display
-   $ grep -ri cpp_stub . --exclude-dir={build,.git}
+   $ grep -ri abaqus_tools . --exclude-dir={build,.git}
    ...
 
    # Clean list of files with project name
-   $ grep -ri cpp_stub . --exclude-dir={build,.git} -l
+   $ grep -ri abaqus_tools . --exclude-dir={build,.git} -l
    ./CMakeLists.txt
    ./docs/api.rst
    ./docs/devops.rst
    ./README.md
    ./set_vars.sh
-   ./src/cpp/cpp_stub.cpp
-   ./src/cpp/cpp_stub.h
-   ./src/cpp/tests/test_cpp_stub.cpp
+   ./src/cpp/abaqus_tools.cpp
+   ./src/cpp/abaqus_tools.h
+   ./src/cpp/tests/test_abaqus_tools.cpp
 
 3. Search and replace from command line
 
@@ -245,24 +245,24 @@ Update project name throughout repository
    /projects/<moniker>/w13repos/my_project
 
    # Replace lower case occurrences in place
-   $ sed -i 's/cpp_stub/my_project/g' $(grep -ri cpp_stub . --exclude-dir={build,.git} -l)
-   $ grep -ri cpp_stub . --exclude-dir={build,.git} -l
-   ./src/cpp/cpp_stub.h
+   $ sed -i 's/abaqus_tools/my_project/g' $(grep -ri abaqus_tools . --exclude-dir={build,.git} -l)
+   $ grep -ri abaqus_tools . --exclude-dir={build,.git} -l
+   ./src/cpp/abaqus_tools.h
 
    # Replace upper case occurrences in place
-   $ sed -i 's/CPP_STUB/MY_PROJECT/g' $(grep -ri cpp_stub . --exclude-dir={build,.git} -l)
+   $ sed -i 's/ABAQUS_TOOLS/MY_PROJECT/g' $(grep -ri abaqus_tools . --exclude-dir={build,.git} -l)
 
-4. Verify no more occurrences of project name ``cpp_stub``
+4. Verify no more occurrences of project name ``abaqus_tools``
 
 .. code:: bash
 
    $ pwd
    /projects/<moniker>/w13repos/my_project
-   $ grep -ri cpp_stub . --exclude-dir={build,.git} | wc -l
+   $ grep -ri abaqus_tools . --exclude-dir={build,.git} | wc -l
    0
-   $ grep -ri cpp_stub . --exclude-dir={build,.git}
+   $ grep -ri abaqus_tools . --exclude-dir={build,.git}
    # no stdout to terminal because no files found
-   $ grep -ri cpp_stub . --exclude-dir={build,.git} -l
+   $ grep -ri abaqus_tools . --exclude-dir={build,.git} -l
    # no stdout to terminal because no files found
 
 5. Commit and push your changes to your "remote" or "fork" repository
@@ -272,7 +272,7 @@ Update project name throughout repository
    $ pwd
    /projects/<moniker>/w13repos/my_project
    # Add tracked files and message
-   $ git commit -a -m "FEAT: replace cpp_stub with my_project through repository"
+   $ git commit -a -m "FEAT: replace abaqus_tools with my_project through repository"
    $ git push origin feature/project-name-updates
 
 You can also perform some cleanup in ``README.md`` to remove this walk-through.

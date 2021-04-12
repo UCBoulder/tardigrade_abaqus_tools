@@ -60,7 +60,7 @@ breathe_default_project = project
 
 # Links to PRs, Jira issues.
 extlinks = {
-     "pull": ("https://xcp-stash.lanl.gov/projects/MM/repos/cpp_stub/pull-requests/%s/overview", "PR"),
+     "pull": ("https://xcp-stash.lanl.gov/projects/MM/repos/abaqus_tools/pull-requests/%s/overview", "PR"),
      "jira": ("https://xcp-jira.lanl.gov/browse/VIP-%s", "VIP-"),
 }
 

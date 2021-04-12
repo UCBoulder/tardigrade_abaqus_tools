@@ -9,7 +9,7 @@
 #ifndef UMAT_H
 #define UMAT_H
 
-#include<cpp_stub.h>
+#include<abaqus_tools.h>
 
 extern "C" void UMAT( double *STRESS,       double *STATEV,       double *DDSDDE,       double &SSE,          double &SPD,
                       double &SCD,          double &RPL,          double *DDSDDT,       double *DRPLDE,       double &DRPLDT,

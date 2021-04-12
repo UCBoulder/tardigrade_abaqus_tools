@@ -103,7 +103,7 @@ the release, as documented in :ref:`changelog`.
 
 Steps needed for a release include:
 
-1. Update version number in the root ``CMakeLists.txt``, e.g. ``project(cpp_stub VERSION 0.0.1)``.
+1. Update version number in the root ``CMakeLists.txt``, e.g. ``project(abaqus_tools VERSION 0.0.1)``.
    Version bumps should be accompanied by resetting numbers to the right of the
    bump to zero, e.g., ``'0.2.30'`` to ``'0.3.0'`` and ``'1.2.30'`` to
    ``'2.0.0'``.

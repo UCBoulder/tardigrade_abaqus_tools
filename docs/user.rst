@@ -19,18 +19,18 @@ The template UMAT can be used after build with the following Abaqus options
 
 .. code:: bash
 
-   $ abaqus -job <my_input_file> -user relative/path/to/cpp_stub/build/src/cpp/umat.o
+   $ abaqus -job <my_input_file> -user relative/path/to/abaqus_tools/build/src/cpp/umat.o
 
 Until the template repository and all upstream c++ libraries are built as shared library objects it is recommended that
 the subroutines are left in the project build directory. However, it is possible to copy the shared library files to any
 other directory provided the upstream projects ``{error,vector,stress,solver,constitutive}_tools`` are present in the
-build directory, e.g. ``cpp_stub/build/_deps/{error,vector,stress,solver,constitutive}_tools-build/``.
+build directory, e.g. ``abaqus_tools/build/_deps/{error,vector,stress,solver,constitutive}_tools-build/``.
 
 .. code:: bash
 
    $ pwd
    /path/to/my/abaqus/job
-   $ cp /path/to/cpp_stub/build/src/cpp/{umat.o,libcpp_stub.so} .
+   $ cp /path/to/abaqus_tools/build/src/cpp/{umat.o,libabaqus_tools.so} .
    $ abaqus -job <my_input_file> -user umat.o
 
 *************

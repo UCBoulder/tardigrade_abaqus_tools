@@ -20,7 +20,7 @@
       <hudson.plugins.git.UserRemoteConfig>
         <name>origin</name>
         <refspec>+refs/pull-requests/*:refs/remotes/origin/pull-requests/* +refs/heads/*:refs/remotes/origin/*</refspec>
-        <url>ssh://git@xcp-stash.lanl.gov:7999/mm/cpp_stub.git</url>
+        <url>ssh://git@xcp-stash.lanl.gov:7999/mm/abaqus_tools.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -53,7 +53,7 @@
       <stashHost>https://xcp-stash.lanl.gov</stashHost>
       <credentialsId>654d0967-ce05-40ad-92b8-f2baa4a7a963</credentialsId>
       <projectCode>MM</projectCode>
-      <repositoryName>cpp_stub</repositoryName>
+      <repositoryName>abaqus_tools</repositoryName>
       <ignoreSsl>true</ignoreSsl>
       <targetBranchesToBuild>^((?!master).)*$</targetBranchesToBuild>
       <checkDestinationCommit>true</checkDestinationCommit>
