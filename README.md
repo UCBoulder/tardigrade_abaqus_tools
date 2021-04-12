@@ -1,38 +1,6 @@
-# C++ Stub repository
+# abaqus\_tools repository
 
-A stub repository for C++ development projects in W-13.
-
-This repository will contain the necessary setup files to integrate C++ doc strings,
-[CMake](https://cmake.org/cmake/help/v3.14/), [Doxygen](https://www.doxygen.nl/manual/docblocks.html),
-[Sphinx](https://www.sphinx-doc.org/en/master/), and [Breathe](https://breathe.readthedocs.io/en/latest/) for a complete
-build system with integrated documentation. It will also include the necessary hooks to commonly used C++ libraries for
-constitutive modeling. This stub repository also includes template hooks for integrating C++ code as Abaqus subroutines.
-
-> Note: you can use this repo as a stub for fortran projects as well! A
-> step-by-step may never happen because c++ is the future of W-13 subroutines.
-> For now, refer to the following references:
->
-> * [CMake for Fortran example
->   ``CMakeLists.txt``](https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/languages/fortran/ForFortranExample)
-> * [CMake documentation starting point](https://cmake.org/cmake/help/v3.14/module/CheckFortranSourceRuns.html)
-> * [Stack Overflow thread](https://stackoverflow.com/questions/12705562/using-cmake-with-fortran)
-> * [Doxygen comments for Fortran](https://www.doxygen.nl/manual/docblocks.html#fortranblocks)
-
-## Setting up a Jenkins CI job
-
-This section has a corresponding section in the formatted and hyperlinked html
-documentation. Build and view instructions are included in following sections,
-separated from project setup by horizontal bars.
-
-See ``jenkins_job_creation.md`` in this repo.
-
-## Version control for a Jenkins job
-
-This section has a corresponding section in the formatted and hyperlinked html
-documentation. Build and view instructions are included in following sections,
-separated from project setup by horizontal bars.
-
-See ``jenkins_job_xml.md`` in this repo.
+A collection of tools for C++ that make interfacing with Abaqus subroutines easier and less prone to error.
 
 ---
 
@@ -74,57 +42,14 @@ Documentation](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/m
 
 ### C++ Libraries
 
-* [Eigen](https://eigen.tuxfamily.org/dox/) >= 3.3.7
 * [BOOST](https://www.boost.org/doc/libs/1_53_0/) >= 1.53.0
-* error\_tools: https://xcp-stash.lanl.gov/projects/MM/repos/error_tools
 * vector\_tools: https://xcp-stash.lanl.gov/projects/MM/repos/vector_tools
-* stress\_tools: https://xcp-stash.lanl.gov/projects/MM/repos/stress_tools
-* solver\_tools: https://xcp-stash.lanl.gov/projects/MM/repos/solver_tools
-* constitutive\_tools: https://xcp-stash.lanl.gov/projects/MM/repos/consitutive_tools
 
-#### Constitutive Tools
+#### Constitutive c++ Tools
 
-All of the ``{error,vector,stress,solver,constitutive}_tools`` libraries are
+All of the ``*_tools`` libraries are
 pulled from their git repos by branch name and built with their respective cmake
 files as part of the cmake build for this project.
-
-#### Eigen
-
-https://gitlab.com/libeigen/eigen
-
-Eigen must be "installed" following the ``eigen/INSTALL`` instructions. The
-Eigen dependence is easiest to resolve if eigen is installed in the default
-install directory.  However, if you don't have admin privileges, you can also
-insall Eigen to your home directory in ``$HOME/.local/include`` or
-``$HOME/include``.
-
-#### Non-admin Eigen install
-
-[Reference](https://unix.stackexchange.com/questions/36871/where-should-a-local-executable-be-placed)
-
-```
-# Create personal include file directory
-$ pwd
-/home/$USER
-$ mkdir -p .local/include
-# Move to repository directory
-$ cd /preferred/path/to/repos
-# Example
-$ pwd
-/projects/$USER/w13repos
-# Clone eigen
-$ git clone https://gitlab.com/libeigen/eigen.git
-$ cd eigen
-$ git checkout 3.3.7
-# Create build directory
-$ mkdir build
-$ cd build
-# OPTIONAL. Set c++ compiler separate from system default
-$ export CXX=$(command -v g++)
-# Build eigen
-$ cmake3 .. -DCMAKE_INSTALL_PREFIX=$HOME/.local
-$ make install
-```
 
 ---
 

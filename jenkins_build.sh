@@ -41,7 +41,7 @@ ls -l $HOME/include || true
 ls -l $HOME/.local/include || true
 
 # Source common shell script variables
-source set_vars.sh
+workdir=${PWD}
 
 #================================================= TEST AGAINST g++ or c++ COMPILER ===
 case $OSTYPE in
