@@ -20,6 +20,9 @@ Documentation
 
 Internal Changes
 ~~~~~~~~~~~~~~~~
+- Setup Jenkins PR builder:
+  https://toolbox-jenkins.lanl.gov/view/VIPor%20and%20C++/job/abaqus_tools_Pull_Request_Builder/ (:jira:`540`,
+  :pull:`4`). By `Kyle Brindley`_.
 - Update change log for abaqus\_tools release versions and update repository tags (:jira:`539`, :pull:`3`). By `Kyle
   Brindley`_.
 - Remove everything except the abaqus\_tools (:jira:`538`, :pull:`2`). By `Kyle Brindley`_.
