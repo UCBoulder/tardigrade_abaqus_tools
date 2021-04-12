@@ -5,8 +5,8 @@ Jenkins CI job setup
 From the main page: https://toolbox-jenkins.lanl.gov/
 
     1. Select "New Item" in the left hand sidebar.
-    2. Give the project a name following the current convention: "<project name>_Pull_Request_Builder" or "cpp_stub_Pull_Request_Builder"
-    3. We want to copy another job as a template file. Enter "cpp_stub_Pull_Request_Builder" in the "Copy from" text field.
+    2. Give the project a name following the current convention: "<project name>_Pull_Request_Builder" or "abaqus_tools_Pull_Request_Builder"
+    3. We want to copy another job as a template file. Enter "abaqus_tools_Pull_Request_Builder" in the "Copy from" text field.
 
        .. note::
 
@@ -28,7 +28,7 @@ From the main page: https://toolbox-jenkins.lanl.gov/
           1. The repository url should be updated to match your repo. If you're
              doing things the W-13 way, this would fit the convention
              "ssh://git@xcp-stash.lanl.gov:7999/mm/<project_name>.git" or here
-             "ssh://git@xcp-stash.lanl.gov:7999/mm/cpp_stub.git"
+             "ssh://git@xcp-stash.lanl.gov:7999/mm/abaqus_tools.git"
           2. Leave everything else alone. If you have to change anything else in
              the "Source Code Management" section, then you are way out of scope for a stub
              repo tutorial or need to seek help from a project owner for out-of-W-13 setup
@@ -42,7 +42,7 @@ From the main page: https://toolbox-jenkins.lanl.gov/
               have access. For W-13 subroutine projects, you should be using the Material
               Model project and won't need to change this.
            2. Update "repository name" to your projects name. This is case
-              insensitive. In this case, "cpp_stub".
+              insensitive. In this case, "abaqus_tools".
            3. You can make changes to the cron schedule if you like, this project
               pings the Bitbucket server every minute. No xcp-devops admin has complained
               yet...

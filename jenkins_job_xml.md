@@ -102,6 +102,6 @@ toolbox-jenkins@ninetails:~/backups$ scp bakup_20201022_1119.tar.bz2 kbrindley@s
 8. Find the job that you want to backup/version control/examine/copy.
 
 ```
-[kbrindley@sstelmo kbrindley]$ find bakup_20201022_1119/ -type f -name config.xml | grep cpp_stub
-bakup_20201022_1119/jobs/cpp_stub_Pull_Request_Builder/config.xml
+[kbrindley@sstelmo kbrindley]$ find bakup_20201022_1119/ -type f -name config.xml | grep abaqus_tools
+bakup_20201022_1119/jobs/abaqus_tools_Pull_Request_Builder/config.xml
 ```

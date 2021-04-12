@@ -9,15 +9,15 @@
 .. toctree::
     :maxdepth: 2
 
-cpp_stub.cpp
+abaqus_tools.cpp
 ============
 
-.. doxygenfile:: cpp_stub.cpp
+.. doxygenfile:: abaqus_tools.cpp
 
-cpp_stub.h
+abaqus_tools.h
 ==========
 
-.. doxygenfile:: cpp_stub.h
+.. doxygenfile:: abaqus_tools.h
 
 abaqus_tools.h
 ==============

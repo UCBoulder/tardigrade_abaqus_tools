@@ -1,13 +1,13 @@
 /**
   ******************************************************************************
-  * \file cpp_stub.h
+  * \file abaqus_tools.h
   ******************************************************************************
   * A C++ library for printing messages to stdout. Used as a stub repo example.
   ******************************************************************************
   */
 
-#ifndef CPP_STUB_H
-#define CPP_STUB_H
+#ifndef ABAQUS_TOOLS_H
+#define ABAQUS_TOOLS_H
 
 #include<string>
 #include<iostream>
