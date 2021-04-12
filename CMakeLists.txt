@@ -26,6 +26,16 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 # Add the cmake folder to locate the FindSphinx module
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
+# Find related, but external, projects
+# TODO: Decide how to handle master/dev build differences. bash env variables for GIT TAG?
+include(FetchContent)
+FetchContent_Declare(
+    vector_tools
+    GIT_REPOSITORY ssh://git@xcp-stash.lanl.gov:7999/mm/vector_tools.git
+    GIT_TAG        origin/dev
+)
+FetchContent_MakeAvailable(vector_tools)
+
 #=============================================================================================== ADD PROJECT TARGETS ===
 # MUST COME AFTER DEPENDENCY LOCATING
 # Add project source directories

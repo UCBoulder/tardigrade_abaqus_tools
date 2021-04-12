@@ -8,6 +8,8 @@
 #define BOOST_TEST_MODULE test_umat
 #include <boost/test/included/unit_test.hpp>
 
+#include<vector_tools.h>
+
 #include<abaqus_tools.h>
 
 BOOST_AUTO_TEST_CASE( testColumnToRowMajor ){
