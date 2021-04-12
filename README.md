@@ -1,38 +1,6 @@
-# C++ Stub repository
+# abaqus\_tools repository
 
-A stub repository for C++ development projects in W-13.
-
-This repository will contain the necessary setup files to integrate C++ doc strings,
-[CMake](https://cmake.org/cmake/help/v3.14/), [Doxygen](https://www.doxygen.nl/manual/docblocks.html),
-[Sphinx](https://www.sphinx-doc.org/en/master/), and [Breathe](https://breathe.readthedocs.io/en/latest/) for a complete
-build system with integrated documentation. It will also include the necessary hooks to commonly used C++ libraries for
-constitutive modeling. This stub repository also includes template hooks for integrating C++ code as Abaqus subroutines.
-
-> Note: you can use this repo as a stub for fortran projects as well! A
-> step-by-step may never happen because c++ is the future of W-13 subroutines.
-> For now, refer to the following references:
->
-> * [CMake for Fortran example
->   ``CMakeLists.txt``](https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/languages/fortran/ForFortranExample)
-> * [CMake documentation starting point](https://cmake.org/cmake/help/v3.14/module/CheckFortranSourceRuns.html)
-> * [Stack Overflow thread](https://stackoverflow.com/questions/12705562/using-cmake-with-fortran)
-> * [Doxygen comments for Fortran](https://www.doxygen.nl/manual/docblocks.html#fortranblocks)
-
-## Setting up a Jenkins CI job
-
-This section has a corresponding section in the formatted and hyperlinked html
-documentation. Build and view instructions are included in following sections,
-separated from project setup by horizontal bars.
-
-See ``jenkins_job_creation.md`` in this repo.
-
-## Version control for a Jenkins job
-
-This section has a corresponding section in the formatted and hyperlinked html
-documentation. Build and view instructions are included in following sections,
-separated from project setup by horizontal bars.
-
-See ``jenkins_job_xml.md`` in this repo.
+A collection of tools for C++ that make interfacing with Abaqus subroutines easier and less prone to error.
 
 ---
 
