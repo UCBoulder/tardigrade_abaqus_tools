@@ -16,7 +16,7 @@ Retrieve a single configuration file
 If a developer only needs a single configuration file, it is relatively simple
 to copy that file off the Jenkins server without performing a full backup. Log
 into the Jenkins server ``ninetails`` as institutional user ``toolbox-jenkins``
-with an ssh session and perform the following, where ``cpp_stub`` should be
+with an ssh session and perform the following, where ``abaqus_tools`` should be
 replaced with the project's repository name.
 
 1. Log into ``ninetails.lanl.gov``.
@@ -31,7 +31,7 @@ replaced with the project's repository name.
 
 .. code:: bash
 
-   toolbox-jenkins@ninetails:~$ scp /local/jenkins-homes/toolbox-jenkins/jobs/cpp_stub_Pull_Request_Builder/config.xml sstelmo:/projects/toolbox-jenkins
+   toolbox-jenkins@ninetails:~$ scp /local/jenkins-homes/toolbox-jenkins/jobs/abaqus_tools_Pull_Request_Builder/config.xml sstelmo:/projects/toolbox-jenkins
 
 3. Copy or transfer the local configuration copy to the developer's project
 
@@ -149,5 +149,5 @@ complete.
 
 .. code:: bash
 
-   [kbrindley@sstelmo kbrindley]$ find bakup_20201022_1119/ -type f -name config.xml | grep cpp_stub
-   bakup_20201022_1119/jobs/cpp_stub_Pull_Request_Builder/config.xml
+   [kbrindley@sstelmo kbrindley]$ find bakup_20201022_1119/ -type f -name config.xml | grep abaqus_tools
+   bakup_20201022_1119/jobs/abaqus_tools_Pull_Request_Builder/config.xml

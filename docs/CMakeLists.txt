@@ -32,6 +32,29 @@ set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR})
 set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/sphinx)
 set(SPHINX_INDEX_FILE ${SPHINX_BUILD}/index.html)
 
+# Explicit list of documentation source files because globbing won't trigger CMake config on re-builds
+set(DOCUMENTATION_SOURCE
+    ${CMAKE_CURRENT_SOURCE_DIR}/index.rst
+    ${CMAKE_CURRENT_SOURCE_DIR}/api.rst
+    ${CMAKE_CURRENT_SOURCE_DIR}/changelog.rst
+    ${CMAKE_CURRENT_SOURCE_DIR}/bitbucket_setup.txt
+    ${CMAKE_CURRENT_SOURCE_DIR}/build.txt
+    ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt
+    ${CMAKE_CURRENT_SOURCE_DIR}/contribution.txt
+    ${CMAKE_CURRENT_SOURCE_DIR}/dependencies.txt
+    ${CMAKE_CURRENT_SOURCE_DIR}/devops.rst
+    ${CMAKE_CURRENT_SOURCE_DIR}/jenkins_pr_builder.txt
+    ${CMAKE_CURRENT_SOURCE_DIR}/jenkins_version_control.txt
+    ${CMAKE_CURRENT_SOURCE_DIR}/md2rst.txt
+    ${CMAKE_CURRENT_SOURCE_DIR}/project_brief.txt
+    ${CMAKE_CURRENT_SOURCE_DIR}/release_philosophy.rst
+    ${CMAKE_CURRENT_SOURCE_DIR}/stub.rst
+    ${CMAKE_CURRENT_SOURCE_DIR}/targets.txt
+    ${CMAKE_CURRENT_SOURCE_DIR}/theory.rst
+    ${CMAKE_CURRENT_SOURCE_DIR}/user.rst
+    ${CMAKE_CURRENT_SOURCE_DIR}/zreferences.rst
+)
+
 # Add sphinx command
 add_custom_command(OUTPUT ${SPHINX_INDEX_FILE}
                    COMMAND
@@ -42,9 +65,7 @@ add_custom_command(OUTPUT ${SPHINX_INDEX_FILE}
                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                    DEPENDS
                        # Other docs files you want to track should go here (or in some variable)
-                       ${CMAKE_CURRENT_SOURCE_DIR}/index.rst
-                       ${CMAKE_CURRENT_SOURCE_DIR}/api.rst
-                       ${CMAKE_CURRENT_SOURCE_DIR}/changelog.rst
+                       ${DOCUMENTATION_SOURCE}
                        ${DOXYGEN_INDEX_FILE}
                    MAIN_DEPENDENCY ${SPHINX_SOURCE}/conf.py
                    COMMENT "Generating ${PROJECT_NAME} documentation with Sphinx")

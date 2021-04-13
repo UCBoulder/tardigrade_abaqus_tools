@@ -61,7 +61,7 @@
 .. _`Doxygen comments for Fortran`: https://www.doxygen.nl/manual/docblocks.html#fortranblocks
 
 .. Project specific links
-.. _`upstream cpp\_stub repo`: https://xcp-stash.lanl.gov/projects/MM/repos/cpp_stub/browse
+.. _`upstream cpp\_stub repo`: https://xcp-stash.lanl.gov/projects/MM/repos/abaqus_tools/browse
 
 .. Abaqus reference links
 .. _`Abaqus Solid Continuum Elements`: http://simulia.lanl.gov:8080/EstProdDocs2019/English/DSSIMULIA_Established.htm?show=SIMACAEELMRefMap/simaelm-c-solidcont.htm

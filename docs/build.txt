@@ -24,7 +24,7 @@ Build on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/cpp_stub/
+      /path/to/abaqus_tools/
 
       $ mkdir build
       $ cd build
@@ -40,7 +40,7 @@ Build on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/cpp_stub/build
+      /path/to/abaqus_tools/build
       $ cmake3 ..
 
 4) Build various portions of the project
@@ -53,7 +53,7 @@ Build on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/cpp_stub/build
+      /path/to/abaqus_tools/build
 
       # Build everything
       $ cmake3 --build .
@@ -71,7 +71,7 @@ Build on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/cpp_stub/build
+      /path/to/abaqus_tools/build
 
       # find c++ libraries and ignore intermediate files with similar extensions
       $ find . \( -name "*.o" -o -name "*.so" -o -name "*.a" \) | grep -vE "\.cpp\."
@@ -87,7 +87,7 @@ Build on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/cpp_stub/build
+      /path/to/abaqus_tools/build
 
       $ make clean
 
@@ -99,7 +99,7 @@ Test on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/cpp_stub/build
+      /path/to/abaqus_tools/build
 
       # Build c++ tests
       $ cmake3 --build src/cpp/tests
@@ -109,7 +109,7 @@ Test on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/cpp_stub/build
+      /path/to/abaqus_tools/build
 
       # Run ctest
       $ ctest
@@ -134,7 +134,7 @@ configuration from scratch.
    .. code:: bash
 
       $ pwd
-      /path/to/cpp_stub/
+      /path/to/abaqus_tools/
 
       # Just perform the build (pick one)
       $ ./new_build.sh <cxx compiler>
@@ -143,7 +143,7 @@ configuration from scratch.
       $ ./new_build.sh icpc
 
       # Perform tests from PWD
-      $ ./build/src/cpp/tests/test_cpp_stub
+      $ ./build/src/cpp/tests/test_abaqus_tools
 
       # Build and perform tests
       $ ./jenkins_build.sh
@@ -187,7 +187,7 @@ To build just the documentation pick up the steps here:
    .. code:: bash
 
       $ pwd
-      /path/to/cpp_stub/
+      /path/to/abaqus_tools/
       $ mkdir build/
       $ cd build/
 
@@ -196,7 +196,7 @@ To build just the documentation pick up the steps here:
    .. code:: bash
 
       $ pwd
-      /path/to/cpp_stub/build/
+      /path/to/abaqus_tools/build/
       $ cmake3 ..
 
 4) Build the docs
@@ -209,14 +209,14 @@ To build just the documentation pick up the steps here:
 
    .. code:: bash
 
-      cpp_stub/build/docs/sphinx/index.html
+      abaqus_tools/build/docs/sphinx/index.html
 
 6) Display docs
 
    .. code:: bash
 
       $ pwd
-      /path/to/cpp_stub/build/
+      /path/to/abaqus_tools/build/
       $ firefox docs/sphinx/index.html &
 
 7) While the Sphinx API is still a WIP, try the doxygen API
@@ -224,7 +224,7 @@ To build just the documentation pick up the steps here:
    .. code:: bash
 
       $ pwd
-      /path/to/cpp_stub/build/
+      /path/to/abaqus_tools/build/
       $ firefox docs/doxygen/html/index.html &
 
 
