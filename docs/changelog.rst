@@ -3,8 +3,11 @@
 Changelog
 =========
 
-0.0.1 (unrelease)
------------------
+0.0.2 (unreleased)
+------------------
+
+0.0.1 (2021-04-13)
+------------------
 
 Breaking changes
 ~~~~~~~~~~~~~~~~
@@ -17,6 +20,7 @@ Bug fixes
 
 Documentation
 ~~~~~~~~~~~~~
+- First production release (:jira:`543`, :pull:`5`). By `Kyle Brindley`_.
 
 Internal Changes
 ~~~~~~~~~~~~~~~~
