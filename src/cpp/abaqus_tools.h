@@ -90,8 +90,8 @@ namespace abaqusTools{
     }
     
     template< typename T >
-    std::vector< T > expandAbaqusStressVector( const std::vector< T > &abaqus_vector,
-                                               const int &NDI, const int &NSHR ){
+    std::vector< T > expandAbaqusNTENSVector( const std::vector< T > &abaqus_vector,
+                                              const int &NDI, const int &NSHR ){
         /*!
          * Expand stress and strain type components to full Abaqus vectors.
          *
