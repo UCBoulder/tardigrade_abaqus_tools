@@ -8,8 +8,10 @@ Changelog
 
 Breaking changes
 ~~~~~~~~~~~~~~~~
-- Change Abaqus stress expansion function name to match the general purpose nature for both Standard and Explicit
-  (:jira:`591`, :pull:`7`). By `Kyle Brindley`_.
+- Change Abaqus stress-type vector expansion function name to match the general purpose nature for both Standard and
+  Explicit (:jira:`591`, :pull:`7`). By `Kyle Brindley`_.
+- Change Abaqus stress-type vector contraction function name to match the general purpose nature for both Standard and
+  Explicit (:jira:`591`, :pull:`7`). By `Kyle Brindley`_.
 
 0.0.1 (2021-04-13)
 ------------------

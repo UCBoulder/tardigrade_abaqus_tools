@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_CASE( testExpandAbaqusNTENSVector ){
      BOOST_CHECK( vectorTools::fuzzyEquals( vector_expansion, expected_plane_stress ) );
 }
 
-BOOST_AUTO_TEST_CASE( testContractAbaqusStandardStressVector ){
+BOOST_AUTO_TEST_CASE( testContractAbaqusNTENSVector ){
     /*!
      * Test contraction of stress and strain type components to full Abaqus vectors
      */
@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusStandardStressVector ){
      NDI = 3;
      NSHR = 3;
 
-     vector_contraction_full = abaqusTools::contractAbaqusStandardStressVector( expanded_full, NDI, NSHR );
+     vector_contraction_full = abaqusTools::contractAbaqusNTENSVector( expanded_full, NDI, NSHR );
 
      BOOST_CHECK( vectorTools::fuzzyEquals( vector_contraction_full, abaqus_full ) );
 
@@ -133,7 +133,7 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusStandardStressVector ){
      NDI = 2;
      NSHR = 1;
 
-     vector_contraction_plane_stress = abaqusTools::contractAbaqusStandardStressVector( expanded_plane_stress, NDI, NSHR );
+     vector_contraction_plane_stress = abaqusTools::contractAbaqusNTENSVector( expanded_plane_stress, NDI, NSHR );
 
      BOOST_CHECK( vectorTools::fuzzyEquals( vector_contraction_plane_stress, abaqus_plane_stress ) );
 
