@@ -74,7 +74,7 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     BOOST_CHECK( vectorTools::fuzzyEquals( fortran_vector, expected_vector ) );
 }
 
-BOOST_AUTO_TEST_CASE( testExpandAbaqusStandardStressVector ){
+BOOST_AUTO_TEST_CASE( testExpandAbaqusStressVector ){
     /*!
      * Test expansion of stress and strain type components to full Abaqus vectors
      */
