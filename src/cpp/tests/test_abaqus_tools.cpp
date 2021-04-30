@@ -139,7 +139,7 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusNTENSVector ){
 
 }
 
-BOOST_AUTO_TEST_CASE( testContractAbaqusStandardNTENSMatrix ){
+BOOST_AUTO_TEST_CASE( testContractAbaqusNTENSMatrix ){
     /*!
      * Test contraction of NTENS matrix components from full Abaqus matrices of size 6x6
      */
@@ -165,7 +165,7 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusStandardNTENSMatrix ){
      NDI = 3;
      NSHR = 3;
 
-     matrix_contraction_full = abaqusTools::contractAbaqusStandardNTENSMatrix( expanded_full, NDI, NSHR );
+     matrix_contraction_full = abaqusTools::contractAbaqusNTENSMatrix( expanded_full, NDI, NSHR );
 
      BOOST_CHECK( vectorTools::fuzzyEquals( matrix_contraction_full, abaqus_full ) );
 
@@ -183,7 +183,7 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusStandardNTENSMatrix ){
      NDI = 2;
      NSHR = 1;
 
-     matrix_contraction_plane_stress = abaqusTools::contractAbaqusStandardNTENSMatrix( expanded_plane_stress, NDI, NSHR );
+     matrix_contraction_plane_stress = abaqusTools::contractAbaqusNTENSMatrix( expanded_plane_stress, NDI, NSHR );
 
      BOOST_CHECK( vectorTools::fuzzyEquals( matrix_contraction_plane_stress, abaqus_plane_stress ) );
 
