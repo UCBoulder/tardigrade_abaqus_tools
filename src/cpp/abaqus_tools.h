@@ -144,7 +144,7 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    std::vector< T > contractAbaqusStressVector( const std::vector< T > &full_abaqus_vector,
+    std::vector< T > contractAbaqusNTENSVector( const std::vector< T > &full_abaqus_vector,
                                                  const int &NDI, const int &NSHR ){
         /*!
          * Contract stress and strain type components from full Abaqus vectors.
