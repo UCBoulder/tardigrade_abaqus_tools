@@ -90,10 +90,10 @@ namespace abaqusTools{
     }
     
     template< typename T >
-    std::vector< T > expandAbaqusStandardStressVector( const std::vector< T > &abaqus_vector,
-                                                       const int &NDI, const int &NSHR ){
+    std::vector< T > expandAbaqusNTENSVector( const std::vector< T > &abaqus_vector,
+                                              const int &NDI, const int &NSHR ){
         /*!
-         * Expand stress and strain type components to full Abaqus vectors
+         * Expand stress and strain type components to full Abaqus vectors.
          *
          * See the Abaqus documentation > Introduction & Spatial Modeling > Conventions chapter > Convention used for stress
          * and strain components.
@@ -106,10 +106,20 @@ namespace abaqusTools{
          *
          * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{13}, \gamma_{23} \right ) \f$
          *
+         * The stress vector components for Abaqus/Explicit (VUMAT) are
+         *
+         * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{23}, \tau_{13} \right ) \f$
+         *
+         * and the strain vector components match as
+         *
+         * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{23}, \gamma_{13} \right ) \f$
+         *
          * where components that are zero-valued by definition, e.g. plane stress, are omitted. The shear strain is the
          * engineering shear strain where
          *
          * \f$ \gamma_{ij} = \epsilon_{ij} + \epsilon_{ji} \f$
+         *
+         * for both Abaqus/Standard and Abaqus/Explicit.
          *
          * \param &abaqus_vector: an abaqus stress-type vector with no by-definition-zero components. Length NDI + NSHR.
          * \param &NDI: The number of direct components.
@@ -132,12 +142,12 @@ namespace abaqusTools{
     
         return vector_expansion;
     }
-    
+
     template< typename T >
-    std::vector< T > contractAbaqusStandardStressVector( const std::vector< T > &full_abaqus_vector,
-                                                         const int &NDI, const int &NSHR ){
+    std::vector< T > contractAbaqusNTENSVector( const std::vector< T > &full_abaqus_vector,
+                                                 const int &NDI, const int &NSHR ){
         /*!
-         * Contract stress and strain type components from full Abaqus vectors
+         * Contract stress and strain type components from full Abaqus vectors.
          *
          * See the Abaqus documentation > Introduction & Spatial Modeling > Conventions chapter > Convention used for stress
          * and strain components.
@@ -150,10 +160,20 @@ namespace abaqusTools{
          *
          * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{13}, \gamma_{23} \right ) \f$
          *
+         * The stress vector components for Abaqus/Explicit (VUMAT) are
+         *
+         * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{23}, \tau_{13} \right ) \f$
+         *
+         * and the strain vector components match as
+         *
+         * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{23}, \gamma_{13} \right ) \f$
+         *
          * where components that are zero-valued by definition, e.g. plane stress, are omitted. The shear strain is the
          * engineering shear strain where
          *
          * \f$ \gamma_{ij} = \epsilon_{ij} + \epsilon_{ji} \f$
+         *
+         * for both Abaqus/Standard and Abaqus/Explicit.
          *
          * \param &full_abaqus_vector: a previously expanded abaqus stress-type vector. Length 6.
          * \param &NDI: The number of direct components.
@@ -178,10 +198,10 @@ namespace abaqusTools{
     }
     
     template< typename T >
-    std::vector< std::vector < T > > contractAbaqusStandardNTENSMatrix( const std::vector< std::vector< T > > &full_abaqus_matrix, 
+    std::vector< std::vector < T > > contractAbaqusNTENSMatrix( const std::vector< std::vector< T > > &full_abaqus_matrix, 
                                                                         const int &NDI, const int &NSHR ){
         /*!
-         * Contract NTENS type components from full Abaqus matrixes (6x6).
+         * Contract NTENS type components from full Abaqus stress-type matrixes (6x6).
          *
          * See the Abaqus documentation > Introduction & Spatial Modeling > Conventions chapter > Convention used for stress
          * and strain components.
@@ -194,8 +214,16 @@ namespace abaqusTools{
          *
          * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{13}, \gamma_{23} \right ) \f$
          *
+         * The stress vector components for Abaqus/Explicit (VUMAT) are
+         *
+         * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{23}, \tau_{13} \right ) \f$
+         *
+         * and the strain vector components match as
+         *
+         * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{23}, \gamma_{13} \right ) \f$
+         *
          * where components that are zero-valued by definition, e.g. plane stress, are omitted. The related matrixes are
-         * then
+         * therefore ordered for Abaqus/Standard (UMAT) as
          *
          * TODO: Update LaTeX formatting for a well aligned matrix
          *
@@ -205,6 +233,15 @@ namespace abaqusTools{
          * \f$ \left ( D_{symm}, D_{symm}, D_{symm}, D_{1212}, D_{1213}, D_{1223} \right ) \f$
          * \f$ \left ( D_{symm}, D_{symm}, D_{symm}, D_{symm}, D_{1313}, D_{1323} \right ) \f$
          * \f$ \left ( D_{symm}, D_{symm}, D_{symm}, D_{symm}, D_{symm}, D_{2323} \right ) \f$
+         *
+         * and for Abaqus/Explicit (VUMAT) as
+         *
+         * \f$ \left ( D_{1111}, D_{1122}, D_{1133}, D_{1112}, D_{1113}, D_{1123} \right ) \f$
+         * \f$ \left ( D_{symm}, D_{2222}, D_{2233}, D_{2212}, D_{2213}, D_{2223} \right ) \f$
+         * \f$ \left ( D_{symm}, D_{symm}, D_{3333}, D_{3312}, D_{3313}, D_{3323} \right ) \f$
+         * \f$ \left ( D_{symm}, D_{symm}, D_{symm}, D_{1212}, D_{1213}, D_{1223} \right ) \f$
+         * \f$ \left ( D_{symm}, D_{symm}, D_{symm}, D_{symm}, D_{2323}, D_{2313} \right ) \f$
+         * \f$ \left ( D_{symm}, D_{symm}, D_{symm}, D_{symm}, D_{symm}, D_{1313} \right ) \f$
          *
          * \param &full_abaqus_matrix: a previously expanded abaqus NTENS matrix. Dimensions 6x6.
          * \param &NDI: The number of direct components.
