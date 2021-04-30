@@ -93,7 +93,7 @@ namespace abaqusTools{
     std::vector< T > expandAbaqusStressVector( const std::vector< T > &abaqus_vector,
                                                const int &NDI, const int &NSHR ){
         /*!
-         * Expand stress and strain type components to full Abaqus vectors for Abaqus/Standard.
+         * Expand stress and strain type components to full Abaqus vectors.
          *
          * See the Abaqus documentation > Introduction & Spatial Modeling > Conventions chapter > Convention used for stress
          * and strain components.
