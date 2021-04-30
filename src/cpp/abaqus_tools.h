@@ -90,10 +90,10 @@ namespace abaqusTools{
     }
     
     template< typename T >
-    std::vector< T > expandAbaqusStandardStressVector( const std::vector< T > &abaqus_vector,
-                                                       const int &NDI, const int &NSHR ){
+    std::vector< T > expandAbaqusStressVector( const std::vector< T > &abaqus_vector,
+                                               const int &NDI, const int &NSHR ){
         /*!
-         * Expand stress and strain type components to full Abaqus vectors
+         * Expand stress and strain type components to full Abaqus vectors for Abaqus/Standard.
          *
          * See the Abaqus documentation > Introduction & Spatial Modeling > Conventions chapter > Convention used for stress
          * and strain components.
@@ -106,10 +106,20 @@ namespace abaqusTools{
          *
          * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{13}, \gamma_{23} \right ) \f$
          *
+         * The stress vector components for Abaqus/Explicit (VUMAT) are
+         *
+         * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{23}, \tau_{13} \right ) \f$
+         *
+         * and the strain vector components match as
+         *
+         * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{23}, \gamma_{13} \right ) \f$
+         *
          * where components that are zero-valued by definition, e.g. plane stress, are omitted. The shear strain is the
          * engineering shear strain where
          *
          * \f$ \gamma_{ij} = \epsilon_{ij} + \epsilon_{ji} \f$
+         *
+         * for both Abaqus/Standard and Abaqus/Explicit.
          *
          * \param &abaqus_vector: an abaqus stress-type vector with no by-definition-zero components. Length NDI + NSHR.
          * \param &NDI: The number of direct components.
@@ -132,7 +142,7 @@ namespace abaqusTools{
     
         return vector_expansion;
     }
-    
+
     template< typename T >
     std::vector< T > contractAbaqusStandardStressVector( const std::vector< T > &full_abaqus_vector,
                                                          const int &NDI, const int &NSHR ){
