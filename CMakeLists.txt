@@ -1,6 +1,6 @@
 #===================================================================================================== PROJECT SETUP ===
 cmake_minimum_required (VERSION 3.14)
-project (abaqus_tools VERSION 0.0.1)
+project (abaqus_tools VERSION 0.0.2)
 enable_testing()
 
 # Set common project paths relative to project root directory
