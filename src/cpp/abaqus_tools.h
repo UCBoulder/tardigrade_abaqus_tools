@@ -328,9 +328,8 @@ namespace abaqusTools{
          * \returns full_tensor: c++ type row major vector of length 9.
          */
 
-        //Initialize the output row-major vector 
+        //Initialize internal vectors 
         std::vector< unsigned int > tensorOrder( 9 );
-        std::vector< T > full_tensor( 9 );
 
         //Set the tensor packing order by Abaqus solver
         if ( abaqus_standard ){
@@ -345,9 +344,9 @@ namespace abaqusTools{
         }
 
         //Pack the row-major full tensor
-        floatVector full_tensor = { long_vector[tensorOrder[0]], long_vector[tensorOrder[1]], long_vector[tensorOrder[2]],
-                                    long_vector[tensorOrder[3]], long_vector[tensorOrder[4]], long_vector[tensorOrder[5]],
-                                    long_vector[tensorOrder[6]], long_vector[tensorOrder[7]], long_vector[tensorOrder[8]] };
+        std::vector< T > full_tensor = { long_vector[tensorOrder[0]], long_vector[tensorOrder[1]], long_vector[tensorOrder[2]],
+                                         long_vector[tensorOrder[3]], long_vector[tensorOrder[4]], long_vector[tensorOrder[5]],
+                                         long_vector[tensorOrder[6]], long_vector[tensorOrder[7]], long_vector[tensorOrder[8]] };
     
         return full_tensor;
     }

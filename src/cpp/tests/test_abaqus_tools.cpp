@@ -188,3 +188,26 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusNTENSMatrix ){
      BOOST_CHECK( vectorTools::fuzzyEquals( matrix_contraction_plane_stress, abaqus_plane_stress ) );
 
 }
+
+BOOST_AUTO_TEST_CASE( testConstructFullNTENSTensor ){
+    /*!
+     * Test construction of full stress and strain type tensors from full Abaqus vectors
+     */
+
+     //Initialize common test variables
+     std::vector< int > result( 9 );
+     std::vector< int > abaqus_standard = { 11, 22, 33, 12, 13, 23 };
+     std::vector< int > abaqus_explicit = { 11, 22, 33, 12, 23, 13 };
+     std::vector< int > answer = { 11, 12, 13,
+                                   12, 22, 23,
+                                   13, 23, 33 };
+
+     //Check full tensor construction for Abaqus/Standard
+     result = abaqusTools::constructFullNTENSTensor( abaqus_standard, true );
+     BOOST_CHECK( answer == result );
+
+     //Check full tensor construction for Abaqus/Explicit
+     result = abaqusTools::constructFullNTENSTensor( abaqus_explicit, false );
+     BOOST_CHECK( answer == result );
+
+}
