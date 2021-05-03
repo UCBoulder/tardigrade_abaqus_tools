@@ -423,6 +423,42 @@ namespace abaqusTools{
 
     }
 
+    template< typename T >
+    std::vector< T > destructFullNTENSTensor( const std::vector< T > &full_tensor,
+                                              const int &NDI, const int &NSHR,
+                                              const bool abaqus_standard = true ){
+        /*!
+         * Destruct a full 3x3 tensor stored as a row-major vector into an Abaqus stress-type vector of length NDI +
+         * NSHR. Handle the stress-type vector element order differences between Abaqus/Standard and Abaqus/Explicit.
+         *
+         * The full tensor is stored as a row-major vector
+         *
+         *     full_tensor[]            0            1            2
+         *                   { \sigma_{11}, \sigma_{12}, \sigma_{13},
+         *
+         *     full_tensor[]            3            4            5
+         *                     \sigma_{12}, \sigma_{22}, \sigma_{23},
+         *
+         *     full_tensor[]            6            7            8
+         *                     \sigma_{13}, \sigma_{23}, \sigma_{33} }
+         *
+         * \param full_tensor: c++ type row-major vector of length 9.
+         * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
+         *                         Default: True.
+         * \returns &abaqus_vector: a contracted abaqus stress-type vector. Length NDI + NSHR.
+         */
+
+        //Destruct to full length (6) abaqus stress-type vector
+//        std::vector< T > full_abaqus_vector = destructFullNTENSTensor( full_tensor, NDI, NSHR, abaqus_standard );
+        std::vector< T > full_abaqus_vector = { 11, 22, 33, 12, 13, 23 };
+
+        //Contract the full length (6) vector to an abaqus stress-type vector of length NDI + NSHR
+        std::vector< T > abaqus_vector = contractAbaqusNTENSVector( full_abaqus_vector, NDI, NSHR );
+
+        return abaqus_vector;
+
+    }
+
 }
 
 #endif

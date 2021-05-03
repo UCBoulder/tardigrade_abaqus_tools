@@ -239,4 +239,13 @@ BOOST_AUTO_TEST_CASE( testDestructFullNTENSTensor ) {
      result = abaqusTools::destructFullNTENSTensor( full_tensor, false );
      BOOST_CHECK( result == abaqus_explicit );
 
+     //Test overloaded variation with contracted vector input
+     //Check full tensor construction for Abaqus/Standard
+     result = abaqusTools::destructFullNTENSTensor( full_tensor, 3, 3, true );
+     BOOST_CHECK( result == abaqus_standard );
+
+     //Check full tensor construction for Abaqus/Explicit
+     result = abaqusTools::destructFullNTENSTensor( full_tensor, 3, 3, false );
+     BOOST_CHECK( result == abaqus_explicit );
+
 }
