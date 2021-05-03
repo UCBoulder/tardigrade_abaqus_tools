@@ -1,21 +1,27 @@
 .. _changelog:
 
-Changelog
-=========
 
+#########
+Changelog
+#########
+
+
+******************
 0.0.3 (unreleased)
-------------------
+******************
 
 New Features
-~~~~~~~~~~~~
+============
 - Add full tensor construction from Abaqus stress and strain type ``NTENS`` vectors (:jira:`610`, :pull:`12`). By `Kyle
   Brindley`_.
 
+
+******************
 0.0.2 (2021-04-30)
-------------------
+******************
 
 Breaking changes
-~~~~~~~~~~~~~~~~
+================
 - Change Abaqus stress-type vector expansion function name to match the general purpose nature for both Standard and
   Explicit (:jira:`591`, :pull:`7`). By `Kyle Brindley`_.
 - Change Abaqus stress-type vector contraction function name to match the general purpose nature for both Standard and
@@ -23,24 +29,26 @@ Breaking changes
 - Change Abaqus NTENS matrix contraction function name to match the general purpose nature for both Standard and
   Explicit (:jira:`593`, :pull:`9`). By `Kyle Brindley`_.
 
+
+******************
 0.0.1 (2021-04-13)
-------------------
+******************
 
 Breaking changes
-~~~~~~~~~~~~~~~~
+================
 
 New Features
-~~~~~~~~~~~~
+============
 
 Bug fixes
-~~~~~~~~~
+=========
 
 Documentation
-~~~~~~~~~~~~~
+=============
 - First production release (:jira:`543`, :pull:`5`). By `Kyle Brindley`_.
 
 Internal Changes
-~~~~~~~~~~~~~~~~
+================
 - Setup Jenkins PR builder:
   https://toolbox-jenkins.lanl.gov/view/VIPor%20and%20C++/job/abaqus_tools_Pull_Request_Builder/ (:jira:`540`,
   :pull:`4`). By `Kyle Brindley`_.
@@ -51,5 +59,5 @@ Internal Changes
 - Creation from cpp_stub (:jira:`534`). By `Kyle Brindley`_.
 
 Enhancements
-~~~~~~~~~~~~
+============
 
