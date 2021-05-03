@@ -461,7 +461,7 @@ namespace abaqusTools{
 
     template< typename T >
     std::vector< std::vector< T > > destructFullNTENSMatrix( const std::vector< std::vector< T > > &full_matrix,
-                                              const bool abaqus_standard = true ){
+                                                             const bool abaqus_standard = true ){
         /*!
          * Re-pack a full 9x9 matrix into the expected order for an expanded (6x6) Abaqus NTENS matrix. Handle the
          * stress-type vector element order differences between Abaqus/Standard and Abaqus/Explicit.

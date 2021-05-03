@@ -255,15 +255,15 @@ BOOST_AUTO_TEST_CASE( testDestructFullNTENSMatrix ){
      //Initialize common test variables
      std::vector< std::vector< int > > result( 6, std::vector< int >( 6 ) );
                                                          // 0     1     2     3     4     5     6     7     8
-     std::vector< std::vector< int > > full_matrix = { { 1166, 1112, 1113, 0.00, 1122, 1123, 0.00, 0.00, 1133 },   // 0
-                                                     { { 1112, 1212, 1213, 0.00, 2212, 1223, 0.00, 0.00, 3312 },   // 1
-                                                     { { 1113, 1213, 1313, 0.00, 2213, 1323, 0.00, 0.00, 3313 },   // 2
-                                                     { { 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00 },   // 3
-                                                     { { 1122, 2212, 2213, 0.00, 2222, 2223, 0.00, 0.00, 2233 },   // 4
-                                                     { { 1123, 1223, 1323, 0.00, 2223, 2323, 0.00, 0.00, 3323 },   // 5
-                                                     { { 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00 },   // 6
-                                                     { { 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00 },   // 7
-                                                     { { 1133, 3312, 3313, 0.00, 2233, 3323, 0.00, 0.00, 3333 } }; // 8
+     std::vector< std::vector< int > > full_matrix = { { 1166, 1112, 1113, 0000, 1122, 1123, 0000, 0000, 1133 },   // 0
+                                                       { 1112, 1212, 1213, 0000, 2212, 1223, 0000, 0000, 3312 },   // 1
+                                                       { 1113, 1213, 1313, 0000, 2213, 1323, 0000, 0000, 3313 },   // 2
+                                                       { 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 },   // 3
+                                                       { 1122, 2212, 2213, 0000, 2222, 2223, 0000, 0000, 2233 },   // 4
+                                                       { 1123, 1223, 1323, 0000, 2223, 2323, 0000, 0000, 3323 },   // 5
+                                                       { 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 },   // 6
+                                                       { 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 },   // 7
+                                                       { 1133, 3312, 3313, 0000, 2233, 3323, 0000, 0000, 3333 } }; // 8
                                                                         //  0     4     8     1     2     5
      std::vector< std::vector< int > > full_abaqus_standard_matrix = { { 1111, 1122, 1133, 1112, 1113, 1123 },   // 0
                                                                        { 1122, 2222, 2233, 2212, 2213, 2223 },   // 4
@@ -280,6 +280,11 @@ BOOST_AUTO_TEST_CASE( testDestructFullNTENSMatrix ){
                                                                        { 1113, 2213, 3313, 1213, 2313, 1313 } };
 
      //Check full matrix destruction for Abaqus/Standard
+     result = abaqusTools::destructFullNTENSMatrix( full_matrix, true );
+     BOOST_CHECK( result == full_abaqus_standard_matrix );
+
      //Check full matrix destruction for Abaqus/Explicit
+     result = abaqusTools::destructFullNTENSMatrix( full_matrix, false );
+     BOOST_CHECK( result == full_abaqus_explicit_matrix );
 
 }
