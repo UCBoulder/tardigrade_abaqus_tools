@@ -276,8 +276,8 @@ BOOST_AUTO_TEST_CASE( testDestructFullNTENSMatrix ){
                                                                        { 1122, 2222, 2233, 2212, 2223, 2213 },
                                                                        { 1133, 2233, 3333, 3312, 3323, 3313 },
                                                                        { 1112, 2212, 3312, 1212, 1223, 1213 },
-                                                                       { 1123, 2223, 3323, 1223, 1323, 1313 },
-                                                                       { 1113, 2213, 3313, 1213, 1313, 2313 } };
+                                                                       { 1123, 2223, 3323, 1223, 2323, 2313 },
+                                                                       { 1113, 2213, 3313, 1213, 2313, 1313 } };
 
      //Check full matrix destruction for Abaqus/Standard
      //Check full matrix destruction for Abaqus/Explicit
