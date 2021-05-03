@@ -255,7 +255,7 @@ BOOST_AUTO_TEST_CASE( testDestructFullNTENSMatrix ){
      //Initialize common test variables
      std::vector< std::vector< int > > result( 6, std::vector< int >( 6 ) );
                                                          // 0     1     2     3     4     5     6     7     8
-     std::vector< std::vector< int > > full_matrix = { { 1166, 1112, 1113, 0000, 1122, 1123, 0000, 0000, 1133 },   // 0
+     std::vector< std::vector< int > > full_matrix = { { 1111, 1112, 1113, 0000, 1122, 1123, 0000, 0000, 1133 },   // 0
                                                        { 1112, 1212, 1213, 0000, 2212, 1223, 0000, 0000, 3312 },   // 1
                                                        { 1113, 1213, 1313, 0000, 2213, 1323, 0000, 0000, 3313 },   // 2
                                                        { 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000, 0000 },   // 3
