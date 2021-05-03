@@ -14,6 +14,8 @@ New Features
 ============
 - Add full tensor construction from Abaqus stress and strain type ``NTENS`` vectors (:jira:`610`, :pull:`12`). By `Kyle
   Brindley`_.
+- Add full tensor deconstruction to Abaqus stress and strain type ``NTENS`` vectors (:jira:`614`, :pull:`13`). By `Kyle
+  Brindley`_.
 
 Internal Changes
 ================
