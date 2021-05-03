@@ -1,12 +1,17 @@
 .. _releasephilosophy:
 
+
+##################
 Release Philosophy
-==================
+##################
+Release Philosophy
 
 This section discusses topics related to |project| releases and version numbering.
 
+
+**********************
 Release and Deployment
-++++++++++++++++++++++
+**********************
 
 .. warning::
 
@@ -28,8 +33,10 @@ software projects. While the deployed projects in beta have been unit and integr
 include updated or new Python modules that result in less stable behavior. The beta environment is used to test W-13
 software projects against an updated Python environment before releasing the new environment.
 
+
+***************
 Version Numbers
-+++++++++++++++
+***************
 
 The |project| project follows the `PEP-440`_ standard for version numbering. The
 final release version number uses the three component ("major.minor.micro")
@@ -46,13 +53,13 @@ information contains the most recent git tag ("major.minor.micro+dev") followed
 by the number of commits since the last final release and a short hash.
 
 Major Number
-------------
+============
 
 The major number is expected to increment infrequently. After the first major release, it is recommended that the major
 version number only increments for major breaking changes.
 
 Minor Number
-------------
+============
 
 The minor number is updated for the following reasons:
 
@@ -65,7 +72,7 @@ dedicated release commit. Until the first major release, minor version changes m
 recommended that all minor version changes are announced to the user community prior to release.
 
 Micro Number
-------------
+============
 
 .. warning::
 
@@ -88,8 +95,10 @@ with the user community.
 
 .. _releasebranchreq:
 
+
+***************************
 Release Branch Requirements
----------------------------
+***************************
 
 .. warning::
 

@@ -16,6 +16,30 @@
 
 namespace abaqusTools{
 
+    char *FtoCString( int stringLength, const char* fString ){
+        /*!
+         * Converts a Fortran string to C-string. Trims trailing white space during processing.
+         *
+         * Code excerpt from a c++ Abaqus FILM subroutine in the Abaqus Knowledge Base:
+         * https://kb.dsxclient.3ds.com/mashup-ui/page/resultqa?from=search%3fq%3dwriting%2bsubroutine%2bc%252B%252B&id=QA00000008005e&q=writing%20subroutine%20c%2B%2B
+         *
+         * TODO: update coding style to match project.
+         *
+         * \param stringLength: The length of the Fortran string.
+         * \param *fString: The pointer to the start of the Fortran string.
+         */
+        int stringLen = stringLength;
+        for ( int k1 = stringLength - 1; k1 >= 0; k1-- )
+    	{
+    	    if ( fString[ k1 ] != ' ' ) break;
+    	    stringLen = k1;
+    	}
+        char* cString  = new char [ stringLen + 1 ];
+        memcpy ( cString, fString, stringLen );
+        cString[ stringLen ] = '\0';
+        return cString;
+    }
+
     template< typename T >
     std::vector< std::vector< T > > columnToRowMajor( const T *column_major,  const int &height, const int &width ){
         /*!
@@ -40,7 +64,7 @@ namespace abaqusTools{
         }
         return row_major;
     }
-    
+
     template< typename T >
     void rowToColumnMajor( T *column_major, const std::vector< std::vector< T > > &row_major_array,
                            const int &height, const int &width ){
@@ -62,10 +86,10 @@ namespace abaqusTools{
                 column_major[column_major_index] = row_major_array[row][col];
             }
         }
-    
+
         return;
     }
-    
+
     template< typename T >
     void rowToColumnMajor( T *column_major, const std::vector< T > &row_major, const int &height, const int &width ){
         /*!
@@ -88,7 +112,7 @@ namespace abaqusTools{
             }
         }
     }
-    
+
     template< typename T >
     std::vector< T > expandAbaqusNTENSVector( const std::vector< T > &abaqus_vector,
                                               const int &NDI, const int &NSHR ){
@@ -126,26 +150,26 @@ namespace abaqusTools{
          * \param &NSHR: The number of shear components.
          * \returns vector_expansion: c++ type vector of length 6.
          */
-    
+
         //Initialize expanded vector to the appropriate dimensions with zero values
         std::vector< T > vector_expansion( 6, 0 );
-    
+
         //Unpack direct components of Abaqus/Standard stress-type vector
         for ( int index = 0; index < NDI; index++ ){
             vector_expansion[ index ] = abaqus_vector[ index ];
         }
-    
+
         //Unpack shear components of Abaqus/Standard stress-type vector
         for ( int index = 0; index < NSHR; index++ ){
             vector_expansion[ 3 + index ] = abaqus_vector[ NDI + index ];
         }
-    
+
         return vector_expansion;
     }
 
     template< typename T >
     std::vector< T > contractAbaqusNTENSVector( const std::vector< T > &full_abaqus_vector,
-                                                 const int &NDI, const int &NSHR ){
+                                                const int &NDI, const int &NSHR ){
         /*!
          * Contract stress and strain type components from full Abaqus vectors.
          *
@@ -180,26 +204,26 @@ namespace abaqusTools{
          * \param &NSHR: The number of shear components.
          * \returns vector_contraction: c++ type vector of length NDI + NSHR.
          */
-    
+
         //Initialize contracted vector to the appropriate dimensions
         std::vector< T > vector_contraction( NDI + NSHR );
-    
+
         //Pack non-zero direct components of Abaqus/Standard stress-type vector
         for ( int index = 0; index < NDI; index++ ){
             vector_contraction[ index ] = full_abaqus_vector[ index ];
         }
-    
+
         //Pack non-zero shear components of Abaqus/Standard stress-type vector
         for ( int index = 0; index < NSHR; index++ ){
             vector_contraction[ NDI + index ] = full_abaqus_vector[ 3 + index ];
         }
-    
+
         return vector_contraction;
     }
-    
+
     template< typename T >
-    std::vector< std::vector < T > > contractAbaqusNTENSMatrix( const std::vector< std::vector< T > > &full_abaqus_matrix, 
-                                                                        const int &NDI, const int &NSHR ){
+    std::vector< std::vector < T > > contractAbaqusNTENSMatrix( const std::vector< std::vector< T > > &full_abaqus_matrix,
+                                                                const int &NDI, const int &NSHR ){
         /*!
          * Contract NTENS type components from full Abaqus stress-type matrixes (6x6).
          *
@@ -248,10 +272,10 @@ namespace abaqusTools{
          * \param &NSHR: The number of shear components.
          * \returns matrix_contraction: c++ type vector of vectors with square shape of size NDI + NSHR.
          */
-    
+
         //Initialize contracted matrix to the appropriate dimensions
         std::vector< std::vector< T > > matrix_contraction( NDI + NSHR, std::vector< T >( NDI + NSHR ) );
-    
+
         //Loop non-zero direct component rows
         for ( int row = 0; row < NDI; row++ ){
             //Loop non-zero direct component columns
@@ -263,7 +287,7 @@ namespace abaqusTools{
                 matrix_contraction[ row ][ NDI + col ] = full_abaqus_matrix[ row ][ 3 + col ];
             }
         }
-    
+
         //Loop non-zero shear component rows
         for ( int row = 0; row < NSHR; row++ ){
             //Loop non-zero direct component columns
@@ -275,32 +299,85 @@ namespace abaqusTools{
                 matrix_contraction[ NDI + row ][ NDI + col ] = full_abaqus_matrix[ 3 + row ][ 3 + col ];
             }
         }
-    
+
         return matrix_contraction;
     }
-    
-    char *FtoCString( int stringLength, const char* fString ){
+
+    template< typename T >
+    std::vector< T > constructFullNTENSTensor( const std::vector< T > &long_vector,
+                                               const bool abaqus_standard = true ){
         /*!
-         * Converts a Fortran string to C-string. Trims trailing white space during processing.
+         * Construct the full 3x3 tensor as a row-major vector from the expanded Abaqus stress-type NTENS vector of
+         * length 6. Handle the stress-type vector element order differences between Abaqus/Standard and
+         * Abaqus/Explicit.
          *
-         * Code excerpt from a c++ Abaqus FILM subroutine in the Abaqus Knowledge Base:
-         * https://kb.dsxclient.3ds.com/mashup-ui/page/resultqa?from=search%3fq%3dwriting%2bsubroutine%2bc%252B%252B&id=QA00000008005e&q=writing%20subroutine%20c%2B%2B
+         * ``abaqusTools::expandAbaqusNTENSVector`` returns
          *
-         * TODO: update coding style to match project.
+         * Abaqus/Standard (UMAT)
          *
-         * \param stringLength: The length of the Fortran string.
-         * \param *fString: The pointer to the start of the Fortran string.
+         *     long_vector[]            0            1            2          3          4          5
+         *                   { \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{13}, \tau_{23}  }
+         *
+         * Abaqus/Explicit (VUMAT)
+         *
+         *     long_vector[]            0            1            2          3          4          5
+         *                   { \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{23}, \tau_{13}  }
+         *
+         * \param &long_vector: a previously expanded Abaqus stress-type vector of length 6.
+         * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
+         *                         Default: True.
+         * \returns full_tensor: c++ type row major vector of length 9.
          */
-        int stringLen = stringLength;
-        for ( int k1 = stringLength - 1; k1 >= 0; k1-- )
-    	{
-    	    if ( fString[ k1 ] != ' ' ) break;
-    	    stringLen = k1;
-    	}
-        char* cString  = new char [ stringLen + 1 ];
-        memcpy ( cString, fString, stringLen );
-        cString[ stringLen ] = '\0';
-        return cString;
+
+        //Initialize internal vectors
+        std::vector< unsigned int > tensorOrder( 9 );
+
+        //Set the tensor packing order by Abaqus solver
+        if ( abaqus_standard ){
+            tensorOrder = { 0, 3, 4,
+                            3, 1, 5,
+                            4, 5, 2 };
+        }
+        else{
+            tensorOrder = { 0, 3, 5,
+                            3, 1, 4,
+                            5, 4, 2 };
+        }
+
+        //Pack the row-major full tensor
+        std::vector< T > full_tensor = { long_vector[tensorOrder[0]], long_vector[tensorOrder[1]], long_vector[tensorOrder[2]],
+                                         long_vector[tensorOrder[3]], long_vector[tensorOrder[4]], long_vector[tensorOrder[5]],
+                                         long_vector[tensorOrder[6]], long_vector[tensorOrder[7]], long_vector[tensorOrder[8]] };
+
+        return full_tensor;
+
+    }
+
+    template< typename T >
+    std::vector< T > constructFullNTENSTensor( const std::vector< T > &abaqus_vector,
+                                               const int &NDI, const int &NSHR,
+                                               const bool abaqus_standard = true ){
+        /*!
+         * Construct the full 3x3 tensor as a row-major vector from the contracted Abaqus stress-type vector of length
+         * NDI + NSHR. Handle the stress-type vector element order differences between Abaqus/Standard and
+         * Abaqus/Explicit.
+         *
+         * \param &abaqus_vector: an abaqus stress-type vector with no by-definition-zero components. Length NDI + NSHR.
+         * \param &NDI: The number of direct components.
+         * \param &NSHR: The number of shear components.
+         * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
+         *                         Default: True.
+         * \returns full_tensor: c++ type row major vector of length 9.
+         */
+
+        //Expand the stress-type vector
+        std::vector< T > long_vector = abaqusTools::expandAbaqusNTENSVector( abaqus_vector, NDI, NSHR );
+
+        //Construct the full tensor
+        std::vector< T > full_tensor = abaqusTools::constructFullNTENSTensor( long_vector, abaqus_standard );
+
+        return full_tensor;
+
     }
 
 }
