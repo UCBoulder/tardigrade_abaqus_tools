@@ -169,7 +169,7 @@ namespace abaqusTools{
 
     template< typename T >
     std::vector< T > contractAbaqusNTENSVector( const std::vector< T > &full_abaqus_vector,
-                                                 const int &NDI, const int &NSHR ){
+                                                const int &NDI, const int &NSHR ){
         /*!
          * Contract stress and strain type components from full Abaqus vectors.
          *
@@ -223,7 +223,7 @@ namespace abaqusTools{
     
     template< typename T >
     std::vector< std::vector < T > > contractAbaqusNTENSMatrix( const std::vector< std::vector< T > > &full_abaqus_matrix, 
-                                                                        const int &NDI, const int &NSHR ){
+                                                                const int &NDI, const int &NSHR ){
         /*!
          * Contract NTENS type components from full Abaqus stress-type matrixes (6x6).
          *
@@ -302,7 +302,56 @@ namespace abaqusTools{
     
         return matrix_contraction;
     }
+
+    template< typename T >
+    std::vector< T > constructFullNTENSTensor( const std::vector< T > &long_vector,
+                                               const bool abaqus_standard = true ){
+        /*!
+         * Construct the full 3x3 tensor as a row-major vector from the expanded Abaqus stress-type NTENS vector. 
+         * Handle the stress-type vector element order differences between Abaqus/Standard and Abaqus/Explicit.
+         *
+         * ``abaqusTools::expandAbaqusNTENSVector`` returns
+         *
+         * Abaqus/Standard (UMAT)
+         *
+         *     long_vector[]            0            1            2          3          4          5
+         *                   { \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{13}, \tau_{23}  }
+         *
+         * Abaqus/Explicit (VUMAT)
+         *
+         *     long_vector[]            0            1            2          3          4          5
+         *                   { \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{23}, \tau_{13}  }
+         *  
+         * \param &long_vector: a previously expanded Abaqus stress-type vector of length 6.
+         * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
+         *                         Default: True.
+         * \returns full_tensor: c++ type row major vector of length 9.
+         */
+
+        //Initialize the output row-major vector 
+        std::vector< unsigned int > tensorOrder( 9 );
+        std::vector< T > full_tensor( 9 );
+
+        //Set the tensor packing order by Abaqus solver
+        if ( abaqus_standard ){
+            tensorOrder = { 0, 3, 4, 
+                            3, 1, 5,
+                            4, 5, 2 };
+        }
+        else{
+            tensorOrder = { 0, 3, 5, 
+                            3, 1, 4,
+                            5, 4, 2 };
+        }
+
+        //Pack the row-major full tensor
+        floatVector full_tensor = { long_vector[tensorOrder[0]], long_vector[tensorOrder[1]], long_vector[tensorOrder[2]],
+                                    long_vector[tensorOrder[3]], long_vector[tensorOrder[4]], long_vector[tensorOrder[5]],
+                                    long_vector[tensorOrder[6]], long_vector[tensorOrder[7]], long_vector[tensorOrder[8]] };
     
+        return full_tensor;
+    }
+
 }
 
 #endif
