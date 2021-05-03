@@ -210,4 +210,13 @@ BOOST_AUTO_TEST_CASE( testConstructFullNTENSTensor ){
      result = abaqusTools::constructFullNTENSTensor( abaqus_explicit, false );
      BOOST_CHECK( answer == result );
 
+     //Test overloaded variation with contracted vector input
+     //Check full tensor construction for Abaqus/Standard
+     result = abaqusTools::constructFullNTENSTensor( abaqus_standard, 3, 3, true );
+     BOOST_CHECK( answer == result );
+
+     //Check full tensor construction for Abaqus/Explicit
+     result = abaqusTools::constructFullNTENSTensor( abaqus_explicit, 3, 3, false );
+     BOOST_CHECK( answer == result );
+
 }
