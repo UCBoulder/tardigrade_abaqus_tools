@@ -15,6 +15,10 @@ New Features
 - Add full tensor construction from Abaqus stress and strain type ``NTENS`` vectors (:jira:`610`, :pull:`12`). By `Kyle
   Brindley`_.
 
+Internal Changes
+================
+- Updates to documentation source for ReST style guide (:jira:`610`, :pull:`12`). By `Kyle Brindley`_.
+
 
 ******************
 0.0.2 (2021-04-30)
