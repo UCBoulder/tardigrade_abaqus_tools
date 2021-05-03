@@ -406,6 +406,7 @@ namespace abaqusTools{
 
         //Initialize internal vectors
         std::vector< unsigned int > tensorOrder( 6 );
+        std::vector< T > full_abaqus_vector( 6 );
 
         //Set the tensor unpacking order by Abaqus solver
         if ( abaqus_standard ){
@@ -416,8 +417,8 @@ namespace abaqusTools{
         }
 
         //Unpack the row-major full tensor
-        std::vector< T > full_abaqus_vector = { full_tensor[tensorOrder[0]], full_tensor[tensorOrder[1]], full_tensor[tensorOrder[2]],
-                                                full_tensor[tensorOrder[3]], full_tensor[tensorOrder[4]], full_tensor[tensorOrder[5]] };
+        full_abaqus_vector = { full_tensor[tensorOrder[0]], full_tensor[tensorOrder[1]], full_tensor[tensorOrder[2]],
+                               full_tensor[tensorOrder[3]], full_tensor[tensorOrder[4]], full_tensor[tensorOrder[5]] };
 
         return full_abaqus_vector;
 
@@ -449,8 +450,7 @@ namespace abaqusTools{
          */
 
         //Destruct to full length (6) abaqus stress-type vector
-//        std::vector< T > full_abaqus_vector = destructFullNTENSTensor( full_tensor, NDI, NSHR, abaqus_standard );
-        std::vector< T > full_abaqus_vector = { 11, 22, 33, 12, 13, 23 };
+        std::vector< T > full_abaqus_vector = destructFullNTENSTensor( full_tensor, abaqus_standard );
 
         //Contract the full length (6) vector to an abaqus stress-type vector of length NDI + NSHR
         std::vector< T > abaqus_vector = contractAbaqusNTENSVector( full_abaqus_vector, NDI, NSHR );
