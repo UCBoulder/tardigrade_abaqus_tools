@@ -198,25 +198,45 @@ BOOST_AUTO_TEST_CASE( testConstructFullNTENSTensor ){
      std::vector< int > result( 9 );
      std::vector< int > abaqus_standard = { 11, 22, 33, 12, 13, 23 };
      std::vector< int > abaqus_explicit = { 11, 22, 33, 12, 23, 13 };
-     std::vector< int > answer = { 11, 12, 13,
-                                   12, 22, 23,
-                                   13, 23, 33 };
+     std::vector< int > expected = { 11, 12, 13,
+                                     12, 22, 23,
+                                     13, 23, 33 };
 
      //Check full tensor construction for Abaqus/Standard
      result = abaqusTools::constructFullNTENSTensor( abaqus_standard, true );
-     BOOST_CHECK( answer == result );
+     BOOST_CHECK( result == expected );
 
      //Check full tensor construction for Abaqus/Explicit
      result = abaqusTools::constructFullNTENSTensor( abaqus_explicit, false );
-     BOOST_CHECK( answer == result );
+     BOOST_CHECK( result == expected );
 
      //Test overloaded variation with contracted vector input
      //Check full tensor construction for Abaqus/Standard
      result = abaqusTools::constructFullNTENSTensor( abaqus_standard, 3, 3, true );
-     BOOST_CHECK( answer == result );
+     BOOST_CHECK( result == expected );
 
      //Check full tensor construction for Abaqus/Explicit
      result = abaqusTools::constructFullNTENSTensor( abaqus_explicit, 3, 3, false );
-     BOOST_CHECK( answer == result );
+     BOOST_CHECK( result == expected );
+
+}
+
+BOOST_AUTO_TEST_CASE( testDestructFullNTENSTensor ) {
+
+     //Initialize common test variables
+     std::vector< int > result( 6 );
+     std::vector< int > full_tensor = { 11, 12, 13,
+                                        12, 22, 23,
+                                        13, 23, 33 };
+     std::vector< int > abaqus_standard = { 11, 22, 33, 12, 13, 23 };
+     std::vector< int > abaqus_explicit = { 11, 22, 33, 12, 23, 13 };
+
+     //Check full tensor construction for Abaqus/Standard
+     result = abaqusTools::destructFullNTENSTensor( full_tensor, true );
+     BOOST_CHECK( result == abaqus_standard );
+
+     //Check full tensor construction for Abaqus/Explicit
+     result = abaqusTools::destructFullNTENSTensor( full_tensor, false );
+     BOOST_CHECK( result == abaqus_explicit );
 
 }
