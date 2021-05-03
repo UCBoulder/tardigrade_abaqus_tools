@@ -221,7 +221,7 @@ BOOST_AUTO_TEST_CASE( testConstructFullNTENSTensor ){
 
 }
 
-BOOST_AUTO_TEST_CASE( testDestructFullNTENSTensor ) {
+BOOST_AUTO_TEST_CASE( testDestructFullNTENSTensor ){
 
      //Initialize common test variables
      std::vector< int > result( 6 );
@@ -231,21 +231,34 @@ BOOST_AUTO_TEST_CASE( testDestructFullNTENSTensor ) {
      std::vector< int > abaqus_standard = { 11, 22, 33, 12, 13, 23 };
      std::vector< int > abaqus_explicit = { 11, 22, 33, 12, 23, 13 };
 
-     //Check full tensor construction for Abaqus/Standard
+     //Check full tensor destruction for Abaqus/Standard
      result = abaqusTools::destructFullNTENSTensor( full_tensor, true );
      BOOST_CHECK( result == abaqus_standard );
 
-     //Check full tensor construction for Abaqus/Explicit
+     //Check full tensor destruction for Abaqus/Explicit
      result = abaqusTools::destructFullNTENSTensor( full_tensor, false );
      BOOST_CHECK( result == abaqus_explicit );
 
      //Test overloaded variation with contracted vector input
-     //Check full tensor construction for Abaqus/Standard
+     //Check full tensor destruction for Abaqus/Standard
      result = abaqusTools::destructFullNTENSTensor( full_tensor, 3, 3, true );
      BOOST_CHECK( result == abaqus_standard );
 
-     //Check full tensor construction for Abaqus/Explicit
+     //Check full tensor destruction for Abaqus/Explicit
      result = abaqusTools::destructFullNTENSTensor( full_tensor, 3, 3, false );
      BOOST_CHECK( result == abaqus_explicit );
+
+}
+
+BOOST_AUTO_TEST_CASE( testDestructFullNTENSMatrix ){
+
+     //Initialize common test variables
+     std::vector< std::vector< int > > result( 6, std::vector< int >( 6 ) );
+     std::vector< std::vector< int > > full_matrix( 6, std::vector< int >( 6 ) );
+     std::vector< std::vector< int > > abaqus_standard_matrix( 6, std::vector< int >( 6 ) );
+     std::vector< std::vector< int > > abaqus_explicit_matrix( 6, std::vector< int >( 6 ) );
+
+     //Check full matrix destruction for Abaqus/Standard
+     //Check full matrix destruction for Abaqus/Explicit
 
 }
