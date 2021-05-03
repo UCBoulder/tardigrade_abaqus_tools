@@ -459,6 +459,42 @@ namespace abaqusTools{
 
     }
 
+    template< typename T >
+    std::vector< std::vector< T > > destructFullNTENSMatrix( const std::vector< std::vector< T > > &full_matrix,
+                                              const bool abaqus_standard = true ){
+        /*!
+         * Re-pack a full 6x6 matrix into the expected order for a full size (6x6) Abaqus NTENS matrix. Handle the
+         * stress-type vector element order differences between Abaqus/Standard and Abaqus/Explicit.
+         *
+         * \param full_matrix: The c++ type matrix (vector of vectors)
+         * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
+         *                         Default: True.
+         * \returns full_abaqus_matrix
+         */
+
+        //Initialize internal vectors
+        std::vector< unsigned int > tensorOrder( 6 );
+        std::vector< std::vector< T > > full_abaqus_matrix( 6, std::vector< T >( 6 ) );
+
+        //Set the tensor unpacking order by Abaqus solver
+        if ( abaqus_standard ){
+            tensorOrder = { 0, 4, 8, 1, 2, 5 };
+        }
+        else{
+            tensorOrder = { 0, 4, 8, 1, 5, 2 };
+        }
+
+        //Repack the full matrix for Abaqus
+        for ( unsigned int i = 0; i < tensorOrder.size( ); i++ ){
+            for ( unsigned int j = 0; j < tensorOrder.size( ); j++ ){
+                full_abaqus_matrix[ i ][ j ] = full_matrix[ tensorOrder[ i ] ][ tensorOrder[ j ] ];
+            }
+        }
+
+        return full_abaqus_matrix;
+
+    }
+
 }
 
 #endif
