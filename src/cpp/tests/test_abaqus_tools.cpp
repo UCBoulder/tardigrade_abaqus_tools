@@ -254,7 +254,7 @@ BOOST_AUTO_TEST_CASE( testDestructFullNTENSMatrix ){
 
      //Initialize common test variables
      std::vector< std::vector< int > > result( 6, std::vector< int >( 6 ) );
-     std::vector< std::vector< int > > full_matrix( 6, std::vector< int >( 6 ) );
+     std::vector< std::vector< int > > full_matrix( 9, std::vector< int >( 9 ) );
      std::vector< std::vector< int > > abaqus_standard_matrix( 6, std::vector< int >( 6 ) );
      std::vector< std::vector< int > > abaqus_explicit_matrix( 6, std::vector< int >( 6 ) );
 
