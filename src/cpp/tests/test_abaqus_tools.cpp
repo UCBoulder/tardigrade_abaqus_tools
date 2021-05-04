@@ -276,4 +276,10 @@ BOOST_AUTO_TEST_CASE( testDestructFullNTENSMatrix ){
      result = abaqusTools::destructFullNTENSMatrix( full_matrix );
      BOOST_CHECK( result == full_abaqus_standard_matrix );
 
+//     //Test overloaded variation with contracted NTENSxNTENS matrix output
+//     //Check full matrix destruction for Abaqus/Standard
+//     //Sign of life test. The tests for NDI and NSHR less than 3 are performed in contractAbaqusNTENSMatrix.
+//     result = abaqusTools::destructFullNTENSMatrix( full_matrix, 3, 3 );
+//     BOOST_CHECK( result == full_abaqus_standard_matrix );
+
 }
