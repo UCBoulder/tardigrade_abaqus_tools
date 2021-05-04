@@ -245,11 +245,11 @@ namespace abaqusTools{
          * TODO: Update LaTeX formatting for a well aligned matrix
          *
          * \f$ \left ( D_{1111}, D_{1122}, D_{1133}, D_{1112}, D_{1113}, D_{1123} \right ) \f$
-         * \f$ \left ( D_{symm}, D_{2222}, D_{2233}, D_{2212}, D_{2213}, D_{2223} \right ) \f$
-         * \f$ \left ( D_{symm}, D_{symm}, D_{3333}, D_{3312}, D_{3313}, D_{3323} \right ) \f$
-         * \f$ \left ( D_{symm}, D_{symm}, D_{symm}, D_{1212}, D_{1213}, D_{1223} \right ) \f$
-         * \f$ \left ( D_{symm}, D_{symm}, D_{symm}, D_{symm}, D_{1313}, D_{1323} \right ) \f$
-         * \f$ \left ( D_{symm}, D_{symm}, D_{symm}, D_{symm}, D_{symm}, D_{2323} \right ) \f$
+         * \f$ \left ( D_{2211}, D_{2222}, D_{2233}, D_{2212}, D_{2213}, D_{2223} \right ) \f$
+         * \f$ \left ( D_{3311}, D_{3322}, D_{3333}, D_{3312}, D_{3313}, D_{3323} \right ) \f$
+         * \f$ \left ( D_{1211}, D_{1222}, D_{1233}, D_{1212}, D_{1213}, D_{1223} \right ) \f$
+         * \f$ \left ( D_{1311}, D_{1322}, D_{1333}, D_{1312}, D_{1313}, D_{1323} \right ) \f$
+         * \f$ \left ( D_{2311}, D_{2322}, D_{2333}, D_{2312}, D_{2313}, D_{2323} \right ) \f$
          *
          * \param &full_abaqus_matrix: a previously expanded abaqus NTENS matrix. Dimensions 6x6.
          * \param &NDI: The number of direct components.
@@ -448,6 +448,27 @@ namespace abaqusTools{
         /*!
          * Re-pack a full 9x9 matrix into the expected order for an expanded (6x6) Abaqus NTENS matrix. ONLY APPLIES TO
          * ABAQUS/STANDARD Voigt matrices, e.g. Jaumann stiffness matrix.
+         *
+         * Full 9x9 Matrix
+         *
+         * \f$ \left ( D_{1111}, D_{1112}, D_{1113}, D_{1121}, D_{1122}, D_{1123}, D_{1131}, D_{1132}, D_{1133} \right ) \f$
+         * \f$ \left ( D_{1211}, D_{1212}, D_{1213}, D_{1221}, D_{1222}, D_{1223}, D_{1231}, D_{1232}, D_{1233} \right ) \f$
+         * \f$ \left ( D_{1311}, D_{1312}, D_{1313}, D_{1321}, D_{1322}, D_{1323}, D_{1331}, D_{1332}, D_{1333} \right ) \f$
+         * \f$ \left ( D_{2111}, D_{2112}, D_{2113}, D_{2121}, D_{2122}, D_{2123}, D_{2131}, D_{2132}, D_{2133} \right ) \f$
+         * \f$ \left ( D_{2211}, D_{2212}, D_{2213}, D_{2221}, D_{2222}, D_{2223}, D_{2231}, D_{2232}, D_{2233} \right ) \f$
+         * \f$ \left ( D_{2311}, D_{2312}, D_{2313}, D_{2321}, D_{2322}, D_{2323}, D_{2331}, D_{2332}, D_{2333} \right ) \f$
+         * \f$ \left ( D_{3111}, D_{3112}, D_{3113}, D_{3121}, D_{3122}, D_{3123}, D_{3131}, D_{3132}, D_{3133} \right ) \f$
+         * \f$ \left ( D_{3211}, D_{3212}, D_{3213}, D_{3221}, D_{3222}, D_{3223}, D_{3231}, D_{3232}, D_{3233} \right ) \f$
+         * \f$ \left ( D_{3311}, D_{3312}, D_{3313}, D_{3321}, D_{3322}, D_{3323}, D_{3331}, D_{3332}, D_{3333} \right ) \f$
+         *
+         * Abaqus/Standard 6x6 Matrix
+         *
+         * \f$ \left ( D_{1111}, D_{1122}, D_{1133}, D_{1112}, D_{1113}, D_{1123} \right ) \f$
+         * \f$ \left ( D_{2211}, D_{2222}, D_{2233}, D_{2212}, D_{2213}, D_{2223} \right ) \f$
+         * \f$ \left ( D_{3311}, D_{3322}, D_{3333}, D_{3312}, D_{3313}, D_{3323} \right ) \f$
+         * \f$ \left ( D_{1211}, D_{1222}, D_{1233}, D_{1212}, D_{1213}, D_{1223} \right ) \f$
+         * \f$ \left ( D_{1311}, D_{1322}, D_{1333}, D_{1312}, D_{1313}, D_{1323} \right ) \f$
+         * \f$ \left ( D_{2311}, D_{2322}, D_{2333}, D_{2312}, D_{2313}, D_{2323} \right ) \f$
          *
          * \param full_matrix: The c++ type matrix (vector of vectors)
          * \returns full_abaqus_matrix
