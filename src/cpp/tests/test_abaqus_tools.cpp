@@ -189,9 +189,9 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusNTENSMatrix ){
 
 }
 
-BOOST_AUTO_TEST_CASE( testConstructFullNTENSTensor ){
+BOOST_AUTO_TEST_CASE( testExpandFullNTENSTensor ){
     /*!
-     * Test construction of full stress and strain type tensors from full Abaqus vectors
+     * Test expansion of full stress and strain type tensors from full Abaqus vectors
      */
 
      //Initialize common test variables
@@ -202,26 +202,26 @@ BOOST_AUTO_TEST_CASE( testConstructFullNTENSTensor ){
                                      12, 22, 23,
                                      13, 23, 33 };
 
-     //Check full tensor construction for Abaqus/Standard
-     result = abaqusTools::constructFullNTENSTensor( abaqus_standard, true );
+     //Check full tensor expansion for Abaqus/Standard
+     result = abaqusTools::expandFullNTENSTensor( abaqus_standard, true );
      BOOST_CHECK( result == expected );
 
-     //Check full tensor construction for Abaqus/Explicit
-     result = abaqusTools::constructFullNTENSTensor( abaqus_explicit, false );
+     //Check full tensor expansion for Abaqus/Explicit
+     result = abaqusTools::expandFullNTENSTensor( abaqus_explicit, false );
      BOOST_CHECK( result == expected );
 
      //Test overloaded variation with contracted vector input
-     //Check full tensor construction for Abaqus/Standard
-     result = abaqusTools::constructFullNTENSTensor( abaqus_standard, 3, 3, true );
+     //Check full tensor expansion for Abaqus/Standard
+     result = abaqusTools::expandFullNTENSTensor( abaqus_standard, 3, 3, true );
      BOOST_CHECK( result == expected );
 
-     //Check full tensor construction for Abaqus/Explicit
-     result = abaqusTools::constructFullNTENSTensor( abaqus_explicit, 3, 3, false );
+     //Check full tensor expansion for Abaqus/Explicit
+     result = abaqusTools::expandFullNTENSTensor( abaqus_explicit, 3, 3, false );
      BOOST_CHECK( result == expected );
 
 }
 
-BOOST_AUTO_TEST_CASE( testDestructFullNTENSTensor ){
+BOOST_AUTO_TEST_CASE( testContractFullNTENSTensor ){
 
      //Initialize common test variables
      std::vector< int > result( 6 );
@@ -231,26 +231,26 @@ BOOST_AUTO_TEST_CASE( testDestructFullNTENSTensor ){
      std::vector< int > abaqus_standard = { 11, 22, 33, 12, 13, 23 };
      std::vector< int > abaqus_explicit = { 11, 22, 33, 12, 23, 13 };
 
-     //Check full tensor destruction for Abaqus/Standard
-     result = abaqusTools::destructFullNTENSTensor( full_tensor, true );
+     //Check full tensor contraction for Abaqus/Standard
+     result = abaqusTools::contractFullNTENSTensor( full_tensor, true );
      BOOST_CHECK( result == abaqus_standard );
 
-     //Check full tensor destruction for Abaqus/Explicit
-     result = abaqusTools::destructFullNTENSTensor( full_tensor, false );
+     //Check full tensor contraction for Abaqus/Explicit
+     result = abaqusTools::contractFullNTENSTensor( full_tensor, false );
      BOOST_CHECK( result == abaqus_explicit );
 
      //Test overloaded variation with contracted vector input
-     //Check full tensor destruction for Abaqus/Standard
-     result = abaqusTools::destructFullNTENSTensor( full_tensor, 3, 3, true );
+     //Check full tensor contraction for Abaqus/Standard
+     result = abaqusTools::contractFullNTENSTensor( full_tensor, 3, 3, true );
      BOOST_CHECK( result == abaqus_standard );
 
-     //Check full tensor destruction for Abaqus/Explicit
-     result = abaqusTools::destructFullNTENSTensor( full_tensor, 3, 3, false );
+     //Check full tensor contraction for Abaqus/Explicit
+     result = abaqusTools::contractFullNTENSTensor( full_tensor, 3, 3, false );
      BOOST_CHECK( result == abaqus_explicit );
 
 }
 
-BOOST_AUTO_TEST_CASE( testDestructFullNTENSMatrix ){
+BOOST_AUTO_TEST_CASE( testContractFullNTENSMatrix ){
 
      //Initialize common test variables
      std::vector< std::vector< int > > result( 6, std::vector< int >( 6 ) );
@@ -272,14 +272,14 @@ BOOST_AUTO_TEST_CASE( testDestructFullNTENSMatrix ){
                                                                        { 1311, 1322, 1333, 1312, 1313, 1323 },   // 2
                                                                        { 2311, 2322, 2333, 2312, 2313, 2323 } }; // 5
 
-     //Check full matrix destruction for Abaqus/Standard
-     result = abaqusTools::destructFullNTENSMatrix( full_matrix );
+     //Check full matrix contraction for Abaqus/Standard
+     result = abaqusTools::contractFullNTENSMatrix( full_matrix );
      BOOST_CHECK( result == full_abaqus_standard_matrix );
 
-//     //Test overloaded variation with contracted NTENSxNTENS matrix output
-//     //Check full matrix destruction for Abaqus/Standard
-//     //Sign of life test. The tests for NDI and NSHR less than 3 are performed in contractAbaqusNTENSMatrix.
-//     result = abaqusTools::destructFullNTENSMatrix( full_matrix, 3, 3 );
-//     BOOST_CHECK( result == full_abaqus_standard_matrix );
+     //Test overloaded variation with contracted NTENSxNTENS matrix output
+     //Check full matrix contraction for Abaqus/Standard
+     //Sign of life test. The tests for NDI and NSHR less than 3 are performed in contractAbaqusNTENSMatrix.
+     result = abaqusTools::contractFullNTENSMatrix( full_matrix, 3, 3 );
+     BOOST_CHECK( result == full_abaqus_standard_matrix );
 
 }
