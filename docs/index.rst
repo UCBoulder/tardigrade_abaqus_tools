@@ -1,6 +1,6 @@
-=====================================
+#####################################
 Welcome to |project|'s documentation!
-=====================================
+#####################################
 
 .. include:: project_brief.txt
 
@@ -17,10 +17,12 @@ Welcome to |project|'s documentation!
    api
    zreferences
 
-==================
-Indices and tables
-==================
+.. only:: html
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   ##################
+   Indices and tables
+   ##################
+   
+   * :ref:`genindex`
+   * :ref:`modindex`
+   * :ref:`search`

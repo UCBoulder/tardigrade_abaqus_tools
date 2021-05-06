@@ -32,9 +32,7 @@ documentation build are included in ``environment.yaml`` and
 documentation can be created from an existing anaconda installation with the
 following commands.
 
-```
-$ conda env create --file environment.yaml
-```
+    $ conda env create --file environment.yaml
 
 You can learn more about Anaconda Python environment creation and management in
 the [Anaconda
@@ -66,102 +64,47 @@ This project is built with [CMake](https://cmake.org/cmake/help/v3.14/) and uses
 
 1) Activate the correct python environment
 
-```
-$ module load python/2019.10-python-3.7
-$ sv3r
-```
+       $ sv3r
 
 2) Create a build directory
 
-```
-$ pwd
-/path/to/abaqus_tools/
-
-$ mkdir build
-$ cd build
-```
+       $ cd build
 
 3) Configure ``cmake3``
 
-> This step only needs to be performed once unless you need to specify a new CMake configuration for a re-build. Most
-> command line arguments and environment variables are stored in the CMake cache. Anything found in cache will not be
-> re-configured unless you remove the cache file or clobber the build directory.
+   > This step only needs to be performed once unless you need to specify a new CMake configuration for a re-build. Most
+   > command line arguments and environment variables are stored in the CMake cache. Anything found in cache will not be
+   > re-configured unless you remove the cache file or clobber the build directory.
 
-```
-$ pwd
-/path/to/abaqus_tools/build
-$ cmake3 ..
-```
+       $ cmake3 ..
 
 4) Build various portions of the project
 
-> Most of the project will re-build only as necessary after source updates. Some portions of the documentation
-> require a ``make clean`` after documentation source file updates to force a re-build.
+   > Most of the project will re-build only as necessary after source updates. Some portions of the documentation
+   > require a ``make clean`` after documentation source file updates to force a re-build.
 
-```
-$ pwd
-/path/to/abaqus_tools/build
-
-# Build everything
-$ cmake3 --build .
-
-# Build only the c++ primary libraries
-$ cmake3 --build src/cpp
-```
+       $ cmake3 --build src/cpp
 
 5) Locate build files
 
-> The build directory structure may change between version releases. Developers and users are encouraged to become
-> familiar with the bash ``find``, ``grep``, and ``tree`` commands to locate build files.
+   > The build directory structure may change between version releases. Developers and users are encouraged to become
+   > familiar with the bash ``find``, ``grep``, and ``tree`` commands to locate build files.
 
-```
-$ pwd
-/path/to/abaqus_tools/build
-
-# find c++ libraries and ignore intermediate files with similar extensions
-$ find . \( -name "*.o" -o -name "*.so" -o -name "*.a" \) | grep -vE "\.cpp\."
-```
+       $ find . \( -name "*.o" -o -name "*.so" -o -name "*.a" \) | grep -vE "\.cpp\."
 
 6) Clean build directory to force a re-build
 
-> :warning: :warning: :warning: HEALTH WARNING :warning: :warning: :warning:
->
-> The abaqus input files and bash scripts used for integration testing are not cleaned with this command. Changes to
-> those source files are also not handled by ``cmake3`` re-builds. Updates to these files must be manually cleaned between
-> changes.
-
-```
-$ pwd
-/path/to/abaqus_tools/build
-
-$ make clean
-```
+       $ make clean
 
 ### Test on sstelmo
 
 4) Build tests of the project
 
-```
-$ pwd
-/path/to/abaqus_tools/build
-
-# Build c++ tests
-$ cmake3 --build src/cpp/tests
-```
+       $ cmake3 --build src/cpp/tests
 
 5) Run the tests
 
-```
-$ pwd
-/path/to/abaqus_tools/build
-
-# Run ctest
-$ ctest
-
-# Results print to screen
-# View details of most recent test execution including failure messages
-$ less Testing/Temporary/LastTest.log
-```
+       $ less Testing/Temporary/LastTest.log
 
 ### Convenience build wrappers
 
@@ -175,42 +118,14 @@ configuration from scratch.
 
 2) Build everything and run tests
 
-```
-$ pwd
-/path/to/abaqus_tools/
-
-# Just perform the build (pick one)
-$ ./new_build.sh <cxx compiler>
-$ ./new_build.sh c++
-$ ./new_build.sh g++
-$ ./new_build.sh icpc
-
-# Perform tests from PWD
-$ ./build/src/cpp/tests/test_abaqus_tools
-
-# Build and perform tests
-$ ./jenkins_build.sh
-```
+       $ ./jenkins_build.sh
 
 3) View test results
-```
-# As built directly to PWD
-$ cat results.tex
-
-# As built by jenkins_build.sh
-$ cat build/src/cpp/tests/*_results.tex
-$ cat *results.tex
-```
+       $ cat *results.tex
 
 4) Display docs
 
-```
-# Sphinx
-$ firefox build/docs/sphinx/index.html &
-
-# Doxygen
-$ firefox build/docs/doxygen/html/index.html &
-```
+       $ firefox build/docs/doxygen/html/index.html &
 
 ### Building the documentation
 
@@ -226,48 +141,27 @@ To build just the documentation pick up the steps here:
 
 2) Create the build directory and move there
 
-```
-$ pwd
-/path/to/abaqus_tools/
-$ mkdir build/
-$ cd build/
-```
+       $ cd build/
 
 3) Run cmake3 configuration
 
-```
-$ pwd
-/path/to/abaqus_tools/build/
-$ cmake3 ..
-```
+       $ cmake3 ..
 
 4) Build the docs
 
-```
-$ cmake3 --build docs
-```
+       $ cmake3 --build docs
 
 5) Documentation builds to:
 
-```
-abaqus_tools/build/docs/sphinx/index.html
-```
+       abaqus_tools/build/docs/sphinx/index.html
 
 6) Display docs
 
-```
-$ pwd
-/path/to/abaqus_tools/build/
-$ firefox docs/sphinx/index.html &
-```
+       $ firefox docs/sphinx/index.html &
 
 7) While the Sphinx API is still a WIP, try the doxygen API
 
-```
-$ pwd
-/path/to/abaqus_tools/build/
-$ firefox docs/doxygen/html/index.html &
-```
+       $ firefox docs/doxygen/html/index.html &
 
 ---
 
@@ -289,11 +183,7 @@ Begin Git commit messages with one of the following headings:
 
 For example:
 
-```
-git commit -m "FEAT: short intent of new feature"
-git commit -m "BUG: fixes nasty bug"
-git commit -m "DOC: adds documentation for feature"
-```
+    git commit -m "DOC: adds documentation for feature"
 
 ### Git Branch Names
 
@@ -328,9 +218,7 @@ notable exceptions to the notional PEP-8 fall back:
 
 An example of the whitespace style:
 
-```
-my_function( arg1, { arg2, arg3 }, arg4 );
-```
+    my_function( arg1, { arg2, arg3 }, arg4 );
 
 The following ``sed`` commands may be useful for updating white space, but must
 be used with care. The developer is recommended to use a unique git commit
@@ -339,18 +227,13 @@ run.
 
 * Trailing space for open paren/brace/bracket
 
-```
-sed -i 's/\([({[]\)\([^ ]\)/\1 \2/g' <list of files to update>
-```
+      sed -i 's/\([({[]\)\([^ ]\)/\1 \2/g' <list of files to update>
 
 * Leading space for close paren/brace/bracket
 
-```
-sed -i 's/\([^ ]\)\([)}\]]\)/\1 \2/g' <list of files to update>
-```
+      sed -i 's/\([^ ]\)\([)}\]]\)/\1 \2/g' <list of files to update>
 
 * White space between adjacent paren/brace/bracket
 
-```
-sed -i 's/\([)}\]]\)\([)}\]]\)/\1 \2/g' <list of files to update>
-```
+      sed -i 's/\([)}\]]\)\([)}\]]\)/\1 \2/g' <list of files to update>
+
