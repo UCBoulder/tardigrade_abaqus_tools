@@ -16,6 +16,8 @@ New Features
   Brindley`_.
 - Add full tensor deconstruction to Abaqus stress and strain type ``NTENS`` vectors (:jira:`614`, :pull:`13`). By `Kyle
   Brindley`_.
+- Add full Voigt matrix (9x9) contraction to Abaqus Voigt (6x6) matrix and (``NTENS`` x ``NTENS``) matrix (:jira:`615`,
+  :pull:`14`). By `Kyle Brindley`_. 
 
 Internal Changes
 ================
