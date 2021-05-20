@@ -5,6 +5,7 @@ dependencies:
   - python>=3.7
   - sphinx>=3.0.4
   - sphinx_rtd_theme>=0.4.3
+  - breathe>=4.30.0
+  - eigen>=3.3.7
+  - boost>=1.53
   - pip
-  - pip:
-    - --requirement requirements.txt
