@@ -80,9 +80,12 @@ Build on sstelmo
 
    .. warning::
 
-      The abaqus input files and bash scripts used for integration testing are not cleaned with this command. Changes to
-      those source files are also not handled by ``cmake3`` re-builds. Updates to these files must be manually cleaned between
-      changes.
+      The abaqus input files and bash scripts used for integration testing are built with the `CMake
+      add\_custom\_target`_ feature. Consequently, the integration test target is *always considered out of date*. The
+      integration test target copies all registered input files and the integration test bash script from source to build
+      directory. This means the file copy operation is always performed when the integration test target is requested in the
+      cmake build command, e.g. ``cmake --build .`` or ``cmake --build src/abaqus/tests``. This operation is computationally
+      inexpensive with respect to building the VIPor source code.
 
    .. code:: bash
 
