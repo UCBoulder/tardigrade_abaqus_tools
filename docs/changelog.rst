@@ -27,6 +27,7 @@ New Features
 Internal Changes
 ================
 - Updates to documentation source for ReST style guide (:jira:`610`, :pull:`12`). By `Kyle Brindley`_.
+- Add support for multi-host, multi-environment CI/CD (:jira:`646`, :pull:`15`). By `Kyle Brindley`_.
 
 
 ******************
