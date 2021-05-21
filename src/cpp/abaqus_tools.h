@@ -1,8 +1,9 @@
 /**
   ******************************************************************************
-  * \file umat.h
+  * \file abaqus_tools.h
   ******************************************************************************
-  * The declarations and definitions required for an Abaqus UMAT c++ interface.
+  * The abaqus tools library. Provides common tools for converting between
+  * Abaqus Fortran pointers and C++ types for UMATs and VUMATs
   ******************************************************************************
   */
 
