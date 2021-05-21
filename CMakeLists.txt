@@ -16,7 +16,7 @@ include_directories(${CPP_SRC_PATH})
 
 #================================================================================================= FIND DEPENDENCIES ===
 # Add the cmake folder to locate the FindSphinx module
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
 
 # Set build type checks
 string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
