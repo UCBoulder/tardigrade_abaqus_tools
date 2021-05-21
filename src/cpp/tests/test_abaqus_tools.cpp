@@ -1,7 +1,7 @@
 /**
-  * \file test_umat.cpp
+  * \file test_abaqus_tools.cpp
   *
-  * Tests for umat
+  * Tests for c++ library of abaqus_tools
   */
 
 
