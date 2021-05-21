@@ -5,7 +5,7 @@
   */
 
 
-#define BOOST_TEST_MODULE test_umat
+#define BOOST_TEST_MODULE test_abaqus_tools
 #include <boost/test/included/unit_test.hpp>
 
 #include<vector_tools.h>
