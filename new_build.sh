@@ -1,6 +1,6 @@
 # USAGE:
 #
-# ./jenkins_build.sh CXX_compiler
+# ./new_build.sh cxx_path cmake_build_type
 
 # Make bash script more like high-level languages.
 set -Eeuxo pipefail
@@ -9,13 +9,15 @@ set -Eeuxo pipefail
 script=`basename "$0"`
 
 # Parse arguments
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 2 ]; then
     echo "${script} USAGE:"
-    echo "./${script} CXX_compiler"
-    echo "    CXX_compiler: desired c++ compiler"
+    echo "./${script} cxx_path cmake_build_type"
+    echo "    cxx_path: desired c++ compiler"
+    echo "    cmake_build_type: string for the CMake config -DCMAKE_BUILD_TYPE=<string> option"
     exit 1
 fi
-cxx_path=$1 #  Path to CXX compiler
+cxx_path=$1  # Path to CXX compiler
+cmake_build_type=$2
 
 # Verify compiler command and set CXX env variable
 if [ -x "$(command -v ${cxx_path})" ]; then
@@ -44,5 +46,5 @@ fi
 rm -rf build/
 mkdir build
 cd build
-${cmake_exec} ..
+${cmake_exec} .. -DCMAKE_BUILD_TYPE=${cmake_build_type}
 ${cmake_exec} --build . --verbose
