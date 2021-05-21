@@ -7,12 +7,12 @@ enable_testing()
 set(CPP_SRC_PATH "src/cpp")
 set(CMAKE_SRC_PATH "src/cmake")
 
+# Add installation directory variables
+include(GNUInstallDirs)
+
 # Set the c++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-# Include project source code directory for use by all libraries and executables in this project
-include_directories(${CPP_SRC_PATH})
 
 #================================================================================================= FIND DEPENDENCIES ===
 # Add the cmake folder to locate the FindSphinx module
@@ -33,15 +33,15 @@ foreach(package ${upstream_packages})
     if(${package}_FOUND)
         message(STATUS "Found ${package}: ${${package}_DIR}")
     else()
-    # Find related, but external, projects using FetchContent and building locally
-    message(WARNING "Did not find an installed ${package} package. Attempting local build with FetchContent.")
-    # TODO: Decide how to handle master/dev build differences. bash env variables for GIT TAG?
-    FetchContent_Declare(
-        ${package}
-        GIT_REPOSITORY ssh://git@xcp-stash.lanl.gov:7999/mm/${package}.git
-        GIT_TAG        origin/dev
-    )
-    FetchContent_MakeAvailable(${package})
+        # Find related, but external, projects using FetchContent and building locally
+        message(WARNING "Did not find an installed ${package} package. Attempting local build with FetchContent.")
+        # TODO: Decide how to handle master/dev build differences. bash env variables for GIT TAG?
+        FetchContent_Declare(
+            ${package}
+            GIT_REPOSITORY ssh://git@xcp-stash.lanl.gov:7999/mm/${package}.git
+            GIT_TAG        origin/dev
+        )
+        FetchContent_MakeAvailable(${package})
     endif()
 endforeach(package)
 
