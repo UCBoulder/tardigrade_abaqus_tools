@@ -32,6 +32,13 @@ foreach(package ${upstream_packages})
     find_package(${package} ${upstream_required} CONFIG)
     if(${package}_FOUND)
         message(STATUS "Found ${package}: ${${package}_DIR}")
+        # FIXME: The following two lines, 'string' and 'include_directories' commands, are HACKS required to get the
+        # correct included directories for the abaqus_tools builds. For some reason, the abaqus_tools project doesn't
+        # add the correct include libraries, despite finding the upstream packages. Suspect a header only project
+        # gotcha. These commands can be removed if you can coax CMake to add the "-isystem
+        # /projects/python/beta/include" arguments to the compiler command when building the tests.
+        string(REPLACE "share/${package}/cmake" "" package_include ${${package}_DIR})
+        include_directories(${package_include}/include)
     else()
         # Find related, but external, projects using FetchContent and building locally
         message(WARNING "Did not find an installed ${package} package. Attempting local build with FetchContent.")
