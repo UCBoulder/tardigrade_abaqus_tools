@@ -9,7 +9,7 @@ set -Eeuxo pipefail
 script=`basename "$0"`
 
 # Parse arguments
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 1 ]; then
     echo "${script} USAGE:"
     echo "./${script} cmake_build_type"
     echo "    cmake_build_type: string for the CMake config -DCMAKE_BUILD_TYPE=<string> option"
