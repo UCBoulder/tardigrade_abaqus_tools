@@ -15,7 +15,7 @@ if [ "$#" -ne 1 ]; then
     echo "    cmake_build_type: string for the CMake config -DCMAKE_BUILD_TYPE=<string> option"
     exit 1
 fi
-cmake_build_type=$2
+cmake_build_type=$1
 
 # Debugging
 whoami
