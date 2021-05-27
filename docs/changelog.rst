@@ -28,6 +28,8 @@ Internal Changes
 ================
 - Updates to documentation source for ReST style guide (:jira:`610`, :pull:`12`). By `Kyle Brindley`_.
 - Add support for multi-host, multi-environment CI/CD (:jira:`646`, :pull:`15`). By `Kyle Brindley`_.
+- Remove the ``CXX`` compiler variable settings for build scripts (:jira:`667`,
+  :pull:`16`. By `Kyle Brindley`_.
 
 
 ******************

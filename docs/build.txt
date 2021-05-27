@@ -140,10 +140,10 @@ configuration from scratch.
       /path/to/abaqus_tools/
 
       # Just perform the build (pick one)
-      $ ./new_build.sh <cxx compiler>
-      $ ./new_build.sh c++
-      $ ./new_build.sh g++
-      $ ./new_build.sh icpc
+      $ ./new_build.sh <cmake build type>
+      $ ./new_build.sh None
+      $ ./new_build.sh None
+      $ ./new_build.sh None
 
       # Perform tests from PWD
       $ ./build/src/cpp/tests/test_abaqus_tools
