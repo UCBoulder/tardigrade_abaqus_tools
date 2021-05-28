@@ -7,9 +7,23 @@ Changelog
 
 
 ******************
-0.0.4 (unreleased)
+0.1.1 (unreleased)
 ******************
 
+
+******************
+0.1.0 (2021-05-28)
+******************
+
+New Features
+============
+- Add deploy CMake files for build, deploy, discovery, and version comparisons (:jira:`658`, :pull:`18`). By `Kyle
+  Brindley`_.
+
+Internal Changes
+================
+- Add multi-agent Jenkins jobs for CI/CD (:jira:`646`, :pull:`17`). By `Kyle Brindley`_.
+- Remove CXX compiler specification in build scripts (:jira:`667`, :pull:`19`). By `Kyle Brindley`_.
 
 ******************
 0.0.3 (2021-05-06)
@@ -27,6 +41,9 @@ New Features
 Internal Changes
 ================
 - Updates to documentation source for ReST style guide (:jira:`610`, :pull:`12`). By `Kyle Brindley`_.
+- Add support for multi-host, multi-environment CI/CD (:jira:`646`, :pull:`15`). By `Kyle Brindley`_.
+- Remove the ``CXX`` compiler variable settings for build scripts (:jira:`667`,
+  :pull:`16`. By `Kyle Brindley`_.
 
 
 ******************

@@ -1,7 +1,7 @@
 <?xml version='1.1' encoding='UTF-8'?>
-<project>
+<matrix-project plugin="matrix-project@1.18">
   <actions/>
-  <description>Build on pull request. See: https://xcp-confluence.lanl.gov/display/ASET/Pull+request+jobs</description>
+  <description>Test the abaqus_tools c++ library against all supported W-13 Python environments/servers on PRs to the upstream repository.</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.model.ParametersDefinitionProperty>
@@ -14,13 +14,13 @@
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@4.4.4">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@4.7.1">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
         <name>origin</name>
         <refspec>+refs/pull-requests/*:refs/remotes/origin/pull-requests/* +refs/heads/*:refs/remotes/origin/*</refspec>
-        <url>ssh://git@xcp-stash.lanl.gov:7999/mm/abaqus_tools.git</url>
+        <url>ssh://git@xcp-stash.lanl.gov:7999/MM/abaqus_tools.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -29,7 +29,7 @@
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-    <submoduleCfg class="list"/>
+    <submoduleCfg class="empty-list"/>
     <extensions>
       <hudson.plugins.git.extensions.impl.PreBuildMerge>
         <options>
@@ -41,8 +41,7 @@
       </hudson.plugins.git.extensions.impl.PreBuildMerge>
     </extensions>
   </scm>
-  <assignedNode>sstelmo</assignedNode>
-  <canRoam>false</canRoam>
+  <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
@@ -69,29 +68,39 @@
     </stashpullrequestbuilder.stashpullrequestbuilder.StashBuildTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
+  <axes>
+    <hudson.matrix.LabelAxis>
+      <name>label</name>
+      <values>
+        <string>sstelmo</string>
+      </values>
+    </hudson.matrix.LabelAxis>
+  </axes>
   <builders>
-    <hudson.tasks.Shell>
-      <command>./jenkins_build.sh</command>
-      <configuredLocalRules/>
-    </hudson.tasks.Shell>
+    <hudson.plugins.build__timeout.BuildStepWithTimeout plugin="build-timeout@1.20">
+      <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+        <timeoutMinutes>30</timeoutMinutes>
+      </strategy>
+      <buildStep class="hudson.tasks.Shell">
+        <command>./jenkins_build.sh</command>
+        <configuredLocalRules/>
+      </buildStep>
+      <operationList class="empty-list"/>
+    </hudson.plugins.build__timeout.BuildStepWithTimeout>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>*++_results.tex,icpc_results.tex</artifacts>
+      <artifacts>build/results.tex</artifacts>
       <allowEmptyArchive>false</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
       <defaultExcludes>true</defaultExcludes>
       <caseSensitive>true</caseSensitive>
-      <followSymlinks>true</followSymlinks>
+      <followSymlinks>false</followSymlinks>
     </hudson.tasks.ArtifactArchiver>
   </publishers>
-  <buildWrappers>
-    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.38">
-      <deleteDirs>false</deleteDirs>
-      <cleanupParameter></cleanupParameter>
-      <externalDelete></externalDelete>
-      <disableDeferredWipeout>false</disableDeferredWipeout>
-    </hudson.plugins.ws__cleanup.PreBuildCleanup>
-  </buildWrappers>
-</project>
+  <buildWrappers/>
+  <executionStrategy class="hudson.matrix.DefaultMatrixExecutionStrategyImpl">
+    <runSequentially>false</runSequentially>
+  </executionStrategy>
+</matrix-project>
