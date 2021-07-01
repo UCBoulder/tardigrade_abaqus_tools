@@ -11,6 +11,12 @@ Changelog
 ******************
 
 
+Internal Changes
+================
+- Use Git SCM tags for semantic versioning (:jira:`698`, :pull:`22`). By `Kyle
+  Brindley`_.
+
+
 ******************
 0.1.0 (2021-05-28)
 ******************
