@@ -12,35 +12,30 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 import os
-import re
 
 # -- Project information -----------------------------------------------------
-# Scrape some meta data from a single source (e.g. root CMakeLists.txt)
-git_describe = os.popen('git describe --always --dirty --tags').read().strip()
-meta_file = "../CMakeLists.txt"
-with open(meta_file) as config:
-    contents = config.read()
-project_regex = f"project[\s]*\(([\S]*) VERSION [0-9]+\.[0-9]+\.[0-9]\)"
-project_search = re.search(project_regex, contents)
-release_regex = f"project[\s]*\([\S]* VERSION ([0-9]+\.[0-9]+\.[0-9])\)"
-release_search = re.search(release_regex, contents)
+# Meta data from CMake configure()
+project = '@PROJECT_NAME@'
+RECENT_GIT_TAG = '@abaqus_tools_RECENT_GIT_TAG@'
+VERSION_STRING_FULL = '@abaqus_tools_VERSION_STRING_FULL@'
+VERSION = '@abaqus_tools_VERSION@'
+VERSION_MAJOR = '@abaqus_tools_VERSION_MAJOR@'
+VERSION_MINOR = '@abaqus_tools_VERSION_MINOR@'
+VERSION_PATCH = '@abaqus_tools_VERSION_PATCH@'
+VERSION_TWEAK = '@abaqus_tools_VERSION_TWEAK@'
+VERSION_AHEAD = '@abaqus_tools_VERSION_AHEAD@'
+VERSION_GIT_SHA = '@abaqus_tools_VERSION_GIT_SHA@'
 
 # Hardcoded project information
 copyright = '2020, Nathan A. Miller and Kyle A. Brindley'
 author = 'Nathan A. Miller and Kyle A. Brindley'
 
-# Scrape meta_file for project name or fail
-if project_search:
-    project = project_search.group(1)
+# Set version to clean Git tag or else use meta data in version
+release = VERSION
+if int(VERSION_AHEAD) == 0:  # Git tag describes current commit
+    version = release
 else:
-    raise RuntimeError(f'Could not find project name in {meta_file} with "{project_regex}" regex pattern')
-
-# Scrape meta_file for version or fall back to git info
-version = f"{git_describe}".replace('-','.')
-if release_search:
-    release = release_search.group(1)
-else:
-    release = version
+    version = VERSION_STRING_FULL
 
 # -- Project Variables -------------------------------------------------------
 rst_prolog = f'.. |project| replace:: {project}\n.. include:: targets.txt'
