@@ -105,7 +105,7 @@ SCM version script.
 Steps needed for a release include:
 
 1. Create a release branch.
-2. Modify ``docs/whats_new.rst`` to move version number for release PR commit and
+2. Modify ``docs/changelog.rst`` to move version number for release PR commit and
    add description as relevant.
 3. Commit changes and submit a pull request to the ``dev`` branch at `ECMF Bitbucket`_.
 4. **Major and Minor bumps ONLY**: Manually add the new developer version tag to the "Merge" commit on the ``dev``
