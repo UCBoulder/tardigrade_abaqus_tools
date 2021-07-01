@@ -186,13 +186,13 @@ Build the entire before performing the installation.
 4) Build the entire project
 
        $ pwd
-       /path/to/error_tools/build
+       /path/to/abaqus_tools/build
        $ cmake3 --build .
 
 5) Install the library
 
        $ pwd
-       /path/to/error_tools/build
+       /path/to/abaqus_tools/build
        $ cmake --install . --prefix path/to/root/install
 
        # Example local user (non-admin) Linux install
