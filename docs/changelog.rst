@@ -15,6 +15,8 @@ Internal Changes
 ================
 - Use Git SCM tags for semantic versioning (:jira:`698`, :pull:`22`). By `Kyle
   Brindley`_.
+- Master branch production release logic for CD, including automated micro-version bumps (:jira:`698`, :pull:`22`). By `Kyle
+  Brindley`_.
 
 
 ******************
