@@ -76,12 +76,6 @@ Micro Number
 
 .. warning::
 
-   The |project| project does not yet have a deploy script or CI job. Micro version numbers must be updated with a
-   manual version change as described in the minor number section above. All version number updates require a manually
-   created tag on the `upstream cpp\_stub repo`_'s master and dev branches. The dev->master merge commit should be tagged
-   with the new version number. The feature->dev merge commit immediately preceding the dev->master merge commit should be
-   tagged with the new version number and dev tag, e.g. ``0.0.1+dev``.
-
 The micro number is automatically incremented after any merge from the
 development (dev) branch into the release (master) branch. The micro version
 number indicates the following changes:
@@ -100,27 +94,22 @@ with the user community.
 Release Branch Requirements
 ***************************
 
-.. warning::
-
-   Until |project| project has an auto-deploy script that updates the micro version, the micro version will also require
-   a dedicated release branch to update the version number. See Step 5. Remove this warning and step 5 when the
-   auto-deploy scripts and CI jobs are confirmed functioning.
-
-Major and minor version number updates require a release branch.
+All production releases require a release branch.
 Releases correspond to a variety of bug fixes and features that characterize
 the release, as documented in :ref:`changelog`.
 
+The following steps will trigger a micro bump. Major and minor version bumps
+require a manual Git tag update for the otherwise automated ``GetVersionFromGitTag.cmake``
+SCM version script.
+
 Steps needed for a release include:
 
-1. Update version number in the root ``CMakeLists.txt``, e.g. ``project(abaqus_tools VERSION 0.0.1)``.
-   Version bumps should be accompanied by resetting numbers to the right of the
-   bump to zero, e.g., ``'0.2.30'`` to ``'0.3.0'`` and ``'1.2.30'`` to
-   ``'2.0.0'``.
-2. Modify ``docs/changelog.rst`` to update version release date and add next unreleased version section header.
-3. Commit changes and submit a pull request to the upstream dev branch.
-4. Immediately after release branch merge to dev, submit and merge the dev->master pull request.
-5. If there are no auto-deploy scripts, update the Git tags on the upstream master and dev branches.
-
-   * Tag the most recent dev->master merge commit with the new version, e.g. ``0.0.1``.
-   * Tag the merge commit to the dev branch immediately preceding the new version with the dev version, e.g.
-     ``0.0.1+dev``.
+1. Create a release branch.
+2. Modify ``docs/whats_new.rst`` to move version number for release PR commit and
+   add description as relevant.
+3. Commit changes and submit a pull request to the ``dev`` branch at `ECMF Bitbucket`_.
+4. **Major and Minor bumps ONLY**: Manually add the new developer version tag to the "Merge" commit on the ``dev``
+   branch.  Reset all numbers to the right of the bump to ``0``, e.g. ``1.2.3`` becomes ``2.0.0+dev`` for a Major version
+   bump or ``1.3.0+dev`` for a Minor version bump.
+5. Immediately submit a ``dev->master`` PR after merging the release branch to ``dev``.
+6. Review tests and notes, receive approval, and merge to ``master``.
