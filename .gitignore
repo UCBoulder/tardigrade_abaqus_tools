@@ -1,5 +1,12 @@
+# Project files
+# Managed by GetVersionFromGitTag.cmake
+VERSION
+
+# Temp files
 *.swp
+# C++ and temp files
 *.o
+*.so
 *.nfs*
 build*/
 *_results.tex
