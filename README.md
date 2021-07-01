@@ -4,8 +4,6 @@ A collection of tools for C++ that make interfacing with Abaqus subroutines easi
 
 ---
 
----
-
 ## Dependencies
 
 ### Compilers
@@ -22,15 +20,18 @@ A collection of tools for C++ that make interfacing with Abaqus subroutines easi
 
 ### Python Modules (for documentation)
 
-* [Sphinx](https://www.sphinx-doc.org/en/master/) >= 3.0.4
-* [Breathe](https://breathe.readthedocs.io/en/latest/) >= 4.18.1
-* [sphinx\_rtd\_theme](https://sphinx-rtd-theme.readthedocs.io/en/stable/) >= 0.4.3
-
 For convenience, the minimal Python environment requirements for the
-documentation build are included in ``environment.yaml`` and
-``requirements.txt``. A minimal anaconda environment for building the
-documentation can be created from an existing anaconda installation with the
-following commands.
+documentation build are included in ``configuration_files/environment.yaml``.
+This file was created from the [pipreqs](https://github.com/bndr/pipreqs)
+command line tool and Sphinx configuration inspection, e.g. the extension
+packages.
+
+    $ pwd
+    path/to/abaqus_tools/
+    $ pipreqs --use-local --print --no-pin .
+
+A minimal anaconda environment for building the documentation can be created
+from an existing anaconda installation with the following commands.
 
     $ conda env create --file environment.yaml
 
@@ -40,16 +41,18 @@ Documentation](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/m
 
 ### C++ Libraries
 
+> **NOTE: Non-admin installations for Eigen and Boost are no longer required.** This project is built and deployed
+> against C++ libraries managed in Conda. See the Conda environment file and README discussion for non-admin environment
+> management.
+
 * [BOOST](https://www.boost.org/doc/libs/1_53_0/) >= 1.53.0
 * vector\_tools: https://xcp-stash.lanl.gov/projects/MM/repos/vector_tools
 
 #### Constitutive c++ Tools
 
-All of the ``*_tools`` libraries are
-pulled from their git repos by branch name and built with their respective cmake
-files as part of the cmake build for this project.
-
----
+If not found on the current system or active Conda environment, all of the
+``*_tools`` libraries are pulled from their git repos by branch name and built
+with their respective cmake files as part of the cmake build for this project.
 
 ---
 
@@ -64,11 +67,15 @@ This project is built with [CMake](https://cmake.org/cmake/help/v3.14/) and uses
 
 1) Activate the correct python environment
 
+       $ module load python/2020.07-python-3.8
        $ sv3r
 
-2) Create a build directory
+2) Create the build directory and move there
 
-       $ cd build
+       $ pwd
+       /path/to/abaqus_tools/
+       $ mkdir build/
+       $ cd build/
 
 3) Configure ``cmake3``
 
@@ -76,6 +83,8 @@ This project is built with [CMake](https://cmake.org/cmake/help/v3.14/) and uses
    > command line arguments and environment variables are stored in the CMake cache. Anything found in cache will not be
    > re-configured unless you remove the cache file or clobber the build directory.
 
+       $ pwd
+       /path/to/abaqus_tools/build/
        $ cmake3 ..
 
 4) Build various portions of the project
@@ -98,11 +107,15 @@ This project is built with [CMake](https://cmake.org/cmake/help/v3.14/) and uses
 
 ### Test on sstelmo
 
-4) Build tests of the project
+4) Build c++ tests
 
        $ cmake3 --build src/cpp/tests
 
 5) Run the tests
+
+       $ ctest
+
+6) Check the test logs
 
        $ less Testing/Temporary/LastTest.log
 
@@ -121,6 +134,7 @@ configuration from scratch.
        $ ./jenkins_build.sh
 
 3) View test results
+
        $ cat *results.tex
 
 4) Display docs
@@ -145,6 +159,8 @@ To build just the documentation pick up the steps here:
 
 3) Run cmake3 configuration
 
+       $ pwd
+       /path/to/abaqus_tools/build/
        $ cmake3 ..
 
 4) Build the docs
@@ -153,17 +169,41 @@ To build just the documentation pick up the steps here:
 
 5) Documentation builds to:
 
-       abaqus_tools/build/docs/sphinx/index.html
+       abaqus_tools/build/docs/sphinx/html/index.html
 
 6) Display docs
 
-       $ firefox docs/sphinx/index.html &
+       $ firefox docs/sphinx/html/index.html &
 
 7) While the Sphinx API is still a WIP, try the doxygen API
 
        $ firefox docs/doxygen/html/index.html &
 
----
+## Install the library
+
+Build the entire before performing the installation.
+
+4) Build the entire project
+
+       $ pwd
+       /path/to/error_tools/build
+       $ cmake3 --build .
+
+5) Install the library
+
+       $ pwd
+       /path/to/error_tools/build
+       $ cmake --install . --prefix path/to/root/install
+
+       # Example local user (non-admin) Linux install
+       $ cmake --install . --prefix /home/$USER/.local
+
+       # Example install to conda environment
+       $ conda active my_env
+       $ cmake --install . --prefix ${CONDA_DEFAULT_ENV} 
+
+       # Example install to W-13 CI/CD conda environment performed by CI/CD institutional account
+       $ cmake --install . --prefix /projects/python/release
 
 ---
 
