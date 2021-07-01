@@ -7,8 +7,20 @@ Changelog
 
 
 ******************
-0.1.1 (unreleased)
+0.1.2 (unreleased)
 ******************
+
+
+******************
+0.1.1 (2021-07-01)
+******************
+
+Internal Changes
+================
+- Use Git SCM tags for semantic versioning (:jira:`698`, :pull:`22`). By `Kyle
+  Brindley`_.
+- Master branch production release logic for CD, including automated micro-version bumps (:jira:`698`, :pull:`22`). By `Kyle
+  Brindley`_.
 
 
 ******************
