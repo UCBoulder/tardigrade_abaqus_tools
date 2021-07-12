@@ -1,24 +1,9 @@
 .. _`Anaconda Documentation`: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
-.. _`Bitbucket`: https://bitbucket.org/product
 .. _`Confluence`: https://www.atlassian.com/software/confluence
 .. _`DevOps`: https://en.wikipedia.org/wiki/DevOps
 .. _`W-13`: https://int.lanl.gov/org/ddw/aldw/weapon-systems-engineering/advanced-engineering-analysis/index.shtml
 .. _`W-13 Managed UNIX Groups`: https://xcp-confluence.lanl.gov/pages/viewpage.action?pageId=150929410
 .. _`W-13 DevOps Manual`: https://xcp-confluence.lanl.gov/display/COM/W-13+DevOps
-.. _`EABM`: https://xcp-confluence.lanl.gov/display/EABM/EABM+Requirements+Document
-.. _`EABM Search`: https://xcp-jira.lanl.gov/browse/EABM-153?jql=project%20%3D%20EABM%20AND%20resolution%20%3D%20Unresolved%20ORDER%20BY%20priority%20DESC%2C%20updated%20DESC
-.. _`EABM Backlog`: https://xcp-jira.lanl.gov/secure/RapidBoard.jspa?projectKey=EABM&rapidView=103&view=planning
-.. _`EABM Jira Project`: https://xcp-jira.lanl.gov/secure/RapidBoard.jspa?projectKey=EABM&rapidView=103&view=planning
-.. _`EABM Bitbucket Project`: https://xcp-stash.lanl.gov/projects/EABM
-.. _`EABM Repository`: https://xcp-stash.lanl.gov/projects/EABM/repos/eabm/browse
-.. _`ECMF`: https://simulia.lanl.gov/ECMF-D/index.html
-.. _`ECMF Development Documentation`: https://simulia.lanl.gov/ECMF-D/index.html
-.. _`ECMF contribution guide`: https://simulia.lanl.gov/ECMF-D/contribution_guide.html
-.. _`New Bitbucket Repo Guide`: https://simulia.lanl.gov/ECMF-D/devops_guide.html#new-bitbucket-repo-guide
-.. _`ECMF Release Documentation`: https://int.lanl.gov/projects/W13docs/ecmf/
-.. _`ECMF Repository`: https://xcp-stash.lanl.gov/projects/ECMF/repos/ecmf/browse
-.. _`ECMF Jira`: https://xcp-jira.lanl.gov/issues/?jql=project%20%3D%20EABM%20AND%20component%20%3D%20ECMF
-.. _`ECMF Bitbucket`: https://xcp-stash.lanl.gov/projects/EABM/repos/ecmf/browse
 .. _`Engineering Analysis Baseline Models`: https://xcp-confluence.lanl.gov/pages/viewpage.action?pageId=129106839
 .. _`Forking Workflow`: https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow
 .. _`Gitflow Workflow`: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
@@ -26,8 +11,7 @@
 .. _`Granta STK`: https://int.lanl.gov/projects/W13docs/GrantaSTK/#t=streamlined%2Fwelcome_to_v2.htm
 .. _`Jenkins`: https://jenkins.io/
 .. _`Jira`: https://www.atlassian.com/software/jira
-.. _`Material Models Bitbucket project`: https://xcp-stash.lanl.gov/projects/MM
-.. _`Official ECMF Repo`: https://xcp-stash.lanl.gov/projects/ECMF/repos/ecmf/browse
+.. _`Material Models Gitlab Group`: https://re-git.lanl.gov/aea/material-models
 .. _`Python`: https://www.python.org/
 .. _`Python 3`: https://docs.python.org/3.6/
 .. _`Python 2`: https://docs.python.org/2.7/
@@ -35,15 +19,10 @@
 .. _`PEP-440`: https://www.python.org/dev/peps/pep-0440/
 .. _`sphinx`: https://www.sphinx-doc.org/en/master/
 .. _`toolbox-jenkins`: https://toolbox-jenkins.lanl.gov/
-.. _`xcp-confluence`: https://xcp-confluence.lanl.gov/
-.. _`xcp-jira`: https://xcp-jira.lanl.gov/secure/Dashboard.jspa
-.. _`xcp-stash`: https://xcp-stash.lanl.gov/dashboard
 .. _`Cubit`: https://cubit.sandia.gov/public/documentation.html
 .. _`W-13 Python Environments`: https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment
 .. _`re docs`: https://docs.python.org/3.6/library/re.html
 .. _`Git Best Practices`: https://xcp-confluence.lanl.gov/display/EABM/Git+Best+Practices
-.. _`Create a Jira Issue`: https://xcp-jira.lanl.gov/secure/CreateIssue!default.jspa
-.. _`Existing Jira Issues`: https://xcp-jira.lanl.gov/projects/EABM/issue
 .. _`Sphinx style guide`: https://documentation-style-guide-sphinx.readthedocs.io/en/latest/style-guide.html#
 
 .. C++/fortran/cmake links
@@ -61,7 +40,7 @@
 .. _`Doxygen comments for Fortran`: https://www.doxygen.nl/manual/docblocks.html#fortranblocks
 
 .. Project specific links
-.. _`upstream cpp\_stub repo`: https://xcp-stash.lanl.gov/projects/MM/repos/abaqus_tools/browse
+.. _`upstream repository`: https://re-git.lanl.gov/aea/material-models/abaqus_tools 
 
 .. Abaqus reference links
 .. _`Abaqus Solid Continuum Elements`: http://simulia.lanl.gov:8080/EstProdDocs2019/English/DSSIMULIA_Established.htm?show=SIMACAEELMRefMap/simaelm-c-solidcont.htm
