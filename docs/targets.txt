@@ -36,6 +36,7 @@
 .. _`Doxygen style docstrings`: https://www.doxygen.nl/manual/docblocks.html
 .. _`CMake for Fortran example CMakeLists.txt`: https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/languages/fortran/ForFortranExample
 .. _`CMake documentation starting point`: https://cmake.org/cmake/help/v3.14/module/CheckFortranSourceRuns.html
+.. _`CMake add\_custom\_target`: https://cmake.org/cmake/help/latest/command/add_custom_target.html
 .. _`Stack Overflow thread`: https://stackoverflow.com/questions/12705562/using-cmake-with-fortran
 .. _`Doxygen comments for Fortran`: https://www.doxygen.nl/manual/docblocks.html#fortranblocks
 

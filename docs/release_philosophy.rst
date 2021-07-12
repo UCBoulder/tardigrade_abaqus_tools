@@ -42,7 +42,7 @@ The |project| project follows the `PEP-440`_ standard for version numbering. The
 final release version number uses the three component ("major.minor.micro")
 scheme. The developer (a.k.a. dev or beta) version number follows the final
 release number with an appended "+dev" local version number. The version numbers
-correspond to git tags in the `upstream cpp\_stub repo`_ which point to a static
+correspond to git tags in the `upstream repository`_ which point to a static
 release of the |project| project.
 
 Because the deployed release of the developer version is constantly updated
@@ -73,8 +73,6 @@ recommended that all minor version changes are announced to the user community p
 
 Micro Number
 ============
-
-.. warning::
 
 The micro number is automatically incremented after any merge from the
 development (dev) branch into the release (master) branch. The micro version
