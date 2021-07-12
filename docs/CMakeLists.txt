@@ -57,6 +57,7 @@ set(DOCUMENTATION_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/theory.rst
     ${CMAKE_CURRENT_SOURCE_DIR}/user.rst
     ${CMAKE_CURRENT_SOURCE_DIR}/zreferences.rst
+    ${CMAKE_CURRENT_SOURCE_DIR}/software.bib
 )
 
 # Add sphinx command
