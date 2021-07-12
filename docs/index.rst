@@ -8,7 +8,6 @@ Welcome to |project|'s documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   stub
    user
    theory
    devops

@@ -42,7 +42,7 @@ The |project| project follows the `PEP-440`_ standard for version numbering. The
 final release version number uses the three component ("major.minor.micro")
 scheme. The developer (a.k.a. dev or beta) version number follows the final
 release number with an appended "+dev" local version number. The version numbers
-correspond to git tags in the `upstream cpp\_stub repo`_ which point to a static
+correspond to git tags in the `upstream repository`_ which point to a static
 release of the |project| project.
 
 Because the deployed release of the developer version is constantly updated
@@ -73,8 +73,6 @@ recommended that all minor version changes are announced to the user community p
 
 Micro Number
 ============
-
-.. warning::
 
 The micro number is automatically incremented after any merge from the
 development (dev) branch into the release (master) branch. The micro version
@@ -107,7 +105,7 @@ Steps needed for a release include:
 1. Create a release branch.
 2. Modify ``docs/changelog.rst`` to move version number for release PR commit and
    add description as relevant.
-3. Commit changes and submit a pull request to the ``dev`` branch at `ECMF Bitbucket`_.
+3. Commit changes and submit a pull request to the ``dev`` branch at `upstream repository`_.
 4. **Major and Minor bumps ONLY**: Manually add the new developer version tag to the "Merge" commit on the ``dev``
    branch.  Reset all numbers to the right of the bump to ``0``, e.g. ``1.2.3`` becomes ``2.0.0+dev`` for a Major version
    bump or ``1.3.0+dev`` for a Minor version bump.

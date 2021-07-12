@@ -42,7 +42,7 @@ C++ Libraries
 =============
 
 * `BOOST`_ >= 1.53.0
-* vector\_tools: https://xcp-stash.lanl.gov/projects/MM/repos/vector_tools
+* vector\_tools: https://re-git.lanl.gov/aea/material-models/vector_tools 
 
 Constitutive Tools
 ------------------

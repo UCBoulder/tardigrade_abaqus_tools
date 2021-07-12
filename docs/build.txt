@@ -229,5 +229,3 @@ To build just the documentation pick up the steps here:
       $ pwd
       /path/to/abaqus_tools/build/
       $ firefox docs/doxygen/html/index.html &
-
-
