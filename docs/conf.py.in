@@ -55,8 +55,11 @@ breathe_default_project = project
 
 # Links to PRs, Jira issues.
 extlinks = {
-     "pull": ("https://xcp-stash.lanl.gov/projects/MM/repos/abaqus_tools/pull-requests/%s/overview", "PR"),
-     "jira": ("https://xcp-jira.lanl.gov/browse/VIP-%s", "VIP-"),
+     "merge": ("https://re-git.lanl.gov/aea/material-models/abaqus_tools/-/merge_requests/%s", "MERGE-"),
+     "issue": ("https://re-git.lanl.gov/aea/material-models/abaqus_tools_tools/-/issues/%s", "ISSUE-"),
+     # Maintain the old Atlassian links until the servers don't exist. Required for changelog entries.
+     "pull": ("https://ddw-bitbucket.lanl.gov/projects/MM/repos/error_tools/pull-requests/%s/overview", "PR"),
+     "jira": ("https://ddw-jira.lanl.gov/browse/VIP-%s", "VIP-"),
 }
 
 # Add any paths that contain templates here, relative to this directory.

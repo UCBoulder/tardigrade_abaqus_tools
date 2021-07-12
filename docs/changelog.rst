@@ -7,9 +7,17 @@ Changelog
 
 
 ******************
-0.1.2 (unreleased)
+0.1.3 (unreleased)
 ******************
 
+
+******************
+0.1.2 (2021-07-12)
+******************
+
+Internal Changes
+================
+- Migrate from ddw-bitcket.lanl.gov to re-git.lanl.gov (:issue:`1` :merge:`1`). By `Kyle Brindley`_.
 
 ******************
 0.1.1 (2021-07-01)
