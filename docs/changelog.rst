@@ -7,8 +7,20 @@ Changelog
 
 
 ******************
-0.1.3 (unreleased)
+0.1.4 (unreleased)
 ******************
+
+
+******************
+0.1.3 (2022-03-21)
+******************
+
+Internal Changes
+================
+- Update the build configuration to handle conda environments than manage cpp compilers and libraries ( :merge:`4`). By
+  `Kyle Brindley`_.
+- Add back compiler flags related to code warnings for the project wide compile options (:issue:`2`, :merge:`5`). By
+  `Kyle Brindley`_.
 
 
 ******************
@@ -56,7 +68,7 @@ New Features
 - Add full tensor deconstruction to Abaqus stress and strain type ``NTENS`` vectors (:jira:`614`, :pull:`13`). By `Kyle
   Brindley`_.
 - Add full Voigt matrix (9x9) contraction to Abaqus Voigt (6x6) matrix and (``NTENS`` x ``NTENS``) matrix (:jira:`615`,
-  :pull:`14`). By `Kyle Brindley`_. 
+  :pull:`14`). By `Kyle Brindley`_.
 
 Internal Changes
 ================
