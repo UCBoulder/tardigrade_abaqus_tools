@@ -12,7 +12,6 @@ build:
     - mkdir build-package
     - cd build-package
     - cmake .. -DCMAKE_BUILD_TYPE=Release
-    - cmake --build . --target abaqus_tools
     - cmake --install . --prefix $PREFIX
   ignore_run_exports:
     - python_abi
