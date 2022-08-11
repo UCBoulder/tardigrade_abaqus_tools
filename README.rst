@@ -92,12 +92,11 @@ This project is built with [CMake](https://cmake.org/cmake/help/v3.14/) and uses
 Build on sstelmo
 ================
 
-1) Activate a [W-13 Python Environment](https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment)
+1) Activate the development environment 
 
    .. code-block:: bash
 
-      $ module load python/2020.07-python-3.8
-      $ sv3r
+      $ module load abaqus_tools-env 
 
 2) Create the build directory and move there
 
