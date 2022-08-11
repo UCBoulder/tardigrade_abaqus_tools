@@ -10,6 +10,10 @@ Changelog
 0.1.4 (unreleased)
 ******************
 
+Internal Changes
+================
+- Build, package, and deploy as a Conda package to the AEA Conda channel (:issue:`4`, :merge:`8`). By `Kyle Brindley`_.
+
 
 ******************
 0.1.3 (2022-03-21)

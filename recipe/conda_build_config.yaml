@@ -1,0 +1,6 @@
+c_compiler_version:    # [linux]
+  - 7.3                # [linux]
+cxx_compiler_version:  # [linux]
+  - 7.3                # [linux]
+python:
+  - 3.8

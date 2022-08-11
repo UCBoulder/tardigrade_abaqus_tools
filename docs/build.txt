@@ -16,8 +16,7 @@ Build on sstelmo
 
    .. code:: bash
 
-      $ module load python/2019.10-python-3.7
-      $ sv3r
+      $ module load abaqus_tools-env 
 
 2) Create a build directory
 
