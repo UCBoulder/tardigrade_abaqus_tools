@@ -13,6 +13,7 @@ Changelog
 Internal Changes
 ================
 - Build, package, and deploy as a Conda package to the AEA Conda channel (:issue:`4`, :merge:`8`). By `Kyle Brindley`_.
+- Fix the environment creation command for Gitlab-CI environment (:merge:`9`). By `Kyle Brindley`_.
 
 
 ******************

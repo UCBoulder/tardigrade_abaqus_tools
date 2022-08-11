@@ -20,7 +20,7 @@ before_script:
   - aea_modulefiles=${aea_deploy_directory}/modulefiles
   - environment='abaqus_tools-env'
   - environment_path="${aea_deploy_directory}/${environment}"
-  - conda_options='--yes --channel conda-forge'
+  - conda_options="--yes --channel ${aea_conda_channel} --channel conda-forge"
   # Activate the project specific environment from the project specific modulefile
   - module use ${PWD}/modulefiles
   - module load ${environment}
