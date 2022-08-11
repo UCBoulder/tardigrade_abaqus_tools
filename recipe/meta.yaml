@@ -1,5 +1,5 @@
 package:
-  name: vector_tools
+  name: abaqus_tools
   # TODO: setup and use pyproject.toml and a Conda build Jinja template
   version: {{ VERSION }}
 
@@ -12,7 +12,7 @@ build:
     - mkdir build-package
     - cd build-package
     - cmake .. -DCMAKE_BUILD_TYPE=Release
-    - cmake --build . --target vector_tools
+    - cmake --build . --target abaqus_tools
     - cmake --install . --prefix $PREFIX
   ignore_run_exports:
     - python_abi
@@ -44,11 +44,11 @@ test:
   source_files:
     - CMakeLists.txt
     - src/cpp/tests/CMakeLists.txt
-    - src/cpp/tests/test_vector_tools.cpp
+    - src/cpp/tests/test_abaqus_tools.cpp
   commands:
     - tree
     - mkdir build-package
     - cd build-package
     - cmake ..
-    - cmake --build . --target test_vector_tools
-    - ctest -R test_vector_tools
+    - cmake --build . --target test_abaqus_tools
+    - ctest -R test_abaqus_tools
