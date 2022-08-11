@@ -27,7 +27,7 @@ anaconda installation with the following commands.
 
 .. code-block:: bash
 
-   $ conda create --file environment.txt
+   $ conda create --name abaqus_tools-env --file environment.txt --channel file:///projects/aea_compute/aea-conda
 
 You can learn more about Anaconda Python environment creation and management in
 the `Anaconda Documentation`_.
