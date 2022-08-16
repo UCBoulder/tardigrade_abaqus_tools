@@ -2,6 +2,9 @@
 cmake_minimum_required(VERSION 3.14)
 project(abaqus_tools VERSION 0.1.0)
 
+# Added a flag for whether the python bindings for abaqus tools get built
+set(ABAQUS_TOOLS_BUILD_PYTHON_BINDINGS ON CACHE BOOL "Flag for whether the python bindings should be built")
+
 # Set common project paths relative to project root directory
 set(CPP_SRC_PATH "src/cpp")
 set(CMAKE_SRC_PATH "src/cmake")
@@ -38,6 +41,8 @@ endif()
 include(FetchContent)
 set(upstream_packages "vector_tools")
 foreach(package ${upstream_packages})
+    string(TOUPPER "${package}" package_upper)
+    set(${package_upper}_BUILD_PYTHON_BINDINGS ${ABAQUS_TOOLS_BUILD_PYTHON_BINDINGS})
     find_package(${package} ${upstream_required} CONFIG)
     if(${package}_FOUND)
         message(STATUS "Found ${package}: ${${package}_DIR}")
