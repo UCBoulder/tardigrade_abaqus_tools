@@ -18,22 +18,16 @@ Executables
 * `Doxygen`_ >= 1.8.5
 * `LaTeX`_ >= 2017
 
-Python Modules (for documentation)
-==================================
+Development environment
+=======================
 
-* `Sphinx`_ >= 3.0.4
-* `Breathe`_ >= 4.18.1
-* `sphinx\_rtd\_theme`_ >= 0.4.3
+For convenience, the minimal Conda environment requirements for the documentation build are included in
+``environment.txt``. A minimal anaconda environment for building the documentation can be created from an existing
+anaconda installation with the following commands.
 
-For convenience, the minimal Python environment requirements for the
-documentation build are included in ``environment.yaml`` and
-``requirements.txt``. A minimal anaconda environment for building the
-documentation can be created from an existing anaconda installation with the
-following commands.
+.. code-block:: bash
 
-.. code:: bash
-
-   $ conda env create --file environment.yaml
+   $ conda create --name abaqus_tools-env --file environment.txt --channel file:///projects/aea_compute/aea-conda
 
 You can learn more about Anaconda Python environment creation and management in
 the `Anaconda Documentation`_.
@@ -42,7 +36,7 @@ C++ Libraries
 =============
 
 * `BOOST`_ >= 1.53.0
-* vector\_tools: https://re-git.lanl.gov/aea/material-models/vector_tools 
+* vector\_tools: https://re-git.lanl.gov/aea/material-models/vector_tools
 
 Constitutive Tools
 ------------------

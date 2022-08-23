@@ -7,8 +7,18 @@ Changelog
 
 
 ******************
-0.1.4 (unreleased)
+0.2.2 (unreleased)
 ******************
+
+
+******************
+0.2.1 (2022-08-23)
+******************
+
+Internal Changes
+================
+- Build, package, and deploy as a Conda package to the AEA Conda channel (:issue:`4`, :merge:`8`). By `Kyle Brindley`_.
+- Fix the environment creation command for Gitlab-CI environment (:merge:`9`). By `Kyle Brindley`_.
 
 
 ******************

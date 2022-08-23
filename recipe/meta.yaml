@@ -1,0 +1,51 @@
+package:
+  name: abaqus_tools
+  # TODO: setup and use pyproject.toml and a Conda build Jinja template
+  version: {{ VERSION }}
+
+source:
+  path: '..'
+
+build:
+  script:
+    - tree
+    - mkdir build-package
+    - cd build-package
+    - cmake .. -DCMAKE_BUILD_TYPE=Release
+    - cmake --install . --prefix $PREFIX
+  ignore_run_exports:
+    - python_abi
+
+requirements:
+  # TODO: need to pin the Python version, or at least build a variant to match (3.8.3)
+  build:
+    - python {{ python }}
+    - {{ compiler('cxx') }}
+    - boost >=1.59
+    - cmake >=3.17
+    - doxygen
+    - eigen >=3.3.7
+    - vector_tools
+  host:
+    - python
+    - boost
+    - eigen >=3.3.7
+  run:
+    - python
+    - {{ compiler('cxx') }}
+    - boost
+    - eigen >=3.3.7
+    - vector_tools
+
+test:
+  source_files:
+    - CMakeLists.txt
+    - src/cpp/tests/CMakeLists.txt
+    - src/cpp/tests/test_abaqus_tools.cpp
+  commands:
+    - tree
+    - mkdir build-package
+    - cd build-package
+    - cmake ..
+    - cmake --build . --target test_abaqus_tools
+    - ctest -R test_abaqus_tools
