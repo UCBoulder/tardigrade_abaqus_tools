@@ -4,12 +4,8 @@ cmake
 cython
 doxygen
 eigen>=3.3.7
-gcc_linux-64>=7.3.0
 gxx_linux-64>=7.3.0
 setuptools_scm
-pip
-pytest
-pytest-cov
 sphinx>=3.0.4
 sphinx_rtd_theme>=0.4.3
 sphinxcontrib-bibtex
