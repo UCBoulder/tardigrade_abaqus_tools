@@ -17,9 +17,7 @@ build:
     - python_abi
 
 requirements:
-  # TODO: need to pin the Python version, or at least build a variant to match (3.8.3)
   build:
-    - python {{ python }}
     - {{ compiler('cxx') }}
     - boost >=1.59
     - cmake >=3.17
@@ -27,13 +25,10 @@ requirements:
     - eigen >=3.3.7
     - vector_tools
   host:
-    - python
-    - boost
+    - boost >=1.59
     - eigen >=3.3.7
   run:
-    - python
     - {{ compiler('cxx') }}
-    - boost
     - eigen >=3.3.7
     - vector_tools
 
