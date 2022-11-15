@@ -10,6 +10,9 @@ Changelog
 0.2.2 (unreleased)
 ******************
 
+Internal Changes
+================
+- Remove the upper bound on compiler version in the shared development environment (:merge:`13`). By `Kyle Brindley`_.
 
 ******************
 0.2.1 (2022-08-23)
