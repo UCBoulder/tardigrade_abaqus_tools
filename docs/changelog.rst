@@ -14,6 +14,7 @@ Internal Changes
 ================
 - Remove the upper bound on compiler version in the shared development environment (:merge:`13`). By `Kyle Brindley`_.
 - Remove the Python dependency and add an additional compiler version package (:merge:`14`). By `Kyle Brindley`_.
+- Remove deprecated CI shell scripts (:issue:`9`, :merge:`15`). By `Kyle Brindley`_.
 
 ******************
 0.2.1 (2022-08-23)
