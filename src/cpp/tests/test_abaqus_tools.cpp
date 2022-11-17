@@ -50,6 +50,10 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     const int width = 3;
     std::vector< std::vector< double > > row_major = { { 1, 2, 3 },
                                                        { 4, 5, 6 } };
+    BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( column_major_pointer, row_major, height, 2 ),
+                       std::length_error );
+    BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( column_major_pointer, row_major, 1, width ),
+                       std::length_error );
     abaqusTools::rowToColumnMajor( column_major_pointer, row_major, height, width );
     BOOST_CHECK( vectorTools::fuzzyEquals( column_major, expected ) );
 
