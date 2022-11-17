@@ -17,6 +17,11 @@ Internal Changes
 - Remove deprecated CI shell scripts (:issue:`9`, :merge:`15`). By `Kyle Brindley`_.
 - Remove unused runtime requirement (:issue:`10`, :merge:`16`). By `Kyle Brindley`_.
 
+Enhancements
+============
+- Check for matching dimensions in row-to-column major array unpacking (c++ to Fortran) and throw an exception when the
+  dimensions don't match (:issue:`8`, :merge:`17`). By `Kyle Brindley`_.
+
 ******************
 0.2.1 (2022-08-23)
 ******************
