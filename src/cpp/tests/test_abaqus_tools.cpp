@@ -73,8 +73,9 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     double *fortran_vector_pointer = fortran_vector.data( );
     std::vector< double > expected_vector = { 1, 2, 3 };
     std::vector< double > cpp_vector = { 1, 2, 3 };
+    BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( fortran_vector_pointer, cpp_vector, 1, 2 ),
+                       std::length_error );
     abaqusTools::rowToColumnMajor( fortran_vector_pointer, cpp_vector, 1, 3 );
-
     BOOST_CHECK( vectorTools::fuzzyEquals( fortran_vector, expected_vector ) );
 }
 
