@@ -50,8 +50,11 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     const int width = 3;
     std::vector< std::vector< double > > row_major = { { 1, 2, 3 },
                                                        { 4, 5, 6 } };
+    BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( column_major_pointer, row_major, height, 2 ),
+                       std::length_error );
+    BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( column_major_pointer, row_major, 1, width ),
+                       std::length_error );
     abaqusTools::rowToColumnMajor( column_major_pointer, row_major, height, width );
-
     BOOST_CHECK( vectorTools::fuzzyEquals( column_major, expected ) );
 
     //Test the interface using a c++ vector saved in row major order
@@ -59,8 +62,9 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     column_major = { 0, 0, 0, 0, 0, 0 };
     std::vector< double > row_major_vector = { 1, 2, 3,
                                                4, 5, 6 };
+    BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( column_major_pointer, row_major_vector, height, 2 ),
+                       std::length_error );
     abaqusTools::rowToColumnMajor( column_major_pointer, row_major_vector, height, width );
-
     BOOST_CHECK( vectorTools::fuzzyEquals( column_major, expected ) );
 
     //Test a single row to single column
@@ -69,8 +73,9 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     double *fortran_vector_pointer = fortran_vector.data( );
     std::vector< double > expected_vector = { 1, 2, 3 };
     std::vector< double > cpp_vector = { 1, 2, 3 };
+    BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( fortran_vector_pointer, cpp_vector, 1, 2 ),
+                       std::length_error );
     abaqusTools::rowToColumnMajor( fortran_vector_pointer, cpp_vector, 1, 3 );
-
     BOOST_CHECK( vectorTools::fuzzyEquals( fortran_vector, expected_vector ) );
 }
 
