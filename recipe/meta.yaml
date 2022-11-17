@@ -19,20 +19,23 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - boost >=1.59
-    - cmake >=3.17
+    - cmake >=3.18
     - doxygen
     - eigen >=3.3.7
-    - vector_tools
+    - setuptools_scm
   host:
     - boost >=1.59
     - eigen >=3.3.7
+    - setuptools_scm
   run:
     - {{ compiler('cxx') }}
     - eigen >=3.3.7
-    - vector_tools
 
 test:
+  requires:
+    - cmake >=3.18
+    - boost >=1.59
+    - vector_tools
   source_files:
     - CMakeLists.txt
     - src/cpp/tests/CMakeLists.txt
