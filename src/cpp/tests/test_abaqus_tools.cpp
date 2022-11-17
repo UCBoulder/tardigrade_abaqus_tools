@@ -51,7 +51,6 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     std::vector< std::vector< double > > row_major = { { 1, 2, 3 },
                                                        { 4, 5, 6 } };
     abaqusTools::rowToColumnMajor( column_major_pointer, row_major, height, width );
-
     BOOST_CHECK( vectorTools::fuzzyEquals( column_major, expected ) );
 
     //Test the interface using a c++ vector saved in row major order
@@ -59,8 +58,9 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     column_major = { 0, 0, 0, 0, 0, 0 };
     std::vector< double > row_major_vector = { 1, 2, 3,
                                                4, 5, 6 };
+    BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( column_major_pointer, row_major_vector, height, 2 ),
+                       std::length_error );
     abaqusTools::rowToColumnMajor( column_major_pointer, row_major_vector, height, width );
-
     BOOST_CHECK( vectorTools::fuzzyEquals( column_major, expected ) );
 
     //Test a single row to single column
