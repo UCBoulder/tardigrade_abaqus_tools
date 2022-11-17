@@ -19,6 +19,7 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
+    - boost >=1.59  # TODO: Separate the package/test configuration to make BOOST an optional build dependency
     - cmake >=3.18
     - doxygen
     - eigen >=3.3.7
