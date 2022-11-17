@@ -58,7 +58,7 @@ extlinks = {
      "merge": ("https://re-git.lanl.gov/aea/material-models/abaqus_tools/-/merge_requests/%s", "MERGE-"),
      "issue": ("https://re-git.lanl.gov/aea/material-models/abaqus_tools_tools/-/issues/%s", "ISSUE-"),
      # Maintain the old Atlassian links until the servers don't exist. Required for changelog entries.
-     "pull": ("https://ddw-bitbucket.lanl.gov/projects/MM/repos/error_tools/pull-requests/%s/overview", "PR"),
+     "pull": ("https://ddw-bitbucket.lanl.gov/projects/MM/repos/abaqus_tools/pull-requests/%s/overview", "PR"),
      "jira": ("https://ddw-jira.lanl.gov/browse/VIP-%s", "VIP-"),
 }
 
