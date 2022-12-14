@@ -80,6 +80,11 @@ namespace abaqusTools{
          * \param &height: The height of the array, e.g. number of rows
          * \param &width: The width of the array, e.g. number of columns
          */
+        const int rows = row_major_array.size();
+        const int columns = row_major_array[0].size();
+        if (rows != height || columns != width){
+            throw std::length_error("Column major size must match row major size");
+        }
         int column_major_index;
         for ( int row = 0; row < height; row++ ){
             for ( int col = 0; col < width; col++ ){
@@ -103,6 +108,10 @@ namespace abaqusTools{
          * \param &height: The height of the array, e.g. number of rows. The c++ row count (1) for 1D arrays.
          * \param &width: The width of the array, e.g. number of columns. The c++ column count (size) for 1D arrays.
          */
+        const int length = row_major.size();
+        if (length != height*width){
+            throw std::length_error("Column major size must match row major size");
+        }
         int row_major_index;
         int column_major_index;
         for ( int row = 0; row < height; row++ ){

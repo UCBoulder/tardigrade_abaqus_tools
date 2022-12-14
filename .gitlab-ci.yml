@@ -113,12 +113,17 @@ fast-test:
   variables:
     GIT_STRATEGY: clone
   script:
-    - ./BUILD.sh
-    - ./TEST.sh
+    - workdir=${PWD}
+    - mkdir build
+    - cd build
+    - cmake .. -DCMAKE_BUILD_TYPE=Release
+    - cmake --build . --verbose
+    - ctest --verbose --output-log results.txt
+    - cd ${workdir}
   artifacts:
     when: always
     paths:
-      - build/results.tex
+      - build/results.txt
   tags:
     - sstelmo-shell-aea
 
@@ -175,9 +180,15 @@ pages:
   variables:
     GIT_STRATEGY: clone
   script:
-    - ./BUILD.sh
-    - mkdir public
+    - workdir=${PWD}
+    - mkdir -p public/doxygen
+    - mkdir build
+    - cd build
+    - cmake ..
+    - cmake --build . --target Sphinx
+    - cd ${workdir}
     - cp -r build/docs/sphinx/html/* public/
+    - cp -r build/docs/doxygen/html/* public/doxygen
   artifacts:
     paths:
       # It MUST be called public

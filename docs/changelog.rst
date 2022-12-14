@@ -7,9 +7,27 @@ Changelog
 
 
 ******************
-0.2.2 (unreleased)
+0.2.3 (unreleased)
 ******************
 
+
+******************
+0.2.2 (2022-12-14)
+******************
+
+Internal Changes
+================
+- Remove the upper bound on compiler version in the shared development environment (:merge:`13`). By `Kyle Brindley`_.
+- Remove the Python dependency and add an additional compiler version package (:merge:`14`). By `Kyle Brindley`_.
+- Remove deprecated CI shell scripts (:issue:`9`, :merge:`15`). By `Kyle Brindley`_.
+- Remove unused runtime requirement (:issue:`10`, :merge:`16`). By `Kyle Brindley`_.
+- Convert to BOOST vector equality checks for more informative unit test failure output (:issue:`11`, :merge:`18`). By
+  `Kyle Brindley`_.
+
+Enhancements
+============
+- Check for matching dimensions in row-to-column major array unpacking (c++ to Fortran) and throw an exception when the
+  dimensions don't match (:issue:`8`, :merge:`17`). By `Kyle Brindley`_.
 
 ******************
 0.2.1 (2022-08-23)

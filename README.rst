@@ -159,35 +159,6 @@ Test on sstelmo
 
       $ less Testing/Temporary/LastTest.log
 
-Convenience build wrappers
-==========================
-
-Two build scripts have been created for convenience, ``new_build.sh`` and
-``build_docs.sh``. The first will build everything including the library binary,
-the test binary, and the documentation. This is the same build script used by
-``jenkins_build.sh`` for CI builds and testing. The ``build_docs.sh`` script
-only builds the documentation. Both build scripts clobber existing build
-directories, reset any bash environment variables, and run the cmake
-configuration from scratch.
-
-2) Build everything and run tests
-
-   .. code-block:: bash
-
-      $ ./jenkins_build.sh
-
-3) View test results
-
-   .. code-block:: bash
-
-      $ cat *results.tex
-
-4) Display docs
-
-   .. code-block:: bash
-
-      $ firefox build/docs/doxygen/html/index.html &
-
 Building the documentation
 ==========================
 
@@ -195,9 +166,6 @@ Building the documentation
 
    **API Health Note**: The sphinx API docs are a work-in-progress. The doxygen
    API is much more useful.
-
-The documentation can be built with ``build_docs.sh``. The steps used in that
-shell script are repeated here.
 
 To build just the documentation pick up the steps here:
 
