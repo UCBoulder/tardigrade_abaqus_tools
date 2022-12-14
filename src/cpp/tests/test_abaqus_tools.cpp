@@ -260,34 +260,36 @@ BOOST_AUTO_TEST_CASE( testContractFullNTENSTensor ){
 
 BOOST_AUTO_TEST_CASE( testContractFullNTENSMatrix ){
 
-     //Initialize common test variables
-     std::vector< std::vector< int > > result( 6, std::vector< int >( 6 ) );
-                                                         // 0     1     2     3     4     5     6     7     8
-     std::vector< std::vector< int > > full_matrix = { { 1111, 1112, 1113, 1121, 1122, 1123, 1131, 1132, 1133 },   // 0
-                                                       { 1211, 1212, 1213, 1221, 1222, 1223, 1231, 1232, 1233 },   // 1
-                                                       { 1311, 1312, 1313, 1321, 1322, 1323, 1331, 1332, 1333 },   // 2
-                                                       { 2111, 2112, 2113, 2121, 2122, 2123, 2131, 2132, 2133 },   // 3
-                                                       { 2211, 2212, 2213, 2221, 2222, 2223, 2231, 2232, 2233 },   // 4
-                                                       { 2311, 2312, 2313, 2321, 2322, 2323, 2331, 2332, 2333 },   // 5
-                                                       { 3111, 3112, 3113, 3121, 3122, 3123, 3131, 3132, 3133 },   // 6
-                                                       { 3211, 3212, 3213, 3221, 3222, 3223, 3231, 3232, 3233 },   // 7
-                                                       { 3311, 3312, 3313, 3321, 3322, 3323, 3331, 3332, 3333 } }; // 8
-                                                                        //  0     4     8     1     2     5
-     std::vector< std::vector< int > > full_abaqus_standard_matrix = { { 1111, 1122, 1133, 1112, 1113, 1123 },   // 0
-                                                                       { 2211, 2222, 2233, 2212, 2213, 2223 },   // 4
-                                                                       { 3311, 3322, 3333, 3312, 3313, 3323 },   // 8
-                                                                       { 1211, 1222, 1233, 1212, 1213, 1223 },   // 1
-                                                                       { 1311, 1322, 1333, 1312, 1313, 1323 },   // 2
-                                                                       { 2311, 2322, 2333, 2312, 2313, 2323 } }; // 5
+    //Initialize common test variables
+    std::vector< std::vector< int > > result( 6, std::vector< int >( 6 ) );
+                                                        // 0     1     2     3     4     5     6     7     8
+    std::vector< std::vector< int > > full_matrix = { { 1111, 1112, 1113, 1121, 1122, 1123, 1131, 1132, 1133 },   // 0
+                                                      { 1211, 1212, 1213, 1221, 1222, 1223, 1231, 1232, 1233 },   // 1
+                                                      { 1311, 1312, 1313, 1321, 1322, 1323, 1331, 1332, 1333 },   // 2
+                                                      { 2111, 2112, 2113, 2121, 2122, 2123, 2131, 2132, 2133 },   // 3
+                                                      { 2211, 2212, 2213, 2221, 2222, 2223, 2231, 2232, 2233 },   // 4
+                                                      { 2311, 2312, 2313, 2321, 2322, 2323, 2331, 2332, 2333 },   // 5
+                                                      { 3111, 3112, 3113, 3121, 3122, 3123, 3131, 3132, 3133 },   // 6
+                                                      { 3211, 3212, 3213, 3221, 3222, 3223, 3231, 3232, 3233 },   // 7
+                                                      { 3311, 3312, 3313, 3321, 3322, 3323, 3331, 3332, 3333 } }; // 8
+                                                                       //  0     4     8     1     2     5
+    std::vector< std::vector< int > > full_abaqus_standard_matrix = { { 1111, 1122, 1133, 1112, 1113, 1123 },   // 0
+                                                                      { 2211, 2222, 2233, 2212, 2213, 2223 },   // 4
+                                                                      { 3311, 3322, 3333, 3312, 3313, 3323 },   // 8
+                                                                      { 1211, 1222, 1233, 1212, 1213, 1223 },   // 1
+                                                                      { 1311, 1322, 1333, 1312, 1313, 1323 },   // 2
+                                                                      { 2311, 2322, 2333, 2312, 2313, 2323 } }; // 5
 
-     //Check full matrix contraction for Abaqus/Standard
-     result = abaqusTools::contractFullNTENSMatrix( full_matrix );
-     BOOST_CHECK( result == full_abaqus_standard_matrix );
+    //Check full matrix contraction for Abaqus/Standard
+    result = abaqusTools::contractFullNTENSMatrix( full_matrix );
+    BOOST_TEST( vectorTools::appendVectors( result ) == vectorTools::appendVectors( full_abaqus_standard_matrix ),
+                boost::test_tools::per_element() );
 
-     //Test overloaded variation with contracted NTENSxNTENS matrix output
-     //Check full matrix contraction for Abaqus/Standard
-     //Sign of life test. The tests for NDI and NSHR less than 3 are performed in contractAbaqusNTENSMatrix.
-     result = abaqusTools::contractFullNTENSMatrix( full_matrix, 3, 3 );
-     BOOST_CHECK( result == full_abaqus_standard_matrix );
+    //Test overloaded variation with contracted NTENSxNTENS matrix output
+    //Check full matrix contraction for Abaqus/Standard
+    //Sign of life test. The tests for NDI and NSHR less than 3 are performed in contractAbaqusNTENSMatrix.
+    result = abaqusTools::contractFullNTENSMatrix( full_matrix, 3, 3 );
+    BOOST_TEST( vectorTools::appendVectors( result ) == vectorTools::appendVectors( full_abaqus_standard_matrix ),
+                boost::test_tools::per_element() );
 
 }
