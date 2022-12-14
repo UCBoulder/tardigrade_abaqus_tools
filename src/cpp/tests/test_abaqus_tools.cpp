@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( column_major_pointer, row_major, 1, width ),
                        std::length_error );
     abaqusTools::rowToColumnMajor( column_major_pointer, row_major, height, width );
-    BOOST_CHECK( vectorTools::fuzzyEquals( column_major, expected ) );
+    BOOST_TEST( column_major == expected, boost::test_tools::per_element() );
 
     //Test the interface using a c++ vector saved in row major order
     //Reset fake Fortran column major array
@@ -65,7 +65,7 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( column_major_pointer, row_major_vector, height, 2 ),
                        std::length_error );
     abaqusTools::rowToColumnMajor( column_major_pointer, row_major_vector, height, width );
-    BOOST_CHECK( vectorTools::fuzzyEquals( column_major, expected ) );
+    BOOST_TEST( column_major == expected, boost::test_tools::per_element() );
 
     //Test a single row to single column
     //Create a fake Fortran vector in memory with a c++ row major vector
@@ -76,7 +76,7 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( fortran_vector_pointer, cpp_vector, 1, 2 ),
                        std::length_error );
     abaqusTools::rowToColumnMajor( fortran_vector_pointer, cpp_vector, 1, 3 );
-    BOOST_CHECK( vectorTools::fuzzyEquals( fortran_vector, expected_vector ) );
+    BOOST_TEST( fortran_vector == expected_vector, boost::test_tools::per_element() );
 }
 
 BOOST_AUTO_TEST_CASE( testExpandAbaqusNTENSVector ){
@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE( testExpandAbaqusNTENSVector ){
 
      vector_expansion = abaqusTools::expandAbaqusNTENSVector( abaqus_full, NDI, NSHR );
 
-     BOOST_CHECK( vectorTools::fuzzyEquals( vector_expansion, expected_full ) );
+     BOOST_TEST( vector_expansion == expected_full, boost::test_tools::per_element() );
 
      //Test plane stress vector
      std::fill(vector_expansion.begin(), vector_expansion.end(), -666.);
@@ -108,7 +108,7 @@ BOOST_AUTO_TEST_CASE( testExpandAbaqusNTENSVector ){
 
      vector_expansion = abaqusTools::expandAbaqusNTENSVector( abaqus_plane_stress, NDI, NSHR );
 
-     BOOST_CHECK( vectorTools::fuzzyEquals( vector_expansion, expected_plane_stress ) );
+     BOOST_TEST( vector_expansion == expected_plane_stress, boost::test_tools::per_element() );
 }
 
 BOOST_AUTO_TEST_CASE( testContractAbaqusNTENSVector ){
@@ -129,7 +129,7 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusNTENSVector ){
 
      vector_contraction_full = abaqusTools::contractAbaqusNTENSVector( expanded_full, NDI, NSHR );
 
-     BOOST_CHECK( vectorTools::fuzzyEquals( vector_contraction_full, abaqus_full ) );
+     BOOST_TEST( vector_contraction_full == abaqus_full, boost::test_tools::per_element() );
 
      //Test plane stress vector
      std::vector< double > vector_contraction_plane_stress(3, -666.);
@@ -140,7 +140,7 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusNTENSVector ){
 
      vector_contraction_plane_stress = abaqusTools::contractAbaqusNTENSVector( expanded_plane_stress, NDI, NSHR );
 
-     BOOST_CHECK( vectorTools::fuzzyEquals( vector_contraction_plane_stress, abaqus_plane_stress ) );
+     BOOST_TEST( vector_contraction_plane_stress == abaqus_plane_stress, boost::test_tools::per_element() );
 
 }
 
