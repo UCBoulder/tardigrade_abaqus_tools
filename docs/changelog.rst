@@ -16,6 +16,8 @@ Internal Changes
 - Remove the Python dependency and add an additional compiler version package (:merge:`14`). By `Kyle Brindley`_.
 - Remove deprecated CI shell scripts (:issue:`9`, :merge:`15`). By `Kyle Brindley`_.
 - Remove unused runtime requirement (:issue:`10`, :merge:`16`). By `Kyle Brindley`_.
+- Convert to BOOST vector equality checks for more informative unit test failure output (:issue:`11`, :merge:`18`). By
+  `Kyle Brindley`_.
 
 Enhancements
 ============
