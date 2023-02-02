@@ -45,6 +45,6 @@ test:
   commands:
     - mkdir build-package
     - cd build-package
-    - cmake ..
+    - cmake .. -DCMAKE_BUILD_TYPE=conda-test
     - cmake --build . --target test_abaqus_tools
     - ctest -R test_abaqus_tools
