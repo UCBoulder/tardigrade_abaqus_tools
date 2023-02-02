@@ -12,7 +12,7 @@ Changelog
 
 Internal Changes
 ================
-- Project configuration and conda build recipe changes to allow macOS builds and conda-build test stage (:merge:`31`).
+- Project configuration and conda build recipe changes to allow macOS builds and conda-build test stage (:merge:`20`).
   By `Kyle Brindley`_.
 
 
