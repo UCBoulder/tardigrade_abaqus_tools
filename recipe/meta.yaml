@@ -8,7 +8,6 @@ source:
 
 build:
   script:
-    - tree
     - mkdir build-package
     - cd build-package
     - cmake .. -DCMAKE_BUILD_TYPE=Release
@@ -44,7 +43,6 @@ test:
     - src/cpp/tests/CMakeLists.txt
     - src/cpp/tests/test_abaqus_tools.cpp
   commands:
-    - tree
     - mkdir build-package
     - cd build-package
     - cmake ..
