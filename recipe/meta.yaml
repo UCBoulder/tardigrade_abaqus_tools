@@ -17,16 +17,16 @@ build:
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-    - cmake >=3.18
     - eigen >=3.3.7
     - boost >=1.59  # TODO: Separate the package/test configuration to make BOOST an optional build dependency
     - vector_tools  # TODO: Separate the package/test configuration to make vector_tools and optional build dependency
+    - setuptools_scm >=6.2
+  host:
+    - python
+    - cmake >=3.18
+    - {{ compiler('cxx') }}
     - doxygen  # TODO: Separate the package/documentation configuration to make Doxygen an optional build dependency
     - sphinx  # TODO: Separate the package/documentation configuration to make Sphinx an optional build dependency
-  host:
-    - boost >=1.59
-    - eigen >=3.3.7
   run:
     - {{ compiler('cxx') }}
     - eigen >=3.3.7
