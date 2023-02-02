@@ -12,11 +12,26 @@ set(CMAKE_SRC_PATH "src/cmake")
 # Add the cmake folder to locate project CMake module(s)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
 
+# Set build type checks
+string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
+set(not_conda_test "true")
+if(cmake_build_type_lower STREQUAL "conda-test")
+    set(not_conda_test "false")
+endif()
+
 # Get version number from Git
 set(VERSION_UPDATE_FROM_GIT True)
-# FIXME: Figure out why include() doesn't pick up CMAKE_MODULE_PATH correctly
-include(${CMAKE_SRC_PATH}/GetVersionFromGitTag.cmake)
-project(${PROJECT_NAME} VERSION ${${PROJECT_NAME}_VERSION})
+if(${not_conda_test} STREQUAL "true")
+    find_package(Python COMPONENTS Interpreter REQUIRED)
+    execute_process(COMMAND ${Python_EXECUTABLE} -m setuptools_scm
+                            OUTPUT_VARIABLE ${PROJECT_NAME}_VERSION_STRING_FULL
+                    OUTPUT_STRIP_TRAILING_WHITESPACE)
+    string(REGEX MATCH "[0-9]+\.[0-9]+\.[0-9]+" ${PROJECT_NAME}_VERSION ${${PROJECT_NAME}_VERSION_STRING_FULL})
+    if(${${PROJECT_NAME}_VERSION} STREQUAL "")
+        set(${PROJECT_NAME}_VERSION 0.0.0)
+    endif()
+    project(${PROJECT_NAME} VERSION ${${PROJECT_NAME}_VERSION})
+endif()
 
 # Add installation directory variables
 include(GNUInstallDirs)
@@ -69,8 +84,10 @@ endforeach(package)
 #=============================================================================================== ADD PROJECT TARGETS ===
 # MUST COME AFTER DEPENDENCY LOCATING
 # Add project source directories
-include_directories("${CPP_SRC_PATH}")
-add_subdirectory("${CPP_SRC_PATH}")
+if(${not_conda_test} STREQUAL "true")
+    include_directories("${CPP_SRC_PATH}")
+    add_subdirectory("${CPP_SRC_PATH}")
+endif()
 
 # Only add tests and documentation for current project builds. Protects downstream project builds.
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
@@ -78,27 +95,31 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     find_package(Boost 1.53.0 REQUIRED COMPONENTS unit_test_framework)
     # Add tests and docs
     add_subdirectory ("${CPP_SRC_PATH}/tests")
-    add_subdirectory ("docs")
+    if(${not_conda_test} STREQUAL "true")
+        add_subdirectory("docs")
+    endif()
 endif()
 
 #==================================================================================== SETUP INSTALLATION CMAKE FILES ===
-include(CMakePackageConfigHelpers)
-write_basic_package_version_file("${PROJECT_NAME}ConfigVersion.cmake"
-                                 VERSION ${PROJECT_VERSION}
-                                 COMPATIBILITY SameMajorVersion)
-configure_package_config_file(
-  "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}/Config.cmake.in"
-  "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-  INSTALL_DESTINATION
-  ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
+if(${not_conda_test} STREQUAL "true")
+    include(CMakePackageConfigHelpers)
+    write_basic_package_version_file("${PROJECT_NAME}ConfigVersion.cmake"
+                                     VERSION ${PROJECT_VERSION}
+                                     COMPATIBILITY SameMajorVersion)
+    configure_package_config_file(
+      "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}/Config.cmake.in"
+      "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+      INSTALL_DESTINATION
+      ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
 
-# CMake won't build the targets for local builds of upstream projects
-if(cmake_build_type_lower STREQUAL release)
-    install(EXPORT ${PROJECT_NAME}_Targets
-            FILE ${PROJECT_NAME}Targets.cmake
+    # CMake won't build the targets for local builds of upstream projects
+    if(cmake_build_type_lower STREQUAL release)
+        install(EXPORT ${PROJECT_NAME}_Targets
+                FILE ${PROJECT_NAME}Targets.cmake
+                DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
+    endif()
+
+    install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+                  "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
 endif()
-
-install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-              "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
-        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
