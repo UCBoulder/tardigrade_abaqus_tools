@@ -10,6 +10,11 @@ Changelog
 0.2.3 (unreleased)
 ******************
 
+Internal Changes
+================
+- Project configuration and conda build recipe changes to allow macOS builds and conda-build test stage (:merge:`20`).
+  By `Kyle Brindley`_.
+
 
 ******************
 0.2.2 (2022-12-14)
