@@ -18,7 +18,6 @@
 .. _`PEP-8`: https://www.python.org/dev/peps/pep-0008/
 .. _`PEP-440`: https://www.python.org/dev/peps/pep-0440/
 .. _`sphinx`: https://www.sphinx-doc.org/en/master/
-.. _`toolbox-jenkins`: https://toolbox-jenkins.lanl.gov/
 .. _`Cubit`: https://cubit.sandia.gov/public/documentation.html
 .. _`W-13 Python Environments`: https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment
 .. _`re docs`: https://docs.python.org/3.6/library/re.html
