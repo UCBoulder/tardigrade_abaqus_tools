@@ -68,7 +68,7 @@ foreach(package ${upstream_packages})
         # correct included directories for the abaqus_tools builds. For some reason, the abaqus_tools project doesn't
         # add the correct include libraries, despite finding the upstream packages. Suspect a header only project
         # gotcha. These commands can be removed if you can coax CMake to add the "-isystem
-        # /projects/python/beta/include" arguments to the compiler command when building the tests.
+        # /projects/aea_compute/beta/include" arguments to the compiler command when building the tests.
         string(REPLACE "share/${package}/cmake" "" package_include ${${package}_DIR})
         include_directories(${package_include}/include)
     else()
