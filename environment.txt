@@ -1,11 +1,11 @@
 boost>=1.59
 breathe>=4.30.0
-cmake
+cmake>=3.18
 doxygen
 eigen>=3.3.7
-gxx_linux-64>=7.3.0
-setuptools_scm
+compilers
+setuptools_scm>=6.2
 sphinx>=3.0.4
 sphinx_rtd_theme>=0.4.3
 sphinxcontrib-bibtex
-vector_tools
+vector_tools>=0.4
