@@ -17,6 +17,7 @@ Internal Changes
 - Add a gcc 11 conda build variant (:issue:`14`, :merge:`23`). By `Kyle Brindley`_.
 - Force CI environment consistent conda-forge packages and make the CI environment file OS-agnostic (:merge:`25`). By
   `Kyle Brindley`_.
+- Remove ``-ansi`` compiler option and update to c++17 standard (:merge:`26`). By `Kyle Brindley`_.
 
 
 ******************
