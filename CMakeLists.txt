@@ -22,6 +22,7 @@ endif()
 # Get version number from Git
 set(VERSION_UPDATE_FROM_GIT True)
 if(${not_conda_test} STREQUAL "true")
+    include(FindPackageHandleStandardArgs)
     find_package(Python COMPONENTS Interpreter REQUIRED)
     execute_process(COMMAND ${Python_EXECUTABLE} -m setuptools_scm
                             OUTPUT_VARIABLE ${PROJECT_NAME}_VERSION_STRING_FULL
