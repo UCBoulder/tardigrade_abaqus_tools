@@ -76,7 +76,7 @@ environment:
     # place the common modulefiles in an accessible location
     - cp ${PWD}/modulefiles/* ${aea_modulefiles}
   tags:
-    - sstbigbird-shell-aea
+    - shell-aea
 
 microbump:
   stage: version
@@ -112,7 +112,7 @@ microbump:
     - git tag -a ${developer_version} -m "developer pre-release ${developer_version}" ${last_merge_hash} || true
     - git push oauth2-origin --tags
   tags:
-    - sstbigbird-shell-aea
+    - shell-aea
 
 fast-test:
   stage: test
@@ -129,6 +129,8 @@ fast-test:
     - workdir=${PWD}
     - mkdir build
     - cd build
+    - which cmake
+    - cmake --version
     - cmake .. -DCMAKE_BUILD_TYPE=Release
     - cmake --build . --target all --verbose
     - ctest --verbose --output-log results.txt
@@ -138,7 +140,7 @@ fast-test:
     paths:
       - build/results.txt
   tags:
-    - sstbigbird-shell-aea
+    - shell-aea
 
 conda-build:
   stage: build
@@ -168,7 +170,7 @@ conda-build:
     paths:
       - conda-build-artifacts/linux-64/abaqus_tools-*-*.tar.bz2
   tags:
-    - sstbigbird-shell-aea
+    - shell-aea
 
 deploy:
   stage: deploy
@@ -193,7 +195,7 @@ deploy:
     - conda index ${aea_conda_channel}
     - conda search --channel file://${aea_conda_channel}/ --override-channels abaqus_tools
   tags:
-    - sstbigbird-shell-aea
+    - shell-aea
 
 # It MUST be called pages
 pages:
@@ -220,4 +222,4 @@ pages:
       # It MUST be called public
       - public
   tags:
-    - sstbigbird-shell-aea
+    - shell-aea
