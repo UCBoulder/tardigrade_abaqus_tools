@@ -1,4 +1,5 @@
 # Project files
+build*/
 # Managed by GetVersionFromGitTag.cmake
 VERSION
 _version.py
