@@ -154,7 +154,7 @@ conda-build:
     - if: $CI_COMMIT_BRANCH == "dev"
   script:
     # Only build one compiler variant during merge request testing
-    - cxx_compiler_version="10"
+    - cxx_compiler_version="12"
     - variants=""
     - if [[ $CI_PIPELINE_SOURCE == "merge_request_event" ]]; then variants="--variants {'cxx_compiler_version':['${cxx_compiler_version}']}"; fi
     # Set the LANL internal proxies
