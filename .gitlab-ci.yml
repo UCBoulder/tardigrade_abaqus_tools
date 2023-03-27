@@ -157,6 +157,9 @@ conda-build:
     - cxx_compiler_version="12"
     - variants=""
     - if [[ $CI_PIPELINE_SOURCE == "merge_request_event" ]]; then variants="--variants {'cxx_compiler_version':['${cxx_compiler_version}']}"; fi
+    # build all variants if the file is updated
+    - FILES=$(git diff --name-only ${CI_COMMIT_SHA} origin/${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} | grep 'conda_build_config.yaml'$)
+    - echo ${FILES} 
     # Set the LANL internal proxies
     - export ALL_PROXY="proxyout.lanl.gov:8080"
     - export HTTP_PROXY="http://$ALL_PROXY"

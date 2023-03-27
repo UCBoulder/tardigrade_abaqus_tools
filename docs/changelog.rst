@@ -9,6 +9,10 @@ Changelog
 0.3.2 (unreleased)
 ******************
 
+Internal Changes
+================
+- Add a gcc 10 conda build variant (:issue:`18`, :merge:`32`). By `Sergio Cordova`_.
+
 ******************
 0.3.1 (2023-03-16)
 ******************
