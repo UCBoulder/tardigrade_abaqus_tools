@@ -1,4 +1,4 @@
 cxx_compiler_version:  # [linux]
-  - 7                  # [linux]
+  - 10                 # [linux]
   - 11                 # [linux]
   - 12                 # [linux]
