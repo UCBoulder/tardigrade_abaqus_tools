@@ -10,8 +10,8 @@ conflict vector_tools-env
 # Set AEA standard software version and environment names
 set cubit_version "Cubit-15.8"
 set matlab_version "R2021b"
-set anaconda_version "2020.07"
-set python_version "3.8"
+set anaconda_version "2021.11"
+set python_version "3.9"
 set environment "abaqus_tools-env"
 
 # Get current hostname
@@ -63,7 +63,7 @@ if { [file exists $release_file] == 1} {
 }
 
 # Set the bash environment variables similarly to HPC anaconda module
-# Reference - sn-rfe.lanl.gov:/usr/projects/hpcsoft/modulefiles/toss3/snow/tools/python/3.8-anaconda-2020.07
+# Reference - sn-rfe.lanl.gov:/usr/projects/hpcsoft/modulefiles/toss3/snow/tools/python/3.9-anaconda-2021.11
 prepend-path PATH "$environment_bin:$anaconda_bin"
 prepend-path MANPATH "$environment_man"
 
@@ -79,7 +79,7 @@ prepend-path LD_LIBRARY_PATH "$environment_lib"
 prepend-path LD_LIBRARY_PATH "$cubit_bin_python"
 
 # Set some aliases similarly to W-13 compute servers
-# Reference - sstelmo.lanl.gov:/usr/share/Modules/modulefiles/python/2020.07-python-3.8
+# Reference - sstelmo.lanl.gov:/usr/share/Modules/modulefiles/python/2021.11-python-3.9
 set-alias ipy "ipython"
 set-alias nb "jupyter notebook"
 
