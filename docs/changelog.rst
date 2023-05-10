@@ -12,6 +12,7 @@ Changelog
 Internal Changes
 ================
 - Add a gcc 10 conda build variant (:issue:`18`, :merge:`32`). By `Sergio Cordova`_.
+- Upgrade to Anaconda 2021 on Gitlab-CI environment (:issue:`66`, :merge:`67`).
 
 ******************
 0.3.1 (2023-03-16)
