@@ -51,4 +51,5 @@
 .. _`Kyle Brindley`: kbrindley@lanl.gov
 .. _`Nathan Miller`: nathanm@lanl.gov
 .. _`Prabhu Khalsa`: prabhu@lanl.gov
+.. _`Sergio Cordova`: sergioc@lanl.gov
 .. _`w13dev`: w13dev@lanl.gov

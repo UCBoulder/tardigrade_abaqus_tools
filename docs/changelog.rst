@@ -9,6 +9,15 @@ Changelog
 0.3.2 (unreleased)
 ******************
 
+Internal Changes
+================
+- Add a gcc 10 conda build variant (:issue:`18`, :merge:`32`). By `Sergio Cordova`_.
+- Upgrade to Anaconda 2021 on Gitlab-CI environment (:issue:`66`, :merge:`67`).
+
+Bug fixes
+=========
+- Added inline to functions to allow for abaqus_tools to be included multiple times (:merge:`36`). By `Nathan Miller`_.
+
 ******************
 0.3.1 (2023-03-16)
 ******************

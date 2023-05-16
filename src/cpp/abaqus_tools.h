@@ -17,7 +17,7 @@
 
 namespace abaqusTools{
 
-    char *FtoCString( int stringLength, const char* fString ){
+    inline char *FtoCString( int stringLength, const char* fString ){
         /*!
          * Converts a Fortran string to C-string. Trims trailing white space during processing.
          *
@@ -42,7 +42,7 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    std::vector< std::vector< T > > columnToRowMajor( const T *column_major,  const int &height, const int &width ){
+    inline std::vector< std::vector< T > > columnToRowMajor( const T *column_major,  const int &height, const int &width ){
         /*!
          * Convert column major two dimensional arrays to row major.
          *
@@ -67,8 +67,8 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    void rowToColumnMajor( T *column_major, const std::vector< std::vector< T > > &row_major_array,
-                           const int &height, const int &width ){
+    inline void rowToColumnMajor( T *column_major, const std::vector< std::vector< T > > &row_major_array,
+                                  const int &height, const int &width ){
         /*!
          * Convert row major two dimensional arrays to column major
          *
@@ -97,7 +97,7 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    void rowToColumnMajor( T *column_major, const std::vector< T > &row_major, const int &height, const int &width ){
+    inline void rowToColumnMajor( T *column_major, const std::vector< T > &row_major, const int &height, const int &width ){
         /*!
          * Convert row major two dimensional arrays stored as vector to column major array
          *
@@ -124,8 +124,8 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    std::vector< T > expandAbaqusNTENSVector( const std::vector< T > &abaqus_vector,
-                                              const int &NDI, const int &NSHR ){
+    inline std::vector< T > expandAbaqusNTENSVector( const std::vector< T > &abaqus_vector,
+                                                     const int &NDI, const int &NSHR ){
         /*!
          * Expand stress and strain type components to full Abaqus vectors.
          *
@@ -178,8 +178,8 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    std::vector< T > contractAbaqusNTENSVector( const std::vector< T > &full_abaqus_vector,
-                                                const int &NDI, const int &NSHR ){
+    inline std::vector< T > contractAbaqusNTENSVector( const std::vector< T > &full_abaqus_vector,
+                                                       const int &NDI, const int &NSHR ){
         /*!
          * Contract stress and strain type components from full Abaqus vectors.
          *
@@ -232,8 +232,8 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    std::vector< std::vector < T > > contractAbaqusNTENSMatrix( const std::vector< std::vector< T > > &full_abaqus_matrix,
-                                                                const int &NDI, const int &NSHR ){
+    inline std::vector< std::vector < T > > contractAbaqusNTENSMatrix( const std::vector< std::vector< T > > &full_abaqus_matrix,
+                                                                       const int &NDI, const int &NSHR ){
         /*!
          * Contract NTENS type components from full Abaqus stress-type matrixes (6x6). ONLY APPLIES TO
          * ABAQUS/STANDARD Voigt matrices, e.g. Jaumann stiffness matrix.
@@ -298,8 +298,8 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    std::vector< T > expandFullNTENSTensor( const std::vector< T > &long_vector,
-                                               const bool abaqus_standard = true ){
+    inline std::vector< T > expandFullNTENSTensor( const std::vector< T > &long_vector,
+                                                   const bool abaqus_standard = true ){
         /*!
          * Expand the full 3x3 tensor as a row-major vector from the expanded Abaqus stress-type NTENS vector of
          * length 6. Handle the stress-type vector element order differences between Abaqus/Standard and
@@ -348,9 +348,9 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    std::vector< T > expandFullNTENSTensor( const std::vector< T > &abaqus_vector,
-                                               const int &NDI, const int &NSHR,
-                                               const bool abaqus_standard = true ){
+    inline std::vector< T > expandFullNTENSTensor( const std::vector< T > &abaqus_vector,
+                                                   const int &NDI, const int &NSHR,
+                                                   const bool abaqus_standard = true ){
         /*!
          * Expand the full 3x3 tensor as a row-major vector from the contracted Abaqus stress-type vector of length
          * NDI + NSHR. Handle the stress-type vector element order differences between Abaqus/Standard and
@@ -375,8 +375,8 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    std::vector< T > contractFullNTENSTensor( const std::vector< T > &full_tensor,
-                                              const bool abaqus_standard = true ){
+    inline std::vector< T > contractFullNTENSTensor( const std::vector< T > &full_tensor,
+                                                     const bool abaqus_standard = true ){
         /*!
          * Contract a full 3x3 tensor stored as a row-major vector into the full Abaqus stress-type vector of length 6.
          * Handle the stress-type vector element order differences between Abaqus/Standard and Abaqus/Explicit.
@@ -419,9 +419,9 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    std::vector< T > contractFullNTENSTensor( const std::vector< T > &full_tensor,
-                                              const int &NDI, const int &NSHR,
-                                              const bool abaqus_standard = true ){
+    inline std::vector< T > contractFullNTENSTensor( const std::vector< T > &full_tensor,
+                                                     const int &NDI, const int &NSHR,
+                                                     const bool abaqus_standard = true ){
         /*!
          * Contract a full 3x3 tensor stored as a row-major vector into an Abaqus stress-type vector of length NDI +
          * NSHR. Handle the stress-type vector element order differences between Abaqus/Standard and Abaqus/Explicit.
@@ -454,7 +454,7 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    std::vector< std::vector< T > > contractFullNTENSMatrix( const std::vector< std::vector< T > > &full_matrix){
+    inline std::vector< std::vector< T > > contractFullNTENSMatrix( const std::vector< std::vector< T > > &full_matrix){
         /*!
          * Re-pack a full 9x9 matrix into the expected order for an expanded (6x6) Abaqus NTENS matrix. ONLY APPLIES TO
          * ABAQUS/STANDARD Voigt matrices, e.g. Jaumann stiffness matrix.
@@ -503,8 +503,8 @@ namespace abaqusTools{
     }
 
     template< typename T >
-    std::vector< std::vector < T > > contractFullNTENSMatrix( const std::vector< std::vector< T > > &full_matrix,
-                                                              const int &NDI, const int &NSHR ){
+    inline std::vector< std::vector < T > > contractFullNTENSMatrix( const std::vector< std::vector< T > > &full_matrix,
+                                                                     const int &NDI, const int &NSHR ){
         /*!
          * Re-pack a full 9x9 matrix into the expected order for the contracted (NTENSxNTENS) Abaqus NTENS matrix. ONLY
          * APPLIES TO ABAQUS/STANDARD Voigt matrices, e.g. Jaumann stiffness matrix.
