@@ -11,8 +11,8 @@ Changelog
 
 Breaking changes
 ================
-- Deploy to the Conda environment preferred ``lib`` directory instead of the CMake linux default ``lib64`` (:issue:`20`,
-  :merge:`49`). By `Kyle Brindley`_.
+- Deploy to the Conda environment preferred ``lib`` directory instead of the CMake linux default ``lib64`` (:issue:`22`,
+  :merge:`38`). By `Kyle Brindley`_.
 
 Internal Changes
 ================
