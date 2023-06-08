@@ -10,7 +10,7 @@ build:
   script:
     - mkdir build-package
     - cd build-package
-    - cmake .. -DCMAKE_BUILD_TYPE=Release
+    - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=lib
     - cmake --install . --prefix $PREFIX
   ignore_run_exports:
     - python_abi
@@ -48,6 +48,6 @@ test:
   commands:
     - mkdir build-package
     - cd build-package
-    - cmake .. -DCMAKE_BUILD_TYPE=conda-test
+    - cmake .. -DCMAKE_BUILD_TYPE=conda-test -DCMAKE_INSTALL_LIBDIR=lib
     - cmake --build . --target test_abaqus_tools
     - ctest -R test_abaqus_tools

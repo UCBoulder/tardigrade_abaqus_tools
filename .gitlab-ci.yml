@@ -131,7 +131,7 @@ fast-test:
     - cd build
     - which cmake
     - cmake --version
-    - cmake .. -DCMAKE_BUILD_TYPE=Release
+    - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=lib
     - cmake --build . --target all --verbose
     - ctest --verbose --output-log results.txt
     - cd ${workdir}
