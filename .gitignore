@@ -3,8 +3,8 @@ build*/
 # Managed by GetVersionFromGitTag.cmake
 VERSION
 _version.py
-conda_build_artifacts
-conda-build-artifacts
+conda_bld
+conda-bld
 
 # Temp files
 *.swp
