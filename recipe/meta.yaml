@@ -10,7 +10,7 @@ build:
   script:
     - mkdir build-package
     - cd build-package
-    - cmake .. -DCMAKE_BUILD_TYPE=Release
+    - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=lib
     - cmake --install . --prefix $PREFIX
   ignore_run_exports:
     - python_abi
@@ -20,7 +20,7 @@ requirements:
     - {{ compiler('cxx') }}
     - eigen >=3.3.7
     - boost >=1.59  # TODO: Separate the package/test configuration to make BOOST an optional build dependency
-    - vector_tools >=0.4 # TODO: Separate the package/test configuration to make vector_tools and optional build dependency
+    - vector_tools >=0.6 # TODO: Separate the package/test configuration to make vector_tools and optional build dependency
     - setuptools_scm >=6.2
     - libcxx <16  # [osx]
   host:
@@ -38,7 +38,7 @@ test:
   requires:
     - cmake >=3.18
     - boost >=1.59
-    - vector_tools >=0.4
+    - vector_tools >=0.6
     - doxygen  # TODO: Separate the package/documentation configuration to make Doxygen an optional build dependency
     - sphinx  # TODO: Separate the package/documentation configuration to make Sphinx an optional build dependency
   source_files:
@@ -48,6 +48,6 @@ test:
   commands:
     - mkdir build-package
     - cd build-package
-    - cmake .. -DCMAKE_BUILD_TYPE=conda-test
+    - cmake .. -DCMAKE_BUILD_TYPE=conda-test -DCMAKE_INSTALL_LIBDIR=lib
     - cmake --build . --target test_abaqus_tools
     - ctest -R test_abaqus_tools
