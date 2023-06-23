@@ -6,7 +6,16 @@ Changelog
 #########
 
 ******************
-0.5.1 (unreleased)
+0.5.2 (unreleased)
+******************
+
+Internal Changes
+================
+- Clean up Conda package recipe to match installed packages/libraries to the correct build-time environments
+  (:issue:`23`, :merge:`40`). By `Kyle Brindley`_.
+
+******************
+0.5.1 (2023-06-20)
 ******************
 
 Breaking changes
