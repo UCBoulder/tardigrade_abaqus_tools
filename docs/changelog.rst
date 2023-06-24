@@ -14,7 +14,7 @@ Internal Changes
 - Clean up Conda package recipe to match installed packages/libraries to the correct build-time environments
   (:issue:`23`, :merge:`40`). By `Kyle Brindley`_.
 - Remove compiler as a runtime dependency. The OS-correct standard library package is added as a depedency by
-  conda-build (:merge:`52`). By `Kyle Brindley`_.
+  conda-build (:merge:`41`). By `Kyle Brindley`_.
 
 ******************
 0.5.1 (2023-06-20)
