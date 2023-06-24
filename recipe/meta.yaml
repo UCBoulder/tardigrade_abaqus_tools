@@ -41,11 +41,11 @@ requirements:
     - doxygen  # TODO: Separate the package/documentation configuration to make Doxygen an optional build dependency
     - sphinx  # TODO: Separate the package/documentation configuration to make Sphinx an optional build dependency
   run:
-    - {{ compiler('cxx') }}
     - eigen >=3.3.7
 
 test:
   requires:
+    - {{ compiler('cxx') }}
     - cmake >=3.18
     - boost >=1.59
     - vector_tools >=0.6
