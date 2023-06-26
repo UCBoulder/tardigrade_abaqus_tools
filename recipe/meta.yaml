@@ -32,6 +32,8 @@ build:
 requirements:
   host:
     - {{ compiler('cxx') }}
+    - libgcc-ng {{ libstdcxx }}     # [linux]
+    - libstdcxx-ng {{ libstdcxx }}  # [linux]
     - python
     - setuptools_scm >=6.2
     - cmake >=3.18
@@ -42,10 +44,15 @@ requirements:
     - sphinx  # TODO: Separate the package/documentation configuration to make Sphinx an optional build dependency
   run:
     - eigen >=3.3.7
+    - libgcc-ng     # [linux]
+    - libstdcxx-ng  # [linux]
+    - libcxx        # [osx]
 
 test:
   requires:
     - {{ compiler('cxx') }}
+    - {{ pin_compatible('libgcc-ng') }}     # [linux]
+    - {{ pin_compatible('libstdcxx-ng') }}  # [linux]
     - cmake >=3.18
     - boost >=1.59
     - vector_tools >=0.6
