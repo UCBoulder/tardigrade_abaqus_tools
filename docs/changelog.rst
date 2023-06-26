@@ -15,6 +15,7 @@ Internal Changes
   (:issue:`23`, :merge:`40`). By `Kyle Brindley`_.
 - Remove compiler as a runtime dependency. The OS-correct standard library package is added as a depedency by
   conda-build (:merge:`41`). By `Kyle Brindley`_.
+- Build stdlib variants instead of compiler variants (:merge:`42`). By `Kyle Brindley`_.
 
 ******************
 0.5.1 (2023-06-20)
