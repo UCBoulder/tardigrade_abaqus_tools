@@ -21,7 +21,7 @@ before_script:
   - module use ${aea_modulefiles}
   - module use ${PWD}/modulefiles
   # Prefer the CI environment and fall back to AEA environment(s)
-  - project_environment='abaqus_tools-env'
+  - project_environment='tardigrade_abaqus_tools-env'
   - environment_choices="${project_environment} aea-beta aea-release"
   - for env in ${environment_choices}; do if [[ -d "${aea_compute_path}/${env}" ]]; then environment=${env}; break; fi; done
   - echo ${environment}
@@ -170,7 +170,7 @@ conda-build:
   artifacts:
     expire_in: '2 hrs'
     paths:
-      - conda-bld/linux-64/abaqus_tools-*-*.tar.bz2
+      - conda-bld/linux-64/tardigrade_abaqus_tools-*-*.tar.bz2
   tags:
     - shell-aea
 
@@ -189,13 +189,13 @@ deploy:
     # Override default permissions. Set group to rx with no write permissions.
     - umask 0022
     # Copy Conda package to AEA Conda Channel
-    - cp ${conda_artifacts_directory}/linux-64/abaqus_tools-*-*.tar.bz2 ${aea_conda_channel}/linux-64
+    - cp ${conda_artifacts_directory}/linux-64/tardigrade_abaqus_tools-*-*.tar.bz2 ${aea_conda_channel}/linux-64
     # Change group for access by all W-13 staff and prevent accidental modification by institutional account in CI jobs
-    - chgrp w13users ${aea_conda_channel}/linux-64/abaqus_tools-*-*.tar.bz2 || true
-    - chmod 555 ${aea_conda_channel}/linux-64/abaqus_tools-*-*.tar.bz2 || true
+    - chgrp w13users ${aea_conda_channel}/linux-64/tardigrade_abaqus_tools-*-*.tar.bz2 || true
+    - chmod 555 ${aea_conda_channel}/linux-64/tardigrade_abaqus_tools-*-*.tar.bz2 || true
     # Update the AEA Conda Channel index
     - conda index ${aea_conda_channel}
-    - conda search --channel file://${aea_conda_channel}/ --override-channels abaqus_tools
+    - conda search --channel file://${aea_conda_channel}/ --override-channels tardigrade_abaqus_tools
   tags:
     - shell-aea
 

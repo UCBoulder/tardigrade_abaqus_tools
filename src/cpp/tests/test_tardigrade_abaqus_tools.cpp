@@ -1,16 +1,16 @@
 /**
-  * \file test_abaqus_tools.cpp
+  * \file test_tardigrade_abaqus_tools.cpp
   *
-  * Tests for c++ library of abaqus_tools
+  * Tests for c++ library of tardigrade_abaqus_tools
   */
 
 
-#define BOOST_TEST_MODULE test_abaqus_tools
+#define BOOST_TEST_MODULE test_tardigrade_abaqus_tools
 #include <boost/test/included/unit_test.hpp>
 
-#include<vector_tools.h>
+#include<tardigrade_vector_tools.h>
 
-#include<abaqus_tools.h>
+#include<tardigrade_abaqus_tools.h>
 
 BOOST_AUTO_TEST_CASE( testColumnToRowMajor ){
     /*!
@@ -26,11 +26,11 @@ BOOST_AUTO_TEST_CASE( testColumnToRowMajor ){
     const int height = 2;
     const int width = 3;
     std::vector< std::vector< double > > row_major;
-    row_major = abaqusTools::columnToRowMajor( column_major_pointer, height, width);
+    row_major = tardigradeAbaqusTools::columnToRowMajor( column_major_pointer, height, width);
     std::vector< std::vector< double > > answer = { { 1, 2, 3 },
                                                     { 4, 5, 6 } };
 
-    BOOST_TEST( vectorTools::appendVectors( row_major ) == vectorTools::appendVectors( answer ),
+    BOOST_TEST( tardigradeVectorTools::appendVectors( row_major ) == tardigradeVectorTools::appendVectors( answer ),
                 boost::test_tools::per_element() );
 }
 
@@ -51,11 +51,11 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     const int width = 3;
     std::vector< std::vector< double > > row_major = { { 1, 2, 3 },
                                                        { 4, 5, 6 } };
-    BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( column_major_pointer, row_major, height, 2 ),
+    BOOST_CHECK_THROW( tardigradeAbaqusTools::rowToColumnMajor( column_major_pointer, row_major, height, 2 ),
                        std::length_error );
-    BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( column_major_pointer, row_major, 1, width ),
+    BOOST_CHECK_THROW( tardigradeAbaqusTools::rowToColumnMajor( column_major_pointer, row_major, 1, width ),
                        std::length_error );
-    abaqusTools::rowToColumnMajor( column_major_pointer, row_major, height, width );
+    tardigradeAbaqusTools::rowToColumnMajor( column_major_pointer, row_major, height, width );
     BOOST_TEST( column_major == expected, boost::test_tools::per_element() );
 
     //Test the interface using a c++ vector saved in row major order
@@ -63,9 +63,9 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     column_major = { 0, 0, 0, 0, 0, 0 };
     std::vector< double > row_major_vector = { 1, 2, 3,
                                                4, 5, 6 };
-    BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( column_major_pointer, row_major_vector, height, 2 ),
+    BOOST_CHECK_THROW( tardigradeAbaqusTools::rowToColumnMajor( column_major_pointer, row_major_vector, height, 2 ),
                        std::length_error );
-    abaqusTools::rowToColumnMajor( column_major_pointer, row_major_vector, height, width );
+    tardigradeAbaqusTools::rowToColumnMajor( column_major_pointer, row_major_vector, height, width );
     BOOST_TEST( column_major == expected, boost::test_tools::per_element() );
 
     //Test a single row to single column
@@ -74,9 +74,9 @@ BOOST_AUTO_TEST_CASE( testRowToColumnMajor ){
     double *fortran_vector_pointer = fortran_vector.data( );
     std::vector< double > expected_vector = { 1, 2, 3 };
     std::vector< double > cpp_vector = { 1, 2, 3 };
-    BOOST_CHECK_THROW( abaqusTools::rowToColumnMajor( fortran_vector_pointer, cpp_vector, 1, 2 ),
+    BOOST_CHECK_THROW( tardigradeAbaqusTools::rowToColumnMajor( fortran_vector_pointer, cpp_vector, 1, 2 ),
                        std::length_error );
-    abaqusTools::rowToColumnMajor( fortran_vector_pointer, cpp_vector, 1, 3 );
+    tardigradeAbaqusTools::rowToColumnMajor( fortran_vector_pointer, cpp_vector, 1, 3 );
     BOOST_TEST( fortran_vector == expected_vector, boost::test_tools::per_element() );
 }
 
@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_CASE( testExpandAbaqusNTENSVector ){
      NDI = 3;
      NSHR = 3;
 
-     vector_expansion = abaqusTools::expandAbaqusNTENSVector( abaqus_full, NDI, NSHR );
+     vector_expansion = tardigradeAbaqusTools::expandAbaqusNTENSVector( abaqus_full, NDI, NSHR );
 
      BOOST_TEST( vector_expansion == expected_full, boost::test_tools::per_element() );
 
@@ -107,7 +107,7 @@ BOOST_AUTO_TEST_CASE( testExpandAbaqusNTENSVector ){
      NDI = 2;
      NSHR = 1;
 
-     vector_expansion = abaqusTools::expandAbaqusNTENSVector( abaqus_plane_stress, NDI, NSHR );
+     vector_expansion = tardigradeAbaqusTools::expandAbaqusNTENSVector( abaqus_plane_stress, NDI, NSHR );
 
      BOOST_TEST( vector_expansion == expected_plane_stress, boost::test_tools::per_element() );
 }
@@ -128,7 +128,7 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusNTENSVector ){
      NDI = 3;
      NSHR = 3;
 
-     vector_contraction_full = abaqusTools::contractAbaqusNTENSVector( expanded_full, NDI, NSHR );
+     vector_contraction_full = tardigradeAbaqusTools::contractAbaqusNTENSVector( expanded_full, NDI, NSHR );
 
      BOOST_TEST( vector_contraction_full == abaqus_full, boost::test_tools::per_element() );
 
@@ -139,7 +139,7 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusNTENSVector ){
      NDI = 2;
      NSHR = 1;
 
-     vector_contraction_plane_stress = abaqusTools::contractAbaqusNTENSVector( expanded_plane_stress, NDI, NSHR );
+     vector_contraction_plane_stress = tardigradeAbaqusTools::contractAbaqusNTENSVector( expanded_plane_stress, NDI, NSHR );
 
      BOOST_TEST( vector_contraction_plane_stress == abaqus_plane_stress, boost::test_tools::per_element() );
 
@@ -171,9 +171,9 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusNTENSMatrix ){
     NDI = 3;
     NSHR = 3;
 
-    matrix_contraction_full = abaqusTools::contractAbaqusNTENSMatrix( expanded_full, NDI, NSHR );
+    matrix_contraction_full = tardigradeAbaqusTools::contractAbaqusNTENSMatrix( expanded_full, NDI, NSHR );
 
-    BOOST_TEST( vectorTools::appendVectors( matrix_contraction_full ) == vectorTools::appendVectors( abaqus_full ),
+    BOOST_TEST( tardigradeVectorTools::appendVectors( matrix_contraction_full ) == tardigradeVectorTools::appendVectors( abaqus_full ),
                 boost::test_tools::per_element() );
 
     //Test plane stress matrix
@@ -190,9 +190,9 @@ BOOST_AUTO_TEST_CASE( testContractAbaqusNTENSMatrix ){
     NDI = 2;
     NSHR = 1;
 
-    matrix_contraction_plane_stress = abaqusTools::contractAbaqusNTENSMatrix( expanded_plane_stress, NDI, NSHR );
+    matrix_contraction_plane_stress = tardigradeAbaqusTools::contractAbaqusNTENSMatrix( expanded_plane_stress, NDI, NSHR );
 
-    BOOST_TEST( vectorTools::appendVectors( matrix_contraction_plane_stress ) == vectorTools::appendVectors( abaqus_plane_stress ),
+    BOOST_TEST( tardigradeVectorTools::appendVectors( matrix_contraction_plane_stress ) == tardigradeVectorTools::appendVectors( abaqus_plane_stress ),
                 boost::test_tools::per_element() );
 
 }
@@ -211,20 +211,20 @@ BOOST_AUTO_TEST_CASE( testExpandFullNTENSTensor ){
                                      13, 23, 33 };
 
      //Check full tensor expansion for Abaqus/Standard
-     result = abaqusTools::expandFullNTENSTensor( abaqus_standard, true );
+     result = tardigradeAbaqusTools::expandFullNTENSTensor( abaqus_standard, true );
      BOOST_TEST( result == expected, boost::test_tools::per_element() );
 
      //Check full tensor expansion for Abaqus/Explicit
-     result = abaqusTools::expandFullNTENSTensor( abaqus_explicit, false );
+     result = tardigradeAbaqusTools::expandFullNTENSTensor( abaqus_explicit, false );
      BOOST_TEST( result == expected, boost::test_tools::per_element() );
 
      //Test overloaded variation with contracted vector input
      //Check full tensor expansion for Abaqus/Standard
-     result = abaqusTools::expandFullNTENSTensor( abaqus_standard, 3, 3, true );
+     result = tardigradeAbaqusTools::expandFullNTENSTensor( abaqus_standard, 3, 3, true );
      BOOST_TEST( result == expected, boost::test_tools::per_element() );
 
      //Check full tensor expansion for Abaqus/Explicit
-     result = abaqusTools::expandFullNTENSTensor( abaqus_explicit, 3, 3, false );
+     result = tardigradeAbaqusTools::expandFullNTENSTensor( abaqus_explicit, 3, 3, false );
      BOOST_TEST( result == expected, boost::test_tools::per_element() );
 
 }
@@ -240,20 +240,20 @@ BOOST_AUTO_TEST_CASE( testContractFullNTENSTensor ){
      std::vector< int > abaqus_explicit = { 11, 22, 33, 12, 23, 13 };
 
      //Check full tensor contraction for Abaqus/Standard
-     result = abaqusTools::contractFullNTENSTensor( full_tensor, true );
+     result = tardigradeAbaqusTools::contractFullNTENSTensor( full_tensor, true );
      BOOST_TEST( result == abaqus_standard, boost::test_tools::per_element() );
 
      //Check full tensor contraction for Abaqus/Explicit
-     result = abaqusTools::contractFullNTENSTensor( full_tensor, false );
+     result = tardigradeAbaqusTools::contractFullNTENSTensor( full_tensor, false );
      BOOST_TEST( result == abaqus_explicit, boost::test_tools::per_element() );
 
      //Test overloaded variation with contracted vector input
      //Check full tensor contraction for Abaqus/Standard
-     result = abaqusTools::contractFullNTENSTensor( full_tensor, 3, 3, true );
+     result = tardigradeAbaqusTools::contractFullNTENSTensor( full_tensor, 3, 3, true );
      BOOST_TEST( result == abaqus_standard, boost::test_tools::per_element() );
 
      //Check full tensor contraction for Abaqus/Explicit
-     result = abaqusTools::contractFullNTENSTensor( full_tensor, 3, 3, false );
+     result = tardigradeAbaqusTools::contractFullNTENSTensor( full_tensor, 3, 3, false );
      BOOST_TEST( result == abaqus_explicit, boost::test_tools::per_element() );
 
 }
@@ -281,15 +281,15 @@ BOOST_AUTO_TEST_CASE( testContractFullNTENSMatrix ){
                                                                       { 2311, 2322, 2333, 2312, 2313, 2323 } }; // 5
 
     //Check full matrix contraction for Abaqus/Standard
-    result = abaqusTools::contractFullNTENSMatrix( full_matrix );
-    BOOST_TEST( vectorTools::appendVectors( result ) == vectorTools::appendVectors( full_abaqus_standard_matrix ),
+    result = tardigradeAbaqusTools::contractFullNTENSMatrix( full_matrix );
+    BOOST_TEST( tardigradeVectorTools::appendVectors( result ) == tardigradeVectorTools::appendVectors( full_abaqus_standard_matrix ),
                 boost::test_tools::per_element() );
 
     //Test overloaded variation with contracted NTENSxNTENS matrix output
     //Check full matrix contraction for Abaqus/Standard
     //Sign of life test. The tests for NDI and NSHR less than 3 are performed in contractAbaqusNTENSMatrix.
-    result = abaqusTools::contractFullNTENSMatrix( full_matrix, 3, 3 );
-    BOOST_TEST( vectorTools::appendVectors( result ) == vectorTools::appendVectors( full_abaqus_standard_matrix ),
+    result = tardigradeAbaqusTools::contractFullNTENSMatrix( full_matrix, 3, 3 );
+    BOOST_TEST( tardigradeVectorTools::appendVectors( result ) == tardigradeVectorTools::appendVectors( full_abaqus_standard_matrix ),
                 boost::test_tools::per_element() );
 
 }

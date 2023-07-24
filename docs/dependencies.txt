@@ -27,7 +27,7 @@ anaconda installation with the following commands.
 
 .. code-block:: bash
 
-   $ conda create --name abaqus_tools-env --file environment.txt --channel file:///projects/aea_compute/aea-conda
+   $ conda create --name tardigrade_abaqus_tools-env --file environment.txt --channel file:///projects/aea_compute/aea-conda
 
 You can learn more about Anaconda Python environment creation and management in
 the `Anaconda Documentation`_.
@@ -36,7 +36,7 @@ C++ Libraries
 =============
 
 * `BOOST`_ >= 1.53.0
-* vector\_tools: https://re-git.lanl.gov/aea/material-models/vector_tools
+* vector\_tools: https://re-git.lanl.gov/aea/material-models/tardigrade_vector_tools
 
 Constitutive Tools
 ------------------

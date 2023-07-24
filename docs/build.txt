@@ -16,14 +16,14 @@ Build on sstelmo
 
    .. code:: bash
 
-      $ module load abaqus_tools-env 
+      $ module load tardigrade_abaqus_tools-env 
 
 2) Create a build directory
 
    .. code:: bash
 
       $ pwd
-      /path/to/abaqus_tools/
+      /path/to/tardigrade_abaqus_tools/
 
       $ mkdir build
       $ cd build
@@ -39,7 +39,7 @@ Build on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build
+      /path/to/tardigrade_abaqus_tools/build
       $ cmake3 ..
 
 4) Build various portions of the project
@@ -52,7 +52,7 @@ Build on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build
+      /path/to/tardigrade_abaqus_tools/build
 
       # Build everything
       $ cmake3 --build .
@@ -70,7 +70,7 @@ Build on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build
+      /path/to/tardigrade_abaqus_tools/build
 
       # find c++ libraries and ignore intermediate files with similar extensions
       $ find . \( -name "*.o" -o -name "*.so" -o -name "*.a" \) | grep -vE "\.cpp\."
@@ -89,7 +89,7 @@ Build on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build
+      /path/to/tardigrade_abaqus_tools/build
 
       $ make clean
 
@@ -101,7 +101,7 @@ Test on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build
+      /path/to/tardigrade_abaqus_tools/build
 
       # Build c++ tests
       $ cmake3 --build src/cpp/tests
@@ -111,7 +111,7 @@ Test on sstelmo
    .. code:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build
+      /path/to/tardigrade_abaqus_tools/build
 
       # Run ctest
       $ ctest
@@ -135,7 +135,7 @@ To build just the documentation pick up the steps here:
    .. code:: bash
 
       $ pwd
-      /path/to/abaqus_tools/
+      /path/to/tardigrade_abaqus_tools/
       $ mkdir build/
       $ cd build/
 
@@ -144,7 +144,7 @@ To build just the documentation pick up the steps here:
    .. code:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build/
+      /path/to/tardigrade_abaqus_tools/build/
       $ cmake3 ..
 
 4) Build the docs
@@ -157,14 +157,14 @@ To build just the documentation pick up the steps here:
 
    .. code:: bash
 
-      abaqus_tools/build/docs/sphinx/index.html
+      tardigrade_abaqus_tools/build/docs/sphinx/index.html
 
 6) Display docs
 
    .. code:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build/
+      /path/to/tardigrade_abaqus_tools/build/
       $ firefox docs/sphinx/index.html &
 
 7) While the Sphinx API is still a WIP, try the doxygen API
@@ -172,5 +172,5 @@ To build just the documentation pick up the steps here:
    .. code:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build/
+      /path/to/tardigrade_abaqus_tools/build/
       $ firefox docs/doxygen/html/index.html &
