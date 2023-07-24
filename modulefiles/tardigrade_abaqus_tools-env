@@ -4,13 +4,13 @@
 conflict aea-release
 conflict aea-beta
 conflict waves-env
-conflict error_tools-env
-conflict vector_tools-env
+conflict tardigrade_error_tools-env
+conflict tardigrade_vector_tools-env
 
 # Set AEA standard software version and environment names
 set anaconda_version "2021.11"
 set python_version "3.9"
-set environment "abaqus_tools-env"
+set environment "tardigrade_abaqus_tools-env"
 
 # Get current hostname
 set hostname [info hostname]
@@ -76,7 +76,7 @@ if { [module-info mode load] || [module-info mode switch2] } {
 }
 
 # Set help information
-module-whatis "Configure the common abaqus_tools development bash and Conda environments"
+module-whatis "Configure the common tardigrade_abaqus_tools development bash and Conda environments"
 proc ModulesHelp {} {
     global hostname
     global environment
@@ -92,7 +92,7 @@ proc ModulesHelp {} {
     global environment_lib
     global abaqus_path
 
-    puts stderr "\nabaqus_tools modulefiles debugging information"
+    puts stderr "\ntardigrade_abaqus_tools modulefiles debugging information"
     puts stderr "hostname: $hostname"
     puts stderr "environment: $environment"
     puts stderr "software_prefix: $software_prefix"

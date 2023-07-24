@@ -6,7 +6,24 @@ Changelog
 #########
 
 ******************
-0.5.1 (unreleased)
+0.6.1 (2023-07-24)
+******************
+
+Breaking changes
+================
+- Change project, package, and namespace from 'abaqus tools' to 'tardigrade abaqus tools' (:issue:`24`, :merge:`43`). By
+  `Kyle Brindley`_.
+
+Internal Changes
+================
+- Clean up Conda package recipe to match installed packages/libraries to the correct build-time environments
+  (:issue:`23`, :merge:`40`). By `Kyle Brindley`_.
+- Remove compiler as a runtime dependency. The OS-correct standard library package is added as a depedency by
+  conda-build (:merge:`41`). By `Kyle Brindley`_.
+- Build stdlib variants instead of compiler variants (:merge:`42`). By `Kyle Brindley`_.
+
+******************
+0.5.1 (2023-06-20)
 ******************
 
 Breaking changes
@@ -26,7 +43,7 @@ Internal Changes
 
 Bug fixes
 =========
-- Added inline to functions to allow for abaqus_tools to be included multiple times (:merge:`36`). By `Nathan Miller`_.
+- Added inline to functions to allow for tardigrade_abaqus_tools to be included multiple times (:merge:`36`). By `Nathan Miller`_.
 
 ******************
 0.3.1 (2023-03-16)
@@ -171,7 +188,7 @@ Documentation
 Internal Changes
 ================
 - Setup Jenkins PR builder:
-  https://toolbox-jenkins.lanl.gov/view/VIPor%20and%20C++/job/abaqus_tools_Pull_Request_Builder/ (:jira:`540`,
+  https://toolbox-jenkins.lanl.gov/view/VIPor%20and%20C++/job/tardigrade_abaqus_tools_Pull_Request_Builder/ (:jira:`540`,
   :pull:`4`). By `Kyle Brindley`_.
 - Update change log for abaqus\_tools release versions and update repository tags (:jira:`539`, :pull:`3`). By `Kyle
   Brindley`_.

@@ -1,4 +1,3 @@
-cxx_compiler_version:  # [linux]
-  - 10                 # [linux]
-  - 11                 # [linux]
-  - 12                 # [linux]
+libstdcxx:  # [linux]
+  - 12      # [linux]
+  - 13      # [linux]
