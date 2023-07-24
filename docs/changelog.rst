@@ -38,7 +38,7 @@ Internal Changes
 
 Bug fixes
 =========
-- Added inline to functions to allow for abaqus_tools to be included multiple times (:merge:`36`). By `Nathan Miller`_.
+- Added inline to functions to allow for tardigrade_abaqus_tools to be included multiple times (:merge:`36`). By `Nathan Miller`_.
 
 ******************
 0.3.1 (2023-03-16)
@@ -183,7 +183,7 @@ Documentation
 Internal Changes
 ================
 - Setup Jenkins PR builder:
-  https://toolbox-jenkins.lanl.gov/view/VIPor%20and%20C++/job/abaqus_tools_Pull_Request_Builder/ (:jira:`540`,
+  https://toolbox-jenkins.lanl.gov/view/VIPor%20and%20C++/job/tardigrade_abaqus_tools_Pull_Request_Builder/ (:jira:`540`,
   :pull:`4`). By `Kyle Brindley`_.
 - Update change log for abaqus\_tools release versions and update repository tags (:jira:`539`, :pull:`3`). By `Kyle
   Brindley`_.

@@ -11,8 +11,8 @@ A collection of tools for C++ that make interfacing with Abaqus subroutines easi
 Information
 ===========
 
-* Documentation: https://aea.re-pages.lanl.gov/material-models/abaqus_tools
-* Wiki: https://re-git.lanl.gov/aea/material-models/abaqus_tools/-/wikis/home
+* Documentation: https://aea.re-pages.lanl.gov/material-models/tardigrade_abaqus_tools
+* Wiki: https://re-git.lanl.gov/aea/material-models/tardigrade_abaqus_tools/-/wikis/home
 
 Developers
 ==========
@@ -47,7 +47,7 @@ anaconda installation with the following commands.
 
 .. code-block:: bash
 
-   $ conda create --name abaqus_tools-env --file environment.txt --channel file:///projects/aea_compute/aea-conda
+   $ conda create --name tardigrade_abaqus_tools-env --file environment.txt --channel file:///projects/aea_compute/aea-conda
 
 You can learn more about Anaconda Python environment creation and management in
 the [Anaconda
@@ -63,7 +63,7 @@ C++ Libraries
    management.
 
 * [BOOST](https://www.boost.org/doc/libs/1_53_0/) >= 1.53.0
-* vector\_tools: https://re-git.lanl.gov/aea/material-models/vector_tools 
+* vector\_tools: https://re-git.lanl.gov/aea/material-models/tardigrade_vector_tools 
 
 If not found on the current system or active Conda environment, all of the
 ``*_tools`` libraries are pulled from their git repos by branch name and built
@@ -85,14 +85,14 @@ Build on sstelmo
 
    .. code-block:: bash
 
-      $ module load abaqus_tools-env 
+      $ module load tardigrade_abaqus_tools-env 
 
 2) Create the build directory and move there
 
    .. code-block:: bash
 
       $ pwd
-      /path/to/abaqus_tools/
+      /path/to/tardigrade_abaqus_tools/
       $ mkdir build/
       $ cd build/
 
@@ -107,7 +107,7 @@ Build on sstelmo
    .. code-block:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build/
+      /path/to/tardigrade_abaqus_tools/build/
       $ cmake3 ..
 
 4) Build various portions of the project
@@ -180,7 +180,7 @@ To build just the documentation pick up the steps here:
    .. code-block:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build/
+      /path/to/tardigrade_abaqus_tools/build/
       $ cmake3 ..
 
 4) Build the docs
@@ -193,7 +193,7 @@ To build just the documentation pick up the steps here:
 
    .. code-block:: bash
 
-      abaqus_tools/build/docs/sphinx/html/index.html
+      tardigrade_abaqus_tools/build/docs/sphinx/html/index.html
 
 6) Display docs
 
@@ -218,7 +218,7 @@ Build the entire before performing the installation.
    .. code-block:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build
+      /path/to/tardigrade_abaqus_tools/build
       $ cmake3 --build .
 
 5) Install the library
@@ -226,7 +226,7 @@ Build the entire before performing the installation.
    .. code-block:: bash
 
       $ pwd
-      /path/to/abaqus_tools/build
+      /path/to/tardigrade_abaqus_tools/build
       $ cmake --install . --prefix path/to/root/install
 
       # Example local user (non-admin) Linux install

@@ -40,7 +40,7 @@
 .. _`Doxygen comments for Fortran`: https://www.doxygen.nl/manual/docblocks.html#fortranblocks
 
 .. Project specific links
-.. _`upstream repository`: https://re-git.lanl.gov/aea/material-models/abaqus_tools 
+.. _`upstream repository`: https://re-git.lanl.gov/aea/material-models/tardigrade_abaqus_tools 
 
 .. Abaqus reference links
 .. _`Abaqus Solid Continuum Elements`: http://simulia.lanl.gov:8080/EstProdDocs2019/English/DSSIMULIA_Established.htm?show=SIMACAEELMRefMap/simaelm-c-solidcont.htm

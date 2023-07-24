@@ -1,9 +1,9 @@
 #===================================================================================================== PROJECT SETUP ===
 cmake_minimum_required(VERSION 3.14)
-project(abaqus_tools VERSION 0.1.0)
+project(tardigrade_abaqus_tools VERSION 0.1.0)
 
 # Added a flag for whether the python bindings for abaqus tools get built
-set(ABAQUS_TOOLS_BUILD_PYTHON_BINDINGS ON CACHE BOOL "Flag for whether the python bindings should be built")
+set(TARDIGRADE_ABAQUS_TOOLS_BUILD_PYTHON_BINDINGS ON CACHE BOOL "Flag for whether the python bindings should be built")
 
 # Set common project paths relative to project root directory
 set(CPP_SRC_PATH "src/cpp")
@@ -57,15 +57,15 @@ endif()
 
 # Find related, but external, projects in installed environment
 include(FetchContent)
-set(upstream_packages "vector_tools")
+set(upstream_packages "tardigrade_vector_tools")
 foreach(package ${upstream_packages})
     string(TOUPPER "${package}" package_upper)
-    set(${package_upper}_BUILD_PYTHON_BINDINGS ${ABAQUS_TOOLS_BUILD_PYTHON_BINDINGS})
+    set(${package_upper}_BUILD_PYTHON_BINDINGS ${TARDIGRADE_ABAQUS_TOOLS_BUILD_PYTHON_BINDINGS})
     find_package(${package} ${upstream_required} CONFIG)
     if(${package}_FOUND)
         message(STATUS "Found ${package}: ${${package}_DIR}")
         # FIXME: The following two lines, 'string' and 'include_directories' commands, are HACKS required to get the
-        # correct included directories for the abaqus_tools builds. For some reason, the abaqus_tools project doesn't
+        # correct included directories for the tardigrade_abaqus_tools builds. For some reason, the tardigrade_abaqus_tools project doesn't
         # add the correct include libraries, despite finding the upstream packages. Suspect a header only project
         # gotcha. These commands can be removed if you can coax CMake to add the "-isystem
         # /projects/aea_compute/beta/include" arguments to the compiler command when building the tests.

@@ -9,7 +9,7 @@
 .. toctree::
     :maxdepth: 2
 
-abaqus_tools.h
+tardigrade_abaqus_tools.h
 ==============
 
-.. doxygenfile:: abaqus_tools.h
+.. doxygenfile:: tardigrade_abaqus_tools.h

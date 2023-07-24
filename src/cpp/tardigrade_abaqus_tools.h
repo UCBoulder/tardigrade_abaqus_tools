@@ -1,21 +1,21 @@
 /**
   ******************************************************************************
-  * \file abaqus_tools.h
+  * \file tardigrade_abaqus_tools.h
   ******************************************************************************
   * The abaqus tools library. Provides common tools for converting between
   * Abaqus Fortran pointers and C++ types for UMATs and VUMATs
   ******************************************************************************
   */
 
-#ifndef ABAQUS_TOOLS_H
-#define ABAQUS_TOOLS_H
+#ifndef TARDIGRADE_ABAQUS_TOOLS_H
+#define TARDIGRADE_ABAQUS_TOOLS_H
 
 #include<iostream>
 #include<vector>
 #include<string.h>
 #include<stdio.h>
 
-namespace abaqusTools{
+namespace tardigradeAbaqusTools{
 
     inline char *FtoCString( int stringLength, const char* fString ){
         /*!
@@ -305,7 +305,7 @@ namespace abaqusTools{
          * length 6. Handle the stress-type vector element order differences between Abaqus/Standard and
          * Abaqus/Explicit.
          *
-         * ``abaqusTools::expandAbaqusNTENSVector`` returns
+         * ``tardigradeAbaqusTools::expandAbaqusNTENSVector`` returns
          *
          * Abaqus/Standard (UMAT)
          *
@@ -365,10 +365,10 @@ namespace abaqusTools{
          */
 
         //Expand the stress-type vector
-        std::vector< T > long_vector = abaqusTools::expandAbaqusNTENSVector( abaqus_vector, NDI, NSHR );
+        std::vector< T > long_vector = tardigradeAbaqusTools::expandAbaqusNTENSVector( abaqus_vector, NDI, NSHR );
 
         //Expand the full tensor
-        std::vector< T > full_tensor = abaqusTools::expandFullNTENSTensor( long_vector, abaqus_standard );
+        std::vector< T > full_tensor = tardigradeAbaqusTools::expandFullNTENSTensor( long_vector, abaqus_standard );
 
         return full_tensor;
 
