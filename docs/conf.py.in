@@ -46,11 +46,11 @@ breathe_default_project = project
 
 # Links to PRs, Jira issues.
 extlinks = {
-     "merge": ("https://re-git.lanl.gov/aea/material-models/tardigrade_abaqus_tools/-/merge_requests/%s", "MERGE-"),
-     "issue": ("https://re-git.lanl.gov/aea/material-models/tardigrade_abaqus_tools_tools/-/issues/%s", "ISSUE-"),
+     "merge": ("https://re-git.lanl.gov/aea/material-models/tardigrade_abaqus_tools/-/merge_requests/%s", "MERGE-%s"),
+     "issue": ("https://re-git.lanl.gov/aea/material-models/tardigrade_abaqus_tools_tools/-/issues/%s", "ISSUE-%s"),
      # Maintain the old Atlassian links until the servers don't exist. Required for changelog entries.
-     "pull": ("https://ddw-bitbucket.lanl.gov/projects/MM/repos/tardigrade_abaqus_tools/pull-requests/%s/overview", "PR"),
-     "jira": ("https://ddw-jira.lanl.gov/browse/VIP-%s", "VIP-"),
+     "pull": ("https://ddw-bitbucket.lanl.gov/projects/MM/repos/tardigrade_abaqus_tools/pull-requests/%s/overview", "PR%s"),
+     "jira": ("https://ddw-jira.lanl.gov/browse/VIP-%s", "VIP-%s"),
 }
 
 # Add any paths that contain templates here, relative to this directory.
