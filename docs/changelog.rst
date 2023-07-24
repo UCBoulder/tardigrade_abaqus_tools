@@ -6,8 +6,13 @@ Changelog
 #########
 
 ******************
-0.5.2 (unreleased)
+0.6.1 (2023-07-24)
 ******************
+
+Breaking changes
+================
+- Change project, package, and namespace from 'abaqus tools' to 'tardigrade abaqus tools' (:issue:`24`, :merge:`43`). By
+  `Kyle Brindley`_.
 
 Internal Changes
 ================
