@@ -57,7 +57,7 @@ endif()
 
 # Find related, but external, projects in installed environment
 include(FetchContent)
-set(upstream_packages "tardigrade_vector_tools")
+set(upstream_packages "tardigrade_error_tools" "tardigrade_vector_tools")
 foreach(package ${upstream_packages})
     string(TOUPPER "${package}" package_upper)
     set(${package_upper}_BUILD_PYTHON_BINDINGS ${TARDIGRADE_ABAQUS_TOOLS_BUILD_PYTHON_BINDINGS})
@@ -77,7 +77,7 @@ foreach(package ${upstream_packages})
         # TODO: Decide how to handle master/dev build differences. bash env variables for GIT TAG?
         FetchContent_Declare(
             ${package}
-            GIT_REPOSITORY ssh://git@re-git.lanl.gov:10022/aea/material-models/${package}.git
+            GIT_REPOSITORY http://github.com/UCBoulder/${package}.git
             GIT_TAG        origin/dev
         )
         FetchContent_MakeAvailable(${package})
