@@ -57,7 +57,7 @@ endif()
 
 # Find related, but external, projects in installed environment
 include(FetchContent)
-set(upstream_packages "tardigrade_vector_tools")
+set(upstream_packages "tardigrade_error_tools" "tardigrade_vector_tools")
 foreach(package ${upstream_packages})
     string(TOUPPER "${package}" package_upper)
     set(${package_upper}_BUILD_PYTHON_BINDINGS ${TARDIGRADE_ABAQUS_TOOLS_BUILD_PYTHON_BINDINGS})
