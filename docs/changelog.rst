@@ -9,6 +9,10 @@ Changelog
 0.6.3 (unreleased)
 ******************
 
+Internal Changes
+================
+- Allow for the version of the code to be specified when using FetchContent (:pull:`2`). By `Nathan Miller`_.
+
 ******************
 0.6.2 (2023-09-29)
 ******************
