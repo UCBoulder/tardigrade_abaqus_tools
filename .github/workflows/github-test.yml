@@ -1,0 +1,62 @@
+name: Tests on pull request
+run-name: ${{ github.actor }} is testing a pull request
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+    branches:
+      - dev
+      - main
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        build_type: [Release]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 0
+      - name: MiniConda setup
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+            miniforge-variant: Miniforge3
+            channels: conda-forge,defaults
+            channel-priority: true
+            auto-activate-base: false
+            activate-environment: "test-environment"
+      - name: check solution
+        run: |
+          conda env export
+      - name: Set reusable strings
+        id: strings
+        shell: bash
+        run: |
+            echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+            echo "environment-file=${{ github.workspace }}/reduced_environment.txt" >> "$GITHUB_OUTPUT"
+            echo "moose-dir=${{ github.workspace }}/moose-dir" >> "$GITHUB_OUTPUT"
+      - name: Conda environment
+        shell: bash -el {0}
+        run: |
+            mamba install --file ${{ steps.strings.outputs.environment-file }} --yes --channel conda-forge
+      - name: Build
+        shell: bash -el {0}
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DTARDIGRADE_ERROR_TOOLS_BUILD_PYTHON_BINDINGS=OFF
+          make
+      - name: Test
+        shell: bash -el {0}
+#        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        run: |
+          conda activate test-environment
+          cd build
+          ctest

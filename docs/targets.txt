@@ -49,7 +49,7 @@
 
 .. email addresses
 .. _`Kyle Brindley`: kbrindley@lanl.gov
-.. _`Nathan Miller`: nathanm@lanl.gov
+.. _`Nathan Miller`: Nathan.A.Miller@colorado.edu
 .. _`Prabhu Khalsa`: prabhu@lanl.gov
 .. _`Sergio Cordova`: sergioc@lanl.gov
 .. _`w13dev`: w13dev@lanl.gov
