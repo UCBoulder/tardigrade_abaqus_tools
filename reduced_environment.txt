@@ -1,8 +1,10 @@
 boost>=1.59
 breathe>=4.30.0
 cmake>=3.18
+compilers
 doxygen
 eigen>=3.3.7
+mamba
 compilers
 setuptools_scm>=6.2
 sphinx>=3.0.4

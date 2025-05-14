@@ -11,13 +11,12 @@ A collection of tools for C++ that make interfacing with Abaqus subroutines easi
 Information
 ===========
 
-* Documentation: https://aea.re-pages.lanl.gov/material-models/tardigrade_abaqus_tools
-* Wiki: https://re-git.lanl.gov/aea/material-models/tardigrade_abaqus_tools/-/wikis/home
+TODO
 
 Developers
 ==========
 
-* Nathan Miller nathanm@lanl.gov
+* Nathan Miller Nathan.A.Miller@colorado.edu
 * Kyle Brindley kbrindley@lanl.gov
 
 ************
@@ -63,7 +62,7 @@ C++ Libraries
    management.
 
 * [BOOST](https://www.boost.org/doc/libs/1_53_0/) >= 1.53.0
-* vector\_tools: https://re-git.lanl.gov/aea/material-models/tardigrade_vector_tools 
+* vector\_tools: https://github.com/UCBoulder/tardigrade_vector_tools
 
 If not found on the current system or active Conda environment, all of the
 ``*_tools`` libraries are pulled from their git repos by branch name and built
