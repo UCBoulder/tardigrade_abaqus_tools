@@ -13,6 +13,7 @@ Internal Changes
 ================
 - Allow for the version of the code to be specified when using FetchContent (:pull:`2`). By `Nathan Miller`_.
 - Allowed for the user to specify a complete build of the tardigrade stack (:pull:`5`). By `Nathan Miller`_.
+- Prepared for conda packaging (:pull:`6`). By `Nathan Miller`_.
 
 ******************
 0.6.2 (2023-09-29)
