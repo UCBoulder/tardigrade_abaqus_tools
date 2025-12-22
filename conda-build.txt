@@ -1,0 +1,4 @@
+boa
+python
+setuptools >=77
+setuptools_scm >=8

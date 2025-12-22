@@ -17,8 +17,10 @@ jobs:
       # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest]
         build_type: [Release]
+        header_only: [OFF, ON]
+        tardigrade_opt: [OFF, ON]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,31 +34,27 @@ jobs:
             channel-priority: true
             auto-activate-base: false
             activate-environment: "test-environment"
-      - name: check solution
-        run: |
-          conda env export
-      - name: Set reusable strings
-        id: strings
-        shell: bash
-        run: |
-            echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
-            echo "environment-file=${{ github.workspace }}/reduced_environment.txt" >> "$GITHUB_OUTPUT"
-            echo "moose-dir=${{ github.workspace }}/moose-dir" >> "$GITHUB_OUTPUT"
       - name: Conda environment
         shell: bash -el {0}
-        run: |
-            mamba install --file ${{ steps.strings.outputs.environment-file }} --yes --channel conda-forge
+        run: conda install --file environment.txt --yes --channel conda-forge
+      - name: CMake linter
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        shell: bash -el {0}
+        run: gersemi CMakeLists.txt src/ docs/ --check --diff
+      - name: Configure
+        shell: bash -el {0}
+        run: cmake -S . -B build -DTARDIGRADE_HEADER_ONLY=${{ matrix.header_only }} -DTARDIGRADE_ERROR_TOOLS_OPT=${{ matrix.tardigrade_opt }} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+      - name: clang-tidy Lint
+        if: ${{ matrix.os == 'ubuntu-latest'}}
+        shell: bash -el {0}
+        run: run-clang-tidy -config-file=.clang-tidy -p build -extra-arg="-mno-sse2"
+      - name: clang-format Lint
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.tardigrade_opt == 'OFF' && matrix.header_only == 'ON' }}
+        shell: bash -el {0}
+        run: cmake --build build --target cpp-format-check
       - name: Build
         shell: bash -el {0}
-        run: |
-          mkdir build
-          cd build
-          cmake .. -DTARDIGRADE_ERROR_TOOLS_BUILD_PYTHON_BINDINGS=OFF
-          make
+        run: cmake --build build --target all
       - name: Test
         shell: bash -el {0}
-#        working-directory: ${{ steps.strings.outputs.build-output-dir }}
-        run: |
-          conda activate test-environment
-          cd build
-          ctest
+        run: conda activate test-environment && ctest --test-dir build -V
