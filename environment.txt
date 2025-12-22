@@ -4,6 +4,7 @@ cmake>=3.30
 compilers
 doxygen>=1.9
 eigen>=3.3.7
+gersemi
 libboost-python-devel>=1.82
 make
 python
