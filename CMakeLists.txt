@@ -39,6 +39,10 @@ if(${not_conda_test} STREQUAL "true")
     project(${PROJECT_NAME} VERSION ${${PROJECT_NAME}_VERSION} LANGUAGES CXX)
 endif()
 
+if(CMAKE_EXPORT_COMPILE_COMMANDS)
+    set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES})
+endif()
+
 # Add installation directory variables
 include(GNUInstallDirs)
 
@@ -47,13 +51,19 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic")
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lrt -O3")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 endif()
 
 # Enable CTest
 enable_testing()
 
 #================================================================================================= FIND DEPENDENCIES ===
+
+#=============================================================================================== FIND PROGRAMS
+
+find_program(CLANG_FORMAT_EXECUTABLE NAMES clang-format REQUIRED)
+set_property(GLOBAL PROPERTY CLANG_FORMAT_SOURCE_FILES)
+
 # Set build type checks
 string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
 set(upstream_required "")
@@ -138,4 +148,26 @@ if(${not_conda_test} STREQUAL "true")
     install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
                   "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
             DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
+endif()
+
+#================================================================================== SETUP CLANG FORMATTING TARGETS ===
+
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    get_property(CLANG_FORMAT_SOURCE_FILES_VALUE GLOBAL PROPERTY CLANG_FORMAT_SOURCE_FILES)
+
+    add_custom_target(
+        cpp-format-check
+        COMMAND ${CLANG_FORMAT_EXECUTABLE} -style=file --dry-run -Werror ${CLANG_FORMAT_SOURCE_FILES_VALUE}
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Check the C++ code format with clang-format"
+    )
+    set_target_properties(cpp-format-check PROPERTIES EXCLUDE_FROM_ALL TRUE)
+
+    add_custom_target(
+        cpp-format
+        COMMAND ${CLANG_FORMAT_EXECUTABLE} -style=file -i ${CLANG_FORMAT_SOURCE_FILES_VALUE}
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+        COMMENT "Format the C++ code with clang-format"
+    )
+    set_target_properties(cpp-format PROPERTIES EXCLUDE_FROM_ALL TRUE)
 endif()

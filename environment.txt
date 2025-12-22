@@ -9,6 +9,7 @@ make
 python
 setuptools >=77
 setuptools_scm >=8
+clang-tools
 sphinx>=3.0.4
 sphinx_rtd_theme>=0.4.3
 sphinxcontrib-bibtex

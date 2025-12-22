@@ -8,3 +8,8 @@ if(NOT tardigrade_vector_tools_FOUND)
                                ${tardigrade_vector_tools_SOURCE_DIR}/${CPP_SRC_PATH}
                                ${tardigrade_error_tools_SOURCE_DIR}/${CPP_SRC_PATH})
 endif()
+
+get_target_property(target_sources ${TEST_NAME} SOURCES)
+foreach(source ${target_sources})
+    set_property(GLOBAL APPEND PROPERTY CLANG_FORMAT_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/${source}")
+endforeach(source)

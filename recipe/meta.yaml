@@ -23,6 +23,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake >=3.30
+    - clang-tools
     - make
   host:
     - breathe >=4.3.0
@@ -43,6 +44,7 @@ test:
     - {{ compiler('cxx') }}
     - make
     - cmake >=3.30
+    - conag-tools
     - libboost-python-devel >=1.82
     - doxygen
     - sphinx >=3.0.4
