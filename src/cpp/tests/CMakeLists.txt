@@ -4,9 +4,12 @@ add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
 
 # Local builds of upstream projects require local include paths
 if(NOT tardigrade_vector_tools_FOUND)
-    target_include_directories(${TEST_NAME} PRIVATE
-                               ${tardigrade_vector_tools_SOURCE_DIR}/${CPP_SRC_PATH}
-                               ${tardigrade_error_tools_SOURCE_DIR}/${CPP_SRC_PATH})
+    target_include_directories(
+        ${TEST_NAME}
+        PRIVATE
+            ${tardigrade_vector_tools_SOURCE_DIR}/${CPP_SRC_PATH}
+            ${tardigrade_error_tools_SOURCE_DIR}/${CPP_SRC_PATH}
+    )
 endif()
 
 get_target_property(target_sources ${TEST_NAME} SOURCES)
