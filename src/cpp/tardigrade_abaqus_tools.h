@@ -18,18 +18,18 @@
 
 namespace tardigradeAbaqusTools {
 
+    /*!
+     * Converts a Fortran string to C-string. Trims trailing white space during processing.
+     *
+     * Code excerpt from a c++ Abaqus FILM subroutine in the Abaqus Knowledge Base:
+     * https://kb.dsxclient.3ds.com/mashup-ui/page/resultqa?from=search%3fq%3dwriting%2bsubroutine%2bc%252B%252B&id=QA00000008005e&q=writing%20subroutine%20c%2B%2B
+     *
+     * TODO: update coding style to match project.
+     *
+     * \param stringLength: The length of the Fortran string.
+     * \param *fString: The pointer to the start of the Fortran string.
+     */
     inline char *FtoCString(int stringLength, const char *fString) {
-        /*!
-         * Converts a Fortran string to C-string. Trims trailing white space during processing.
-         *
-         * Code excerpt from a c++ Abaqus FILM subroutine in the Abaqus Knowledge Base:
-         * https://kb.dsxclient.3ds.com/mashup-ui/page/resultqa?from=search%3fq%3dwriting%2bsubroutine%2bc%252B%252B&id=QA00000008005e&q=writing%20subroutine%20c%2B%2B
-         *
-         * TODO: update coding style to match project.
-         *
-         * \param stringLength: The length of the Fortran string.
-         * \param *fString: The pointer to the start of the Fortran string.
-         */
         int stringLen = stringLength;
         for (int k1 = stringLength - 1; k1 >= 0; k1--) {
             if (fString[k1] != ' ') break;
@@ -41,18 +41,18 @@ namespace tardigradeAbaqusTools {
         return cString;
     }
 
+    /*!
+     * Convert column major two dimensional arrays to row major.
+     *
+     * Specifically, convert pointers to Fortran column major arrays to c++ row major vector of vectors.
+     *
+     * \param *column_major: The pointer to the start of a column major array
+     * \param &height: The height of the array, e.g. number of rows
+     * \param &width: The width of the array, e.g. number of columns
+     * \return row_major: A c++ row major vector of vectors
+     */
     template <typename T>
     inline std::vector<std::vector<T> > columnToRowMajor(const T *column_major, const int &height, const int &width) {
-        /*!
-         * Convert column major two dimensional arrays to row major.
-         *
-         * Specifically, convert pointers to Fortran column major arrays to c++ row major vector of vectors.
-         *
-         * \param *column_major: The pointer to the start of a column major array
-         * \param &height: The height of the array, e.g. number of rows
-         * \param &width: The width of the array, e.g. number of columns
-         * \return row_major: A c++ row major vector of vectors
-         */
         std::vector<std::vector<T> > row_major;
         int                          column_major_index;
         for (int row = 0; row < height; row++) {
@@ -66,20 +66,20 @@ namespace tardigradeAbaqusTools {
         return row_major;
     }
 
+    /*!
+     * Convert row major two dimensional arrays to column major
+     *
+     * Specifically, c++ row major vector of vectors or arrays to Fortran column major arrays using the column major
+     * pointer.
+     *
+     * \param *column_major: The pointer to the start of a column major array
+     * \param &row_major_array: A c++ two dimensional, row major vector of vectors
+     * \param &height: The height of the array, e.g. number of rows
+     * \param &width: The width of the array, e.g. number of columns
+     */
     template <typename T>
     inline void rowToColumnMajor(T *column_major, const std::vector<std::vector<T> > &row_major_array,
                                  const int &height, const int &width) {
-        /*!
-         * Convert row major two dimensional arrays to column major
-         *
-         * Specifically, c++ row major vector of vectors or arrays to Fortran column major arrays using the column major
-         * pointer.
-         *
-         * \param *column_major: The pointer to the start of a column major array
-         * \param &row_major_array: A c++ two dimensional, row major vector of vectors
-         * \param &height: The height of the array, e.g. number of rows
-         * \param &width: The width of the array, e.g. number of columns
-         */
         const int rows    = row_major_array.size();
         const int columns = row_major_array[0].size();
         if (rows != height || columns != width) {
@@ -96,19 +96,19 @@ namespace tardigradeAbaqusTools {
         return;
     }
 
+    /*!
+     * Convert row major two dimensional arrays stored as vector to column major array
+     *
+     * Specifically, c++ row major vector to Fortran column major arrays using the column major pointer.
+     *
+     * \param *column_major: The pointer to the start of a column major array
+     * \param &row_major: A c++ two dimensional array stored as row major vector
+     * \param &height: The height of the array, e.g. number of rows. The c++ row count (1) for 1D arrays.
+     * \param &width: The width of the array, e.g. number of columns. The c++ column count (size) for 1D arrays.
+     */
     template <typename T>
     inline void rowToColumnMajor(T *column_major, const std::vector<T> &row_major, const int &height,
                                  const int &width) {
-        /*!
-         * Convert row major two dimensional arrays stored as vector to column major array
-         *
-         * Specifically, c++ row major vector to Fortran column major arrays using the column major pointer.
-         *
-         * \param *column_major: The pointer to the start of a column major array
-         * \param &row_major_array: A c++ two dimensional array stored as row major vector
-         * \param &height: The height of the array, e.g. number of rows. The c++ row count (1) for 1D arrays.
-         * \param &width: The width of the array, e.g. number of columns. The c++ column count (size) for 1D arrays.
-         */
         const int length = row_major.size();
         if (length != height * width) {
             throw std::length_error("Column major size must match row major size");
@@ -124,44 +124,43 @@ namespace tardigradeAbaqusTools {
         }
     }
 
+    /*!
+     * Expand stress and strain type components to full Abaqus vectors.
+     *
+     * See the Abaqus documentation > Introduction & Spatial Modeling > Conventions chapter > Convention used for
+     * stress and strain components.
+     *
+     * The stress vector components for Abaqus/Standard (UMAT) are
+     *
+     * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{13}, \tau_{23} \right ) \f$
+     *
+     * and the strain vector components match as
+     *
+     * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{13}, \gamma_{23} \right ) \f$
+     *
+     * The stress vector components for Abaqus/Explicit (VUMAT) are
+     *
+     * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{23}, \tau_{13} \right ) \f$
+     *
+     * and the strain vector components match as
+     *
+     * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{23}, \gamma_{13} \right ) \f$
+     *
+     * where components that are zero-valued by definition, e.g. plane stress, are omitted. The shear strain is the
+     * engineering shear strain where
+     *
+     * \f$ \gamma_{ij} = \epsilon_{ij} + \epsilon_{ji} \f$
+     *
+     * for both Abaqus/Standard and Abaqus/Explicit.
+     *
+     * \param &abaqus_vector: an abaqus stress-type vector with no by-definition-zero components. Length NDI + NSHR.
+     * \param &NDI: The number of direct components.
+     * \param &NSHR: The number of shear components.
+     * \returns vector_expansion: c++ type vector of length 6.
+     */
     template <typename T>
     inline std::vector<T> expandAbaqusNTENSVector(const std::vector<T> &abaqus_vector, const int &NDI,
                                                   const int &NSHR) {
-        /*!
-         * Expand stress and strain type components to full Abaqus vectors.
-         *
-         * See the Abaqus documentation > Introduction & Spatial Modeling > Conventions chapter > Convention used for
-         * stress and strain components.
-         *
-         * The stress vector components for Abaqus/Standard (UMAT) are
-         *
-         * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{13}, \tau_{23} \right ) \f$
-         *
-         * and the strain vector components match as
-         *
-         * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{13}, \gamma_{23} \right ) \f$
-         *
-         * The stress vector components for Abaqus/Explicit (VUMAT) are
-         *
-         * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{23}, \tau_{13} \right ) \f$
-         *
-         * and the strain vector components match as
-         *
-         * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{23}, \gamma_{13} \right ) \f$
-         *
-         * where components that are zero-valued by definition, e.g. plane stress, are omitted. The shear strain is the
-         * engineering shear strain where
-         *
-         * \f$ \gamma_{ij} = \epsilon_{ij} + \epsilon_{ji} \f$
-         *
-         * for both Abaqus/Standard and Abaqus/Explicit.
-         *
-         * \param &abaqus_vector: an abaqus stress-type vector with no by-definition-zero components. Length NDI + NSHR.
-         * \param &NDI: The number of direct components.
-         * \param &NSHR: The number of shear components.
-         * \returns vector_expansion: c++ type vector of length 6.
-         */
-
         // Initialize expanded vector to the appropriate dimensions with zero values
         std::vector<T> vector_expansion(6, 0);
 
@@ -178,44 +177,43 @@ namespace tardigradeAbaqusTools {
         return vector_expansion;
     }
 
+    /*!
+     * Contract stress and strain type components from full Abaqus vectors.
+     *
+     * See the Abaqus documentation > Introduction & Spatial Modeling > Conventions chapter > Convention used for
+     * stress and strain components.
+     *
+     * The stress vector components for Abaqus/Standard (UMAT) are
+     *
+     * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{13}, \tau_{23} \right ) \f$
+     *
+     * and the strain vector components match as
+     *
+     * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{13}, \gamma_{23} \right ) \f$
+     *
+     * The stress vector components for Abaqus/Explicit (VUMAT) are
+     *
+     * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{23}, \tau_{13} \right ) \f$
+     *
+     * and the strain vector components match as
+     *
+     * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{23}, \gamma_{13} \right ) \f$
+     *
+     * where components that are zero-valued by definition, e.g. plane stress, are omitted. The shear strain is the
+     * engineering shear strain where
+     *
+     * \f$ \gamma_{ij} = \epsilon_{ij} + \epsilon_{ji} \f$
+     *
+     * for both Abaqus/Standard and Abaqus/Explicit.
+     *
+     * \param &full_abaqus_vector: a previously expanded abaqus stress-type vector. Length 6.
+     * \param &NDI: The number of direct components.
+     * \param &NSHR: The number of shear components.
+     * \returns vector_contraction: c++ type vector of length NDI + NSHR.
+     */
     template <typename T>
     inline std::vector<T> contractAbaqusNTENSVector(const std::vector<T> &full_abaqus_vector, const int &NDI,
                                                     const int &NSHR) {
-        /*!
-         * Contract stress and strain type components from full Abaqus vectors.
-         *
-         * See the Abaqus documentation > Introduction & Spatial Modeling > Conventions chapter > Convention used for
-         * stress and strain components.
-         *
-         * The stress vector components for Abaqus/Standard (UMAT) are
-         *
-         * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{13}, \tau_{23} \right ) \f$
-         *
-         * and the strain vector components match as
-         *
-         * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{13}, \gamma_{23} \right ) \f$
-         *
-         * The stress vector components for Abaqus/Explicit (VUMAT) are
-         *
-         * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{23}, \tau_{13} \right ) \f$
-         *
-         * and the strain vector components match as
-         *
-         * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{23}, \gamma_{13} \right ) \f$
-         *
-         * where components that are zero-valued by definition, e.g. plane stress, are omitted. The shear strain is the
-         * engineering shear strain where
-         *
-         * \f$ \gamma_{ij} = \epsilon_{ij} + \epsilon_{ji} \f$
-         *
-         * for both Abaqus/Standard and Abaqus/Explicit.
-         *
-         * \param &full_abaqus_vector: a previously expanded abaqus stress-type vector. Length 6.
-         * \param &NDI: The number of direct components.
-         * \param &NSHR: The number of shear components.
-         * \returns vector_contraction: c++ type vector of length NDI + NSHR.
-         */
-
         // Initialize contracted vector to the appropriate dimensions
         std::vector<T> vector_contraction(NDI + NSHR);
 
@@ -232,42 +230,41 @@ namespace tardigradeAbaqusTools {
         return vector_contraction;
     }
 
+    /*!
+     * Contract NTENS type components from full Abaqus stress-type matrixes (6x6). ONLY APPLIES TO
+     * ABAQUS/STANDARD Voigt matrices, e.g. Jaumann stiffness matrix.
+     *
+     * See the Abaqus documentation > Introduction & Spatial Modeling > Conventions chapter > Convention used for
+     * stress and strain components.
+     *
+     * The stress vector components for Abaqus/Standard (UMAT) are
+     *
+     * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{13}, \tau_{23} \right ) \f$
+     *
+     * and the strain vector components match as
+     *
+     * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{13}, \gamma_{23} \right ) \f$
+     *
+     * where components that are zero-valued by definition, e.g. plane stress, are omitted. The related matrixes are
+     * therefore ordered for Abaqus/Standard (UMAT) as
+     *
+     * TODO: Update LaTeX formatting for a well aligned matrix
+     *
+     * \f$ \left ( D_{1111}, D_{1122}, D_{1133}, D_{1112}, D_{1113}, D_{1123} \right ) \f$
+     * \f$ \left ( D_{2211}, D_{2222}, D_{2233}, D_{2212}, D_{2213}, D_{2223} \right ) \f$
+     * \f$ \left ( D_{3311}, D_{3322}, D_{3333}, D_{3312}, D_{3313}, D_{3323} \right ) \f$
+     * \f$ \left ( D_{1211}, D_{1222}, D_{1233}, D_{1212}, D_{1213}, D_{1223} \right ) \f$
+     * \f$ \left ( D_{1311}, D_{1322}, D_{1333}, D_{1312}, D_{1313}, D_{1323} \right ) \f$
+     * \f$ \left ( D_{2311}, D_{2322}, D_{2333}, D_{2312}, D_{2313}, D_{2323} \right ) \f$
+     *
+     * \param &full_abaqus_matrix: a previously expanded abaqus NTENS matrix. Dimensions 6x6.
+     * \param &NDI: The number of direct components.
+     * \param &NSHR: The number of shear components.
+     * \returns matrix_contraction: c++ type vector of vectors with square shape of size NDI + NSHR.
+     */
     template <typename T>
     inline std::vector<std::vector<T> > contractAbaqusNTENSMatrix(
         const std::vector<std::vector<T> > &full_abaqus_matrix, const int &NDI, const int &NSHR) {
-        /*!
-         * Contract NTENS type components from full Abaqus stress-type matrixes (6x6). ONLY APPLIES TO
-         * ABAQUS/STANDARD Voigt matrices, e.g. Jaumann stiffness matrix.
-         *
-         * See the Abaqus documentation > Introduction & Spatial Modeling > Conventions chapter > Convention used for
-         * stress and strain components.
-         *
-         * The stress vector components for Abaqus/Standard (UMAT) are
-         *
-         * \f$ \left ( \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{13}, \tau_{23} \right ) \f$
-         *
-         * and the strain vector components match as
-         *
-         * \f$ \left ( \epsilon_{11}, \epsilon_{22}, \epsilon_{33}, \gamma_{12}, \gamma_{13}, \gamma_{23} \right ) \f$
-         *
-         * where components that are zero-valued by definition, e.g. plane stress, are omitted. The related matrixes are
-         * therefore ordered for Abaqus/Standard (UMAT) as
-         *
-         * TODO: Update LaTeX formatting for a well aligned matrix
-         *
-         * \f$ \left ( D_{1111}, D_{1122}, D_{1133}, D_{1112}, D_{1113}, D_{1123} \right ) \f$
-         * \f$ \left ( D_{2211}, D_{2222}, D_{2233}, D_{2212}, D_{2213}, D_{2223} \right ) \f$
-         * \f$ \left ( D_{3311}, D_{3322}, D_{3333}, D_{3312}, D_{3313}, D_{3323} \right ) \f$
-         * \f$ \left ( D_{1211}, D_{1222}, D_{1233}, D_{1212}, D_{1213}, D_{1223} \right ) \f$
-         * \f$ \left ( D_{1311}, D_{1322}, D_{1333}, D_{1312}, D_{1313}, D_{1323} \right ) \f$
-         * \f$ \left ( D_{2311}, D_{2322}, D_{2333}, D_{2312}, D_{2313}, D_{2323} \right ) \f$
-         *
-         * \param &full_abaqus_matrix: a previously expanded abaqus NTENS matrix. Dimensions 6x6.
-         * \param &NDI: The number of direct components.
-         * \param &NSHR: The number of shear components.
-         * \returns matrix_contraction: c++ type vector of vectors with square shape of size NDI + NSHR.
-         */
-
         // Initialize contracted matrix to the appropriate dimensions
         std::vector<std::vector<T> > matrix_contraction(NDI + NSHR, std::vector<T>(NDI + NSHR));
 
@@ -298,31 +295,30 @@ namespace tardigradeAbaqusTools {
         return matrix_contraction;
     }
 
+    /*!
+     * Expand the full 3x3 tensor as a row-major vector from the expanded Abaqus stress-type NTENS vector of
+     * length 6. Handle the stress-type vector element order differences between Abaqus/Standard and
+     * Abaqus/Explicit.
+     *
+     * ``tardigradeAbaqusTools::expandAbaqusNTENSVector`` returns
+     *
+     * Abaqus/Standard (UMAT)
+     *
+     *     long_vector[]            0            1            2          3          4          5
+     *                   { \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{13}, \tau_{23}  }
+     *
+     * Abaqus/Explicit (VUMAT)
+     *
+     *     long_vector[]            0            1            2          3          4          5
+     *                   { \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{23}, \tau_{13}  }
+     *
+     * \param &long_vector: a previously expanded Abaqus stress-type vector of length 6.
+     * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
+     *                         Default: True.
+     * \returns full_tensor: c++ type row major vector of length 9.
+     */
     template <typename T>
     inline std::vector<T> expandFullNTENSTensor(const std::vector<T> &long_vector, const bool abaqus_standard = true) {
-        /*!
-         * Expand the full 3x3 tensor as a row-major vector from the expanded Abaqus stress-type NTENS vector of
-         * length 6. Handle the stress-type vector element order differences between Abaqus/Standard and
-         * Abaqus/Explicit.
-         *
-         * ``tardigradeAbaqusTools::expandAbaqusNTENSVector`` returns
-         *
-         * Abaqus/Standard (UMAT)
-         *
-         *     long_vector[]            0            1            2          3          4          5
-         *                   { \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{13}, \tau_{23}  }
-         *
-         * Abaqus/Explicit (VUMAT)
-         *
-         *     long_vector[]            0            1            2          3          4          5
-         *                   { \sigma_{11}, \sigma_{22}, \sigma_{33}, \tau_{12}, \tau_{23}, \tau_{13}  }
-         *
-         * \param &long_vector: a previously expanded Abaqus stress-type vector of length 6.
-         * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
-         *                         Default: True.
-         * \returns full_tensor: c++ type row major vector of length 9.
-         */
-
         // Initialize internal vectors
         std::vector<unsigned int> tensorOrder(9);
 
@@ -342,22 +338,21 @@ namespace tardigradeAbaqusTools {
         return full_tensor;
     }
 
+    /*!
+     * Expand the full 3x3 tensor as a row-major vector from the contracted Abaqus stress-type vector of length
+     * NDI + NSHR. Handle the stress-type vector element order differences between Abaqus/Standard and
+     * Abaqus/Explicit.
+     *
+     * \param &abaqus_vector: an abaqus stress-type vector with no by-definition-zero components. Length NDI + NSHR.
+     * \param &NDI: The number of direct components.
+     * \param &NSHR: The number of shear components.
+     * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
+     *                         Default: True.
+     * \returns full_tensor: c++ type row-major vector of length 9.
+     */
     template <typename T>
     inline std::vector<T> expandFullNTENSTensor(const std::vector<T> &abaqus_vector, const int &NDI, const int &NSHR,
                                                 const bool abaqus_standard = true) {
-        /*!
-         * Expand the full 3x3 tensor as a row-major vector from the contracted Abaqus stress-type vector of length
-         * NDI + NSHR. Handle the stress-type vector element order differences between Abaqus/Standard and
-         * Abaqus/Explicit.
-         *
-         * \param &abaqus_vector: an abaqus stress-type vector with no by-definition-zero components. Length NDI + NSHR.
-         * \param &NDI: The number of direct components.
-         * \param &NSHR: The number of shear components.
-         * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
-         *                         Default: True.
-         * \returns full_tensor: c++ type row-major vector of length 9.
-         */
-
         // Expand the stress-type vector
         std::vector<T> long_vector = tardigradeAbaqusTools::expandAbaqusNTENSVector(abaqus_vector, NDI, NSHR);
 
@@ -367,30 +362,29 @@ namespace tardigradeAbaqusTools {
         return full_tensor;
     }
 
+    /*!
+     * Contract a full 3x3 tensor stored as a row-major vector into the full Abaqus stress-type vector of length 6.
+     * Handle the stress-type vector element order differences between Abaqus/Standard and Abaqus/Explicit.
+     *
+     * The full tensor is stored as a row-major vector
+     *
+     *     full_tensor[]            0            1            2
+     *                   { \sigma_{11}, \sigma_{12}, \sigma_{13},
+     *
+     *     full_tensor[]            3            4            5
+     *                     \sigma_{12}, \sigma_{22}, \sigma_{23},
+     *
+     *     full_tensor[]            6            7            8
+     *                     \sigma_{13}, \sigma_{23}, \sigma_{33} }
+     *
+     * \param full_tensor: c++ type row-major vector of length 9.
+     * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
+     *                         Default: True.
+     * \returns &full_abaqus_vector: an expanded abaqus stress-type vector. Length 6.
+     */
     template <typename T>
     inline std::vector<T> contractFullNTENSTensor(const std::vector<T> &full_tensor,
                                                   const bool            abaqus_standard = true) {
-        /*!
-         * Contract a full 3x3 tensor stored as a row-major vector into the full Abaqus stress-type vector of length 6.
-         * Handle the stress-type vector element order differences between Abaqus/Standard and Abaqus/Explicit.
-         *
-         * The full tensor is stored as a row-major vector
-         *
-         *     full_tensor[]            0            1            2
-         *                   { \sigma_{11}, \sigma_{12}, \sigma_{13},
-         *
-         *     full_tensor[]            3            4            5
-         *                     \sigma_{12}, \sigma_{22}, \sigma_{23},
-         *
-         *     full_tensor[]            6            7            8
-         *                     \sigma_{13}, \sigma_{23}, \sigma_{33} }
-         *
-         * \param full_tensor: c++ type row-major vector of length 9.
-         * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
-         *                         Default: True.
-         * \returns &full_abaqus_vector: an expanded abaqus stress-type vector. Length 6.
-         */
-
         // Initialize internal vectors
         std::vector<unsigned int> tensorOrder(6);
         std::vector<T>            full_abaqus_vector(6);
@@ -409,30 +403,31 @@ namespace tardigradeAbaqusTools {
         return full_abaqus_vector;
     }
 
+    /*!
+     * Contract a full 3x3 tensor stored as a row-major vector into an Abaqus stress-type vector of length NDI +
+     * NSHR. Handle the stress-type vector element order differences between Abaqus/Standard and Abaqus/Explicit.
+     *
+     * The full tensor is stored as a row-major vector
+     *
+     *     full_tensor[]            0            1            2
+     *                   { \sigma_{11}, \sigma_{12}, \sigma_{13},
+     *
+     *     full_tensor[]            3            4            5
+     *                     \sigma_{12}, \sigma_{22}, \sigma_{23},
+     *
+     *     full_tensor[]            6            7            8
+     *                     \sigma_{13}, \sigma_{23}, \sigma_{33} }
+     *
+     * \param &full_tensor: c++ type row-major vector of length 9.
+     * \param &NDI: Number of diagonal components
+     * \param &NSHR: Number of shear components
+     * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
+     *                         Default: True.
+     * \returns &abaqus_vector: a contracted abaqus stress-type vector. Length NDI + NSHR.
+     */
     template <typename T>
     inline std::vector<T> contractFullNTENSTensor(const std::vector<T> &full_tensor, const int &NDI, const int &NSHR,
                                                   const bool abaqus_standard = true) {
-        /*!
-         * Contract a full 3x3 tensor stored as a row-major vector into an Abaqus stress-type vector of length NDI +
-         * NSHR. Handle the stress-type vector element order differences between Abaqus/Standard and Abaqus/Explicit.
-         *
-         * The full tensor is stored as a row-major vector
-         *
-         *     full_tensor[]            0            1            2
-         *                   { \sigma_{11}, \sigma_{12}, \sigma_{13},
-         *
-         *     full_tensor[]            3            4            5
-         *                     \sigma_{12}, \sigma_{22}, \sigma_{23},
-         *
-         *     full_tensor[]            6            7            8
-         *                     \sigma_{13}, \sigma_{23}, \sigma_{33} }
-         *
-         * \param full_tensor: c++ type row-major vector of length 9.
-         * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
-         *                         Default: True.
-         * \returns &abaqus_vector: a contracted abaqus stress-type vector. Length NDI + NSHR.
-         */
-
         // Contract to full length (6) abaqus stress-type vector
         std::vector<T> full_abaqus_vector = contractFullNTENSTensor(full_tensor, abaqus_standard);
 
@@ -442,38 +437,37 @@ namespace tardigradeAbaqusTools {
         return abaqus_vector;
     }
 
+    /*!
+     * Re-pack a full 9x9 matrix into the expected order for an expanded (6x6) Abaqus NTENS matrix. ONLY APPLIES TO
+     * ABAQUS/STANDARD Voigt matrices, e.g. Jaumann stiffness matrix.
+     *
+     * Full 9x9 Matrix
+     *
+     * \f$ \left ( D_{1111}, D_{1112}, D_{1113}, D_{1121}, D_{1122}, D_{1123}, D_{1131}, D_{1132}, D_{1133} \right )
+     * \f$ \f$ \left ( D_{1211}, D_{1212}, D_{1213}, D_{1221}, D_{1222}, D_{1223}, D_{1231}, D_{1232}, D_{1233}
+     * \right ) \f$ \f$ \left ( D_{1311}, D_{1312}, D_{1313}, D_{1321}, D_{1322}, D_{1323}, D_{1331}, D_{1332},
+     * D_{1333} \right ) \f$ \f$ \left ( D_{2111}, D_{2112}, D_{2113}, D_{2121}, D_{2122}, D_{2123}, D_{2131},
+     * D_{2132}, D_{2133} \right ) \f$ \f$ \left ( D_{2211}, D_{2212}, D_{2213}, D_{2221}, D_{2222}, D_{2223},
+     * D_{2231}, D_{2232}, D_{2233} \right ) \f$ \f$ \left ( D_{2311}, D_{2312}, D_{2313}, D_{2321}, D_{2322},
+     * D_{2323}, D_{2331}, D_{2332}, D_{2333} \right ) \f$ \f$ \left ( D_{3111}, D_{3112}, D_{3113}, D_{3121},
+     * D_{3122}, D_{3123}, D_{3131}, D_{3132}, D_{3133} \right ) \f$ \f$ \left ( D_{3211}, D_{3212}, D_{3213},
+     * D_{3221}, D_{3222}, D_{3223}, D_{3231}, D_{3232}, D_{3233} \right ) \f$ \f$ \left ( D_{3311}, D_{3312},
+     * D_{3313}, D_{3321}, D_{3322}, D_{3323}, D_{3331}, D_{3332}, D_{3333} \right ) \f$
+     *
+     * Abaqus/Standard 6x6 Matrix
+     *
+     * \f$ \left ( D_{1111}, D_{1122}, D_{1133}, D_{1112}, D_{1113}, D_{1123} \right ) \f$
+     * \f$ \left ( D_{2211}, D_{2222}, D_{2233}, D_{2212}, D_{2213}, D_{2223} \right ) \f$
+     * \f$ \left ( D_{3311}, D_{3322}, D_{3333}, D_{3312}, D_{3313}, D_{3323} \right ) \f$
+     * \f$ \left ( D_{1211}, D_{1222}, D_{1233}, D_{1212}, D_{1213}, D_{1223} \right ) \f$
+     * \f$ \left ( D_{1311}, D_{1322}, D_{1333}, D_{1312}, D_{1313}, D_{1323} \right ) \f$
+     * \f$ \left ( D_{2311}, D_{2322}, D_{2333}, D_{2312}, D_{2313}, D_{2323} \right ) \f$
+     *
+     * \param full_matrix: The c++ type matrix (vector of vectors) 9x9.
+     * \returns full_abaqus_matrix: Expanded 6x6 Voigt matrix with Abaqus/Standard element ordering.
+     */
     template <typename T>
     inline std::vector<std::vector<T> > contractFullNTENSMatrix(const std::vector<std::vector<T> > &full_matrix) {
-        /*!
-         * Re-pack a full 9x9 matrix into the expected order for an expanded (6x6) Abaqus NTENS matrix. ONLY APPLIES TO
-         * ABAQUS/STANDARD Voigt matrices, e.g. Jaumann stiffness matrix.
-         *
-         * Full 9x9 Matrix
-         *
-         * \f$ \left ( D_{1111}, D_{1112}, D_{1113}, D_{1121}, D_{1122}, D_{1123}, D_{1131}, D_{1132}, D_{1133} \right )
-         * \f$ \f$ \left ( D_{1211}, D_{1212}, D_{1213}, D_{1221}, D_{1222}, D_{1223}, D_{1231}, D_{1232}, D_{1233}
-         * \right ) \f$ \f$ \left ( D_{1311}, D_{1312}, D_{1313}, D_{1321}, D_{1322}, D_{1323}, D_{1331}, D_{1332},
-         * D_{1333} \right ) \f$ \f$ \left ( D_{2111}, D_{2112}, D_{2113}, D_{2121}, D_{2122}, D_{2123}, D_{2131},
-         * D_{2132}, D_{2133} \right ) \f$ \f$ \left ( D_{2211}, D_{2212}, D_{2213}, D_{2221}, D_{2222}, D_{2223},
-         * D_{2231}, D_{2232}, D_{2233} \right ) \f$ \f$ \left ( D_{2311}, D_{2312}, D_{2313}, D_{2321}, D_{2322},
-         * D_{2323}, D_{2331}, D_{2332}, D_{2333} \right ) \f$ \f$ \left ( D_{3111}, D_{3112}, D_{3113}, D_{3121},
-         * D_{3122}, D_{3123}, D_{3131}, D_{3132}, D_{3133} \right ) \f$ \f$ \left ( D_{3211}, D_{3212}, D_{3213},
-         * D_{3221}, D_{3222}, D_{3223}, D_{3231}, D_{3232}, D_{3233} \right ) \f$ \f$ \left ( D_{3311}, D_{3312},
-         * D_{3313}, D_{3321}, D_{3322}, D_{3323}, D_{3331}, D_{3332}, D_{3333} \right ) \f$
-         *
-         * Abaqus/Standard 6x6 Matrix
-         *
-         * \f$ \left ( D_{1111}, D_{1122}, D_{1133}, D_{1112}, D_{1113}, D_{1123} \right ) \f$
-         * \f$ \left ( D_{2211}, D_{2222}, D_{2233}, D_{2212}, D_{2213}, D_{2223} \right ) \f$
-         * \f$ \left ( D_{3311}, D_{3322}, D_{3333}, D_{3312}, D_{3313}, D_{3323} \right ) \f$
-         * \f$ \left ( D_{1211}, D_{1222}, D_{1233}, D_{1212}, D_{1213}, D_{1223} \right ) \f$
-         * \f$ \left ( D_{1311}, D_{1322}, D_{1333}, D_{1312}, D_{1313}, D_{1323} \right ) \f$
-         * \f$ \left ( D_{2311}, D_{2322}, D_{2333}, D_{2312}, D_{2313}, D_{2323} \right ) \f$
-         *
-         * \param full_matrix: The c++ type matrix (vector of vectors) 9x9.
-         * \returns full_abaqus_matrix: Expanded 6x6 Voigt matrix with Abaqus/Standard element ordering.
-         */
-
         // Initialize internal vectors
         std::vector<unsigned int>    tensorOrder(6);
         std::vector<std::vector<T> > full_abaqus_matrix(6, std::vector<T>(6));
@@ -491,45 +485,44 @@ namespace tardigradeAbaqusTools {
         return full_abaqus_matrix;
     }
 
+    /*!
+     * Re-pack a full 9x9 matrix into the expected order for the contracted (NTENSxNTENS) Abaqus NTENS matrix. ONLY
+     * APPLIES TO ABAQUS/STANDARD Voigt matrices, e.g. Jaumann stiffness matrix.
+     *
+     * Full 9x9 Matrix
+     *
+     * \f$ \left ( D_{1111}, D_{1112}, D_{1113}, D_{1121}, D_{1122}, D_{1123}, D_{1131}, D_{1132}, D_{1133} \right )
+     * \f$ \f$ \left ( D_{1211}, D_{1212}, D_{1213}, D_{1221}, D_{1222}, D_{1223}, D_{1231}, D_{1232}, D_{1233}
+     * \right ) \f$ \f$ \left ( D_{1311}, D_{1312}, D_{1313}, D_{1321}, D_{1322}, D_{1323}, D_{1331}, D_{1332},
+     * D_{1333} \right ) \f$ \f$ \left ( D_{2111}, D_{2112}, D_{2113}, D_{2121}, D_{2122}, D_{2123}, D_{2131},
+     * D_{2132}, D_{2133} \right ) \f$ \f$ \left ( D_{2211}, D_{2212}, D_{2213}, D_{2221}, D_{2222}, D_{2223},
+     * D_{2231}, D_{2232}, D_{2233} \right ) \f$ \f$ \left ( D_{2311}, D_{2312}, D_{2313}, D_{2321}, D_{2322},
+     * D_{2323}, D_{2331}, D_{2332}, D_{2333} \right ) \f$ \f$ \left ( D_{3111}, D_{3112}, D_{3113}, D_{3121},
+     * D_{3122}, D_{3123}, D_{3131}, D_{3132}, D_{3133} \right ) \f$ \f$ \left ( D_{3211}, D_{3212}, D_{3213},
+     * D_{3221}, D_{3222}, D_{3223}, D_{3231}, D_{3232}, D_{3233} \right ) \f$ \f$ \left ( D_{3311}, D_{3312},
+     * D_{3313}, D_{3321}, D_{3322}, D_{3323}, D_{3331}, D_{3332}, D_{3333} \right ) \f$
+     *
+     * Abaqus/Standard 6x6 Matrix
+     *
+     * \f$ \left ( D_{1111}, D_{1122}, D_{1133}, D_{1112}, D_{1113}, D_{1123} \right ) \f$
+     * \f$ \left ( D_{2211}, D_{2222}, D_{2233}, D_{2212}, D_{2213}, D_{2223} \right ) \f$
+     * \f$ \left ( D_{3311}, D_{3322}, D_{3333}, D_{3312}, D_{3313}, D_{3323} \right ) \f$
+     * \f$ \left ( D_{1211}, D_{1222}, D_{1233}, D_{1212}, D_{1213}, D_{1223} \right ) \f$
+     * \f$ \left ( D_{1311}, D_{1322}, D_{1333}, D_{1312}, D_{1313}, D_{1323} \right ) \f$
+     * \f$ \left ( D_{2311}, D_{2322}, D_{2333}, D_{2312}, D_{2313}, D_{2323} \right ) \f$
+     *
+     * Where the output matrix from this function omits the by-definition zero valued components determined by NDI
+     * and NSHR.
+     *
+     * \param full_matrix: The c++ type matrix (vector of vectors) 9x9.
+     * \param &NDI: The number of direct components.
+     * \param &NSHR: The number of shear components.
+     * \returns &abaqus_matrix: A contracted Abaqus Voigt matrix with dimensions NTENSxNTENS where NTENS = NDI +
+     *                          NSHR.
+     */
     template <typename T>
     inline std::vector<std::vector<T> > contractFullNTENSMatrix(const std::vector<std::vector<T> > &full_matrix,
                                                                 const int &NDI, const int &NSHR) {
-        /*!
-         * Re-pack a full 9x9 matrix into the expected order for the contracted (NTENSxNTENS) Abaqus NTENS matrix. ONLY
-         * APPLIES TO ABAQUS/STANDARD Voigt matrices, e.g. Jaumann stiffness matrix.
-         *
-         * Full 9x9 Matrix
-         *
-         * \f$ \left ( D_{1111}, D_{1112}, D_{1113}, D_{1121}, D_{1122}, D_{1123}, D_{1131}, D_{1132}, D_{1133} \right )
-         * \f$ \f$ \left ( D_{1211}, D_{1212}, D_{1213}, D_{1221}, D_{1222}, D_{1223}, D_{1231}, D_{1232}, D_{1233}
-         * \right ) \f$ \f$ \left ( D_{1311}, D_{1312}, D_{1313}, D_{1321}, D_{1322}, D_{1323}, D_{1331}, D_{1332},
-         * D_{1333} \right ) \f$ \f$ \left ( D_{2111}, D_{2112}, D_{2113}, D_{2121}, D_{2122}, D_{2123}, D_{2131},
-         * D_{2132}, D_{2133} \right ) \f$ \f$ \left ( D_{2211}, D_{2212}, D_{2213}, D_{2221}, D_{2222}, D_{2223},
-         * D_{2231}, D_{2232}, D_{2233} \right ) \f$ \f$ \left ( D_{2311}, D_{2312}, D_{2313}, D_{2321}, D_{2322},
-         * D_{2323}, D_{2331}, D_{2332}, D_{2333} \right ) \f$ \f$ \left ( D_{3111}, D_{3112}, D_{3113}, D_{3121},
-         * D_{3122}, D_{3123}, D_{3131}, D_{3132}, D_{3133} \right ) \f$ \f$ \left ( D_{3211}, D_{3212}, D_{3213},
-         * D_{3221}, D_{3222}, D_{3223}, D_{3231}, D_{3232}, D_{3233} \right ) \f$ \f$ \left ( D_{3311}, D_{3312},
-         * D_{3313}, D_{3321}, D_{3322}, D_{3323}, D_{3331}, D_{3332}, D_{3333} \right ) \f$
-         *
-         * Abaqus/Standard 6x6 Matrix
-         *
-         * \f$ \left ( D_{1111}, D_{1122}, D_{1133}, D_{1112}, D_{1113}, D_{1123} \right ) \f$
-         * \f$ \left ( D_{2211}, D_{2222}, D_{2233}, D_{2212}, D_{2213}, D_{2223} \right ) \f$
-         * \f$ \left ( D_{3311}, D_{3322}, D_{3333}, D_{3312}, D_{3313}, D_{3323} \right ) \f$
-         * \f$ \left ( D_{1211}, D_{1222}, D_{1233}, D_{1212}, D_{1213}, D_{1223} \right ) \f$
-         * \f$ \left ( D_{1311}, D_{1322}, D_{1333}, D_{1312}, D_{1313}, D_{1323} \right ) \f$
-         * \f$ \left ( D_{2311}, D_{2322}, D_{2333}, D_{2312}, D_{2313}, D_{2323} \right ) \f$
-         *
-         * Where the output matrix from this function omits the by-definition zero valued components determined by NDI
-         * and NSHR.
-         *
-         * \param full_matrix: The c++ type matrix (vector of vectors) 9x9.
-         * \param &NDI: The number of direct components.
-         * \param &NSHR: The number of shear components.
-         * \returns &abaqus_matrix: A contracted Abaqus Voigt matrix with dimensions NTENSxNTENS where NTENS = NDI +
-         *                          NSHR.
-         */
-
         // Initialize internal vectors
         std::vector<std::vector<T> > full_abaqus_matrix(6, std::vector<T>(6));
         std::vector<std::vector<T> > abaqus_matrix(NDI + NSHR, std::vector<T>(NDI + NSHR));
