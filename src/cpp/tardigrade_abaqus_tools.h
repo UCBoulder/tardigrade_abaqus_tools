@@ -105,7 +105,7 @@ namespace tardigradeAbaqusTools {
          * Specifically, c++ row major vector to Fortran column major arrays using the column major pointer.
          *
          * \param *column_major: The pointer to the start of a column major array
-         * \param &row_major_array: A c++ two dimensional array stored as row major vector
+         * \param &row_major: A c++ two dimensional array stored as row major vector
          * \param &height: The height of the array, e.g. number of rows. The c++ row count (1) for 1D arrays.
          * \param &width: The width of the array, e.g. number of columns. The c++ column count (size) for 1D arrays.
          */
@@ -427,7 +427,9 @@ namespace tardigradeAbaqusTools {
          *     full_tensor[]            6            7            8
          *                     \sigma_{13}, \sigma_{23}, \sigma_{33} }
          *
-         * \param full_tensor: c++ type row-major vector of length 9.
+         * \param &full_tensor: c++ type row-major vector of length 9.
+         * \param &NDI: Number of diagonal components
+         * \param &NSHR: Number of shear components
          * \param abaqus_standard: boolean for Abaqus solver type. True for Abaqus/Standard; False for Abaqus/Explicit.
          *                         Default: True.
          * \returns &abaqus_vector: a contracted abaqus stress-type vector. Length NDI + NSHR.
