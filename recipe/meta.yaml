@@ -18,6 +18,8 @@ build:
     - cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=lib
     - cmake --install build --prefix ${PREFIX}
   skip: true  # [win]
+  run_exports:
+    - {{ pin_subpackage(name|lower, max_pin='x.x') }}
 
 requirements:
   build:
